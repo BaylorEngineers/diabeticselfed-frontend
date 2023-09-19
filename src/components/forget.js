@@ -65,9 +65,9 @@ function Login() {
     const renderForm = (
       <div className="form">
         <form onSubmit={login_handle}>
-          <div className="input-container">
-            <label>Your email address</label>
-            <input type="text" name="username" id="username" required onChange={e => setUserName(e.target.value)}/>
+          <div className="forget-input-container">
+            <label id="add">Your email address</label>
+            <input type="text" name="username" id="username-forget" required onChange={e => setUserName(e.target.value)}/>
             {renderErrorMessage("ID")}
           </div>
 
