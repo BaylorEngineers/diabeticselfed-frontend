@@ -2,7 +2,6 @@ import React, { useState , Component} from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 
 
@@ -16,7 +15,6 @@ function Login() {
     const [firstname, setFirstname] = useState();
     const [lastname, setLastname] = useState();
     const [id, setID] = useState();
-    const [cookies, setCookie] = useCookies(['username'])
 
 
   
@@ -54,7 +52,7 @@ function Login() {
             
           }).then(data=>{
             console.log('gogo'); 
-            setCookie('username', username);
+
             window.location.href =  "/otp";
           }).catch((error) => {
             //this.setState({ requestFailed: true })
