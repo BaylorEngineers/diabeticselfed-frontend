@@ -2,7 +2,6 @@ import React, { useState, useEffect} from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 
 function Login() {
