@@ -10,6 +10,8 @@ function Login() {
     const [islogin, login_set_true] = useState(false);
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [role, setRole] = useState();
+
     const [id, setID] = useState();
 
   
@@ -31,7 +33,7 @@ function Login() {
             mode: 'cors',
             method: 'POST',
             body: JSON.stringify({
-              username: username,
+              email: username,
               password: password,
             }),
             headers: {
@@ -41,8 +43,8 @@ function Login() {
             .then(response => response.json())
             .then((response) => {
                 console.log('response', response);
-                if (response == 'PATIENT') {
-                    console.log('PATIENT');
+                if (response.role == 'PATIENT' || response.role == 'ADMIN' ||response.role == 'CLINICIAN') {
+                    setRole(response.role);
                    
                     login_set_true(true);
                 } else {
@@ -126,7 +128,7 @@ function Login() {
             </Link>
           {(() => {
                         if (islogin) {
-                            window.location.href = "/patient";
+                            window.location.href = "/"+role;
                         } else {
           return (
             renderForm

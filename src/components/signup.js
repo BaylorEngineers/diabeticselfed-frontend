@@ -27,7 +27,7 @@ function Login() {
     };
   
     const login_handle = (event) => {
-      console.log(DOB)
+      console.log(LevelofEdu)
       event.preventDefault();
   
         fetch('http://localhost:8080/api/v1/auth/register', {
@@ -35,10 +35,10 @@ function Login() {
         body: JSON.stringify({
           email : username,
           password : password,
-          firstName : firstname,
-          lastName : lastname,
-          DOB:DOB,
-          LevelofEdu:LevelofEdu,
+          firstname : firstname,
+          lastname : lastname,
+          dob:DOB,
+          levelofedu:LevelofEdu,
           role:"PATIENT"
         }),
         headers: {
@@ -47,7 +47,7 @@ function Login() {
       })
         .then(response => {
            
-          if (response.status == 201) {
+          if (response.status == 200) {
             console.log('go'); 
             return response.json();
             
