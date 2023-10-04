@@ -11,7 +11,6 @@ function Login() {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const [id, setID] = useState();
-    const [cookies, setCookie, removeCookie] = useCookies(['username']);
 
   
     const errors = {
@@ -43,7 +42,7 @@ function Login() {
                 console.log('response', response);
                 if (response.hasError == false) {
                     console.log('login-working');
-                    setCookie('username', username);
+                   
                     login_set_true(true);
                 } else {
                     console.log(response)
