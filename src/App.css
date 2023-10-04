@@ -355,7 +355,7 @@ input[type="text"] {
   height: 80px;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: left;
 }
 
 .menu-bars {
@@ -366,11 +366,11 @@ input[type="text"] {
 }
 
 .nav-menu {
-  background-color: #ffffff;
+  background-color: rgb(9, 105, 30);
   width: 250px;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   position: fixed;
   top: 0;
   left: -100%;
