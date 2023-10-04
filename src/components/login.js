@@ -27,7 +27,7 @@ function Login() {
         console.log(username)
         console.log(password)
 
-        fetch('http://localhost:8080/api/user/login', {
+        fetch('http://localhost:8080/api/v1/auth/authenticate', {
             mode: 'cors',
             method: 'POST',
             body: JSON.stringify({

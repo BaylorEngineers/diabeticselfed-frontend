@@ -30,7 +30,7 @@ function Login() {
       console.log(DOB)
       event.preventDefault();
   
-        fetch('http://137.184.37.205:8080/createUser', {
+        fetch('http://localhost:8080/api/v1/auth/register', {
         method: 'POST',
         body: JSON.stringify({
           email : username,
