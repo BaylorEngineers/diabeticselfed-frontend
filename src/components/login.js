@@ -24,14 +24,15 @@ function Login() {
 
     const test = (event) => {
         event.preventDefault();
-        console.log('Test')
+        console.log(username)
+        console.log(password)
 
-        fetch('http://137.184.37.205:8080/userLogin', {
+        fetch('http://localhost:8080/api/user/login', {
             mode: 'cors',
             method: 'POST',
             body: JSON.stringify({
-                email: username,
-                password: password,
+              username: username,
+              password: password,
             }),
             headers: {
                 'Content-type': 'application/json',
@@ -40,8 +41,8 @@ function Login() {
             .then(response => response.json())
             .then((response) => {
                 console.log('response', response);
-                if (response.hasError == false) {
-                    console.log('login-working');
+                if (response == 'PATIENT') {
+                    console.log('PATIENT');
                    
                     login_set_true(true);
                 } else {
@@ -125,7 +126,7 @@ function Login() {
             </Link>
           {(() => {
                         if (islogin) {
-                            window.location.href = "/userHome";
+                            window.location.href = "/patient";
                         } else {
           return (
             renderForm

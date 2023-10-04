@@ -2,6 +2,7 @@ import React, { useState , Component} from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 
@@ -15,7 +16,9 @@ function Login() {
     const [firstname, setFirstname] = useState();
     const [lastname, setLastname] = useState();
     const [id, setID] = useState();
-
+    const [DOB, setDOB] = useState();
+    const [LevelofEdu, setLevelofEdu] = useState();
+    
 
   
     const errors = {
@@ -24,6 +27,7 @@ function Login() {
     };
   
     const login_handle = (event) => {
+      console.log(DOB)
       event.preventDefault();
   
         fetch('http://137.184.37.205:8080/createUser', {
@@ -32,7 +36,10 @@ function Login() {
           email : username,
           password : password,
           firstName : firstname,
-          lastName : lastname
+          lastName : lastname,
+          DOB:DOB,
+          LevelofEdu:LevelofEdu,
+          role:"PATIENT"
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -52,7 +59,6 @@ function Login() {
             
           }).then(data=>{
             console.log('gogo'); 
-
             window.location.href =  "/otp";
           }).catch((error) => {
             //this.setState({ requestFailed: true })
@@ -96,6 +102,21 @@ function Login() {
             <input type="text" name="Password" required onChange={e => setLastname(e.target.value)}/>
             {renderErrorMessage("ID")}
           </div>
+          <div className="input-container">
+            <label htmlFor="LevelOfEducation">Level of Education</label>
+            <select id="LevelOfEducation" name="LevelOfEducation" required onChange={e => setLevelofEdu(e.target.value)}>
+                <option value="">Select...</option>
+                <option value="HIGHSCHOOL">High School</option>
+                <option value="UNDERGRADUATE">Undergraduate</option>
+                <option value="GRADUATE">Graduate</option>
+                <option value="OTHER">Other</option>
+            </select>
+          </div>
+          <div className="input-container">
+              <label>Date of birth</label>
+              <input type="date" name="DateOfBirth" required onChange={e => setDOB(e.target.value)}/>
+          </div>
+
           <div className="button-container">
             <input type="submit" value="Login"/>
           </div>
