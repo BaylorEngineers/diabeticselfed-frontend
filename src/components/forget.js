@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
@@ -6,10 +6,7 @@ import {Link} from 'react-router-dom';
 
 function Login() {
     const [errorMessages, error_login] = useState({});
-    const [islogin, login_set_true] = useState(false);
     const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
-    const [id, setID] = useState();
 
   
     const errors = {
@@ -118,6 +115,4 @@ function Login() {
     );
   }
   
- // const rootElement = document.getElementById("root");
-  //ReactDOM.render(<App />, rootElement);
   export default Login;
