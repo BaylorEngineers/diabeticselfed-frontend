@@ -4,30 +4,30 @@ import Login from "./components/login.js";
 import SignUp from "./components/signup";
 import Forget from "./components/forget";
 import Modules from "./pages/modules"
+import AdminPage from "./pages/Admin/adminhomepage"
+import AdminProfile from "./pages/Admin/adminprofile"
+import AdminAccessRecords from './pages/Admin/accessrecords'
 import "./App.css";
-import Header from "./components/Header/Header";
 
 // import Course from "./components/Course";
 
 function App() {
 
   return (
-    <>
-    <div>
-      <Header />
-    </div>
     <BrowserRouter>
       <Routes>
 
-          <Route path="/" element={<Login />}></Route>\
-          <Route path="/registration" element={<SignUp />}></Route>
-          <Route path="/forgotpassword" element={<Forget />}></Route>
-          <Route path="/modules" element={<Modules />}></Route>
-          {/* <Route path="/1" element={<1 />}></Route>
-          <Route path="/2" element={<2 />}></Route> */}
-        </Routes>
-      </BrowserRouter>
-    </>
+        <Route path="/" element={<Login />}></Route>\
+        <Route path="/registration" element={<SignUp />}></Route>
+        <Route path="/forgotpassword" element={<Forget />}></Route>
+        <Route path="/modules" element={<Modules />}></Route>
+        <Route path="/admin" element={<AdminPage />}></Route>
+        <Route path="/adminprofile" element={<AdminProfile />}></Route>
+        <Route path="/adminaccessrecords" element={<AdminAccessRecords />}></Route>
+        {/* <Route path="/1" element={<1 />}></Route>
+        <Route path="/2" element={<2 />}></Route> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
