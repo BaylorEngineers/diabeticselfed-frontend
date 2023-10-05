@@ -1,8 +1,7 @@
-import React, { useState , Component} from "react";
+import React, { useState } from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 
 
@@ -15,7 +14,6 @@ function Login() {
     const [repassword, setRepassword] = useState();
     const [firstname, setFirstname] = useState();
     const [lastname, setLastname] = useState();
-    const [id, setID] = useState();
     const [DOB, setDOB] = useState();
     const [LevelofEdu, setLevelofEdu] = useState();
     
@@ -59,7 +57,7 @@ function Login() {
             
           }).then(data=>{
             console.log('gogo'); 
-            window.location.href =  "/otp";
+            window.location.href =  "/";
           }).catch((error) => {
             //this.setState({ requestFailed: true })
         });
@@ -71,18 +69,12 @@ function Login() {
       
         <div className="error">{errorMessages.message}</div>
       ;
-  
-      var sectionStyle = {
-        width: "100%",
-        height: "400px",
-        backgroundImage: backgroundImage
-      };
 
     const renderForm = (
       <div className="form">
         <form onSubmit={login_handle}>
           <div className="input-container">
-            <label>User Id </label>
+            <label>Email </label>
             <input type="text" name="username" id="username" required onChange={e => setUserName(e.target.value)}/>
           </div>
           <div className="input-container">
@@ -100,7 +92,7 @@ function Login() {
           <div className="input-container">
             <label>Last Name </label>
             <input type="text" name="Password" required onChange={e => setLastname(e.target.value)}/>
-            {renderErrorMessage("ID")}
+            
           </div>
           <div className="input-container">
             <label htmlFor="LevelOfEducation">Level of Education</label>
@@ -110,6 +102,7 @@ function Login() {
                 <option value="UNDERGRADUATE">Undergraduate</option>
                 <option value="GRADUATE">Graduate</option>
                 <option value="OTHER">Other</option>
+                {renderErrorMessage("ID")}
             </select>
           </div>
           <div className="input-container">
