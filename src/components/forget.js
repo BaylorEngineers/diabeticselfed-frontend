@@ -101,8 +101,8 @@ function Login() {
                     className="logo"
                       src={logo}
                       alt="brand-logo"
-                      width={60}
-                      height={50}
+                      width={100}
+                      height={25}
                     />
             </Link>
           {(() => {

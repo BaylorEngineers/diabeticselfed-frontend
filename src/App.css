@@ -28,7 +28,7 @@ input[type="password"] {
 
 
 input[type="submit"]:hover {
-  background: #04784f;
+  background: #3e99ee;
 }
 
 button:hover {
@@ -106,8 +106,8 @@ input[type="submit"] {
   margin-top: 10px;
   cursor: pointer;
   font-size: 15px;
-  background: #0c4d12;
-  border: 1px solid #0c4d12;
+  background: #4ec3d8;
+  border: 1px solid #32b0cf;
   border-radius: 6px;
   color: #fff;
   padding: 10px 20px;
