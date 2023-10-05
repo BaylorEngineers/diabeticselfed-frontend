@@ -7,6 +7,7 @@ import Modules from "./pages/modules"
 import AdminPage from "./pages/Admin/adminhomepage"
 import AdminProfile from "./pages/Admin/adminprofile"
 import AdminAccessRecords from './pages/Admin/accessrecords'
+import AccountManager from './pages/Admin/accountmanager'
 import "./App.css";
 
 // import Course from "./components/Course";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />}></Route>
         <Route path="/adminprofile" element={<AdminProfile />}></Route>
         <Route path="/adminaccessrecords" element={<AdminAccessRecords />}></Route>
+        <Route path="/accountmanager" element={<AccountManager />}></Route>
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>
