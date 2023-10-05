@@ -8,7 +8,8 @@ const Button = ({ label, onClick, color, size }) => {
     padding: size === 'small' ? '8px 12px' : size === 'large' ? '12px 20px' : '10px 16px',
     color: '#fff',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '25px',
+    margin: '4px',
     cursor: 'pointer',
   };
 

@@ -3,14 +3,27 @@ import { Link } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import {SidebarData} from "./SidebarData";
+import {SidebarAdminData} from "./SidebarAdminData";
 import "../../App.css";
 import {IconContext} from "react-icons";
 
-function Sidebar() {
+function Sidebar({sidebarType}) {
 
     const [sidebar, setSidebar] = useState(true);
 
     const showSidebar = () => setSidebar(!sidebar);
+
+    // Defining the sidebar data based on the user type
+      const getSidebarData = () => {
+        switch (sidebarType) {
+          case 'sidebarAdmin':
+            return SidebarAdminData;
+          default:
+            return SidebarData;
+        }
+      };
+
+    const sidebarData = getSidebarData();
 
     return (
         <>
@@ -27,7 +40,7 @@ function Sidebar() {
                                 <AiIcons.AiOutlineClose />
                             </Link>
                         </li>
-                        {SidebarData.map((item, index) => {
+                        {sidebarData.map((item, index) => {
                             return (
                                 <li key={index} className={item.cName}>
                                     <Link to={item.path}>
