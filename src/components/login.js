@@ -18,6 +18,7 @@ function Login() {
     const [err, setErr] = useState('');
 
     useEffect(() => {
+      console.log("IN")
     }, [password]);
 
     const test = (event) => {
@@ -36,19 +37,17 @@ function Login() {
                 'Content-type': 'application/json',
             },
         })
-            .then(response => response.json())
+            // .then(response => response.json())
             .then((response) => {
+              if(response.status == 200){
                 console.log('response', response);
-                if (response.role == 'PATIENT' || response.role == 'ADMIN' ||response.role == 'CLINICIAN') {
-                    setRole(response.role);
+               
+                    setRole(response.json.role);
                    
                     login_set_true(true);
-                } else {
-                    console.log(response)
-                    setErr(response.responseMessage);
-                    console.log(err);
-                    error_login({ name: 'ID', message: response.responseMessage.message });
-                }
+                } 
+                    error_login({ name: 'ID', message: response.status+": Wrong email or password" });
+                
             })
             .then((data) => {
                 console.log('---data---',);

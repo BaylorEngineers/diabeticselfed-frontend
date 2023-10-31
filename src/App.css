@@ -68,7 +68,8 @@ button:hover {
   text-align: center;
   background-color: white;
   padding: 2rem;
-  width: 460px;
+  min-width: 490px;
+  width: auto;
   min-height: 350px;
   height: auto;
   opacity: 90%;
@@ -131,8 +132,8 @@ input[type="submit-perf-rev"] {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin: 10px;
+  gap: 9px;
+  margin: 11px;
   margin-left: auto;
   margin-right: auto;
 }
