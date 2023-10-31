@@ -1,0 +1,38 @@
+.patient-list {
+    padding: 15px;
+}
+
+.patient {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.patient-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.profile {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.visiting-time,
+.survey-answers,
+.patient-weight-bmi {
+    margin-bottom: 20px;
+}
+
+.survey-answers ul {
+    list-style: none;
+    padding: 0;
+}
+
+.survey-answers li {
+    margin-bottom: 10px;
+}

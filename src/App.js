@@ -3,11 +3,13 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Login from "./components/login.js";
 import SignUp from "./components/signup";
 import Forget from "./components/forget";
-import Modules from "./pages/modules"
+import Modules from "./pages/Clinician/modules"
 import AdminPage from "./pages/Admin/adminhomepage"
 import AdminProfile from "./pages/Admin/adminprofile"
 import AdminAccessRecords from './pages/Admin/accessrecords'
 import AccountManager from './pages/Admin/accountmanager'
+import ClinicianProfile from "./pages/Clinician/clinicianProfile"
+import PatientList from "./pages/Clinician/patientList";
 import "./App.css";
 
 // import Course from "./components/Course";
@@ -26,6 +28,9 @@ function App() {
         <Route path="/adminprofile" element={<AdminProfile />}></Route>
         <Route path="/adminaccessrecords" element={<AdminAccessRecords />}></Route>
         <Route path="/accountmanager" element={<AccountManager />}></Route>
+        <Route path="/clinicianprofile" element={<ClinicianProfile />}></Route>
+        <Route path="/patientlist" element={<PatientList />}></Route>
+
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>
