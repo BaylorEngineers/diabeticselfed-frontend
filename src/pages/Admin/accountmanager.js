@@ -18,6 +18,24 @@ const AccountManager = () => {
     setSelectedOption(option);
   };
 
+  const handleInviteUser = () => {
+    fetch('http://localhost:8080/api/v1/auth/invite', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, role: selectedOption.toUpperCase() }) // Assuming roles are USER, ADMIN, CLINICIAN, PATIENT
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
+  
+
   const handleCreateAccount = () => {
     // Handle create account logic here
     console.log('Creating account:', { selectedOption, email });
@@ -36,7 +54,7 @@ const AccountManager = () => {
 
         <form style={{ marginTop: '20px', textAlign: 'center' }}>
           <label>
-            Select User:
+            Select Role:
             <select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
               <option value="patient">Patient</option>
               <option value="clinician">Clinician</option>
@@ -50,8 +68,8 @@ const AccountManager = () => {
           </label>
           <br />
           <br />
-          <Button label="Create Account" size="small" onClick={handleCreateAccount}/>
-
+          {/* <Button label="Create Account" size="small" onClick={handleCreateAccount}/> */}
+          <Button label="Invite User" size="small" onClick={handleInviteUser}/>
           <Button label="Reset Password" size="small" onClick={handleResetPassword}/>
         </form>
       </div>
