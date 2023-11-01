@@ -1,167 +1,165 @@
 import React, { useState } from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
-import {Link} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
+function SignUp() {
+    const [formData, setFormData] = useState({
+      email: '',
+      password: '',
+      repassword: '',
+      firstname: '',
+      lastname: '',
+      DOB: '',
+      LevelofEdu: ''
+    });
+    const [errorMessage, setErrorMessage] = useState('');
+    const location = useLocation();
 
-
-function Login() {
-    const [errorMessages, error_login] = useState({});
-    const [islogin, login_set_true] = useState(false);
-
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
-    const [repassword, setRepassword] = useState();
-    const [firstname, setFirstname] = useState();
-    const [lastname, setLastname] = useState();
-    const [DOB, setDOB] = useState();
-    const [LevelofEdu, setLevelofEdu] = useState();
-    
-
-  
-    const errors = {
-      username: "This user Id does not exit or invalid password",
-     
+    const handleInputChange = (event) => {
+      setFormData({ ...formData, [event.target.name]: event.target.value });
     };
-  
-    const login_handle = (event) => {
-      console.log(LevelofEdu)
+
+    const token = new URLSearchParams(location.search).get("token");
+
+    const handleSignUp = async (event) => {
       event.preventDefault();
-  
-        fetch('http://localhost:8080/api/v1/auth/register', {
-        method: 'POST',
-        body: JSON.stringify({
-          email : username,
-          password : password,
-          firstname : firstname,
-          lastname : lastname,
-          dob:DOB,
-          levelofedu:LevelofEdu,
-          role:"PATIENT"
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-        .then(response => {
-           
-          if (response.status == 200) {
-            console.log('go'); 
-            return response.json();
-            
-          } else {
-            error_login({ name: "ID", message: response.status + ": Your registration fails"});
-            throw new Error('Something went wrong ...');
-  
+
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({ ...formData, token }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
           }
-            
-          }).then(data=>{
-            console.log('gogo'); 
-            window.location.href =  "/";
-          }).catch((error) => {
-            //this.setState({ requestFailed: true })
         });
-        
-        
+
+        if (response.status === 200) {
+          window.location.href = "/";
+        } else {
+          const errorData = await response.json();
+          setErrorMessage(`Error (${response.status}): ${errorData.message || 'Registration failed'}`);
+        }
+      } catch (error) {
+        setErrorMessage("Network error: Could not contact server");
+      }
     };
-  
-    const renderErrorMessage = (name) =>
-      
-        <div className="error">{errorMessages.message}</div>
-      ;
-
-    const renderForm = (
-      <div className="form">
-        <form onSubmit={login_handle}>
-          <div className="input-container">
-            <label>Email </label>
-            <input type="text" name="username" id="username" required onChange={e => setUserName(e.target.value)}/>
-          </div>
-          <div className="input-container">
-            <label>Password </label>
-            <input type="password" name="Password" required onChange={e => setPassword(e.target.value)}/>
-          </div>
-          <div className="input-container">
-            <label>Re-enter Password </label>
-            <input type="password" name="Password" required onChange={e => setRepassword(e.target.value)}/>
-          </div>
-          <div className="input-container">
-            <label>First Name </label>
-            <input type="text" name="Password" required onChange={e => setFirstname(e.target.value)}/>
-          </div>
-          <div className="input-container">
-            <label>Last Name </label>
-            <input type="text" name="Password" required onChange={e => setLastname(e.target.value)}/>
-            
-          </div>
-          <div className="input-container">
-            <label htmlFor="LevelOfEducation">Level of Education</label>
-            <select id="LevelOfEducation" name="LevelOfEducation" required onChange={e => setLevelofEdu(e.target.value)}>
-                <option value="">Select...</option>
-                <option value="HIGHSCHOOL">High School</option>
-                <option value="UNDERGRADUATE">Undergraduate</option>
-                <option value="GRADUATE">Graduate</option>
-                <option value="OTHER">Other</option>
-                {renderErrorMessage("ID")}
-            </select>
-          </div>
-          <div className="input-container">
-              <label>Date of birth</label>
-              <input type="date" name="DateOfBirth" required onChange={e => setDOB(e.target.value)}/>
-          </div>
-
-          <div className="button-container">
-            <input type="submit" value="Login"/>
-          </div>
-          <div className="forgotandreg">
-
-
-                <div className="forgotP">
-                <a href={"/"}>
-                  <l className="regisText"  n/>Back to Login
-                </a>
-                </div>
-            </div>
-
-        </form>
-      </div>
-    );
-  
 
     return (
-<div style={{
-        backgroundImage: `url(${backgroundImage})` ,
-        height:'100%',
+      <div style={{
+        backgroundImage: `url(${backgroundImage})`,
+        height: '100%',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-                        }}>
-      <div className="app">
-        <div className="login_frame">
-          <div className="title">Sign Up</div>
-          <Link to="/">
-                    <img
-                    className="logo"
-                      src={logo}
-                      alt="brand-logo"
-                      width={100}
-                      height={25}
-                    />
+      }}>
+        <div className="app">
+          <div className="login_frame">
+            <div className="title">Sign Up</div>
+            <Link to="/">
+              <img
+                className="logo"
+                src={logo}
+                alt="brand-logo"
+                width={100}
+                height={25}
+              />
             </Link>
-          {(() => {
-        if (islogin) {
-        //   navigate('/User/'+id, { state: { id: id}});
-        } else {
-          return (
-            renderForm
-          )
-        }
-      })()}   
-        </div>
+            <form onSubmit={handleSignUp}>
+                {/* Form Fields */}
+                <div className="input-container">
+                  <label htmlFor="email">Email </label>
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    required
+                    onChange={handleInputChange}
+                    placeholder="Email"
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="password">Password </label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="repassword">Re-enter Password </label>
+                  <input
+                    type="password"
+                    id="repassword"
+                    name="repassword"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="firstname">First Name </label>
+                  <input
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="lastname">Last Name </label>
+                  <input
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="dob">Date of Birth</label>
+                  <input
+                    type="date"
+                    id="dob"
+                    name="DOB"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="levelOfEdu">Level of Education</label>
+                  <select
+                    id="levelOfEdu"
+                    name="LevelofEdu"
+                    required
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Select...</option>
+                    <option value="HIGHSCHOOL">High School</option>
+                    <option value="UNDERGRADUATE">Undergraduate</option>
+                    <option value="GRADUATE">Graduate</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </div>
+
+                {errorMessage && <div className="error">{errorMessage}</div>}
+
+                <div className="button-container">
+                  <input type="submit" value="Sign Up" />
+                </div>
+              </form>
+
+          </div>
         </div>
       </div>
     );
-  }
-  
- // const rootElement = document.getElementById("root");
-  //ReactDOM.render(<App />, rootElement);
-  export default Login;
+}
+
+export default SignUp;
