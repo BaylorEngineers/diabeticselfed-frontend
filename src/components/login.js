@@ -10,6 +10,8 @@ function Login() {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const [role, setRole] = useState();
+    const [userId, setUserID] = useState();
+    const [accessToken, setAccessToken] = useState();
   
     const errors = {
       username: "This user Id does not exit or invalid password",
@@ -21,39 +23,49 @@ function Login() {
       console.log("IN")
     }, [password]);
 
-    const test = (event) => {
-        event.preventDefault();
-        console.log(username)
-        console.log(password)
+    const test = async (event) => {
+          event.preventDefault();
+          console.log(username);
+          console.log(password);
 
-        fetch('http://localhost:8080/api/v1/auth/authenticate', {
-            mode: 'cors',
-            method: 'POST',
-            body: JSON.stringify({
-              email: username,
-              password: password,
-            }),
-            headers: {
+          try {
+            const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
+              mode: 'cors',
+              method: 'POST',
+              body: JSON.stringify({
+                email: username,
+                password: password,
+              }),
+              headers: {
                 'Content-type': 'application/json',
-            },
-        })
-            // .then(response => response.json())
-            .then((response) => {
-              if(response.status == 200){
-                console.log('response', response);
-               
-                    setRole(response.json.role);
-                   
-                    login_set_true(true);
-                } 
-                    error_login({ name: 'ID', message: response.status+": Wrong email or password" });
-                
-            })
-            .then((data) => {
-                console.log('---data---',);
-             
+              },
             });
-    }
+
+            if (!response.ok) {
+              const errorMessage = await response.text();
+              throw new Error(` ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Response Data:', responseData);
+            setRole(responseData.role);
+
+            const userID = responseData.userID;
+            console.log('UserID:', userID);
+            setUserID(userID);
+            localStorage.setItem('userId', userID);
+
+            const access_token = responseData.access_token;
+            console.log('access_token:', access_token);
+            setAccessToken(access_token);
+            localStorage.setItem('accessToken', access_token);
+
+            login_set_true(true);
+          } catch (error) {
+            console.error('Error:', error);
+            error_login({ name: 'ID', message: error.message + ": Wrong email or password" });
+          }
+        };
 
 
     const renderErrorMessage = (name) =>
@@ -123,7 +135,7 @@ function Login() {
             </Link>
           {(() => {
                         if (islogin) {
-                            window.location.href = "/"+role;
+//                            window.location.href = "/"+role;
                         } else {
           return (
             renderForm
