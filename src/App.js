@@ -9,7 +9,9 @@ import AdminProfile from "./pages/Admin/adminprofile"
 import AdminAccessRecords from './pages/Admin/accessrecords'
 import AccountManager from './pages/Admin/accountmanager'
 import ClinicianProfile from "./pages/Clinician/clinicianProfile"
-import PatientList from "./pages/Clinician/patientList";
+import PatientList from "./pages/Clinician/patientList"
+
+import PatientProfile from "./pages/Patient/patientProfile";
 import "./App.css";
 
 // import Course from "./components/Course";
@@ -30,6 +32,7 @@ function App() {
         <Route path="/accountmanager" element={<AccountManager />}></Route>
         <Route path="/clinicianprofile" element={<ClinicianProfile />}></Route>
         <Route path="/patientlist" element={<PatientList />}></Route>
+        <Route path="/patientprofile" element={<PatientProfile />}></Route>
 
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}

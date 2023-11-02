@@ -1,0 +1,44 @@
+/* Apply basic styling to the form */
+form {
+  max-width: 400px;
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc; /* Add a border around the form */
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Light gray background color */
+}
+
+/* Style input fields and labels */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc; /* Add a border to input fields */
+  border-radius: 4px;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+  background-color: #007bff; /* Blue background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Hover effect for the submit button */
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
