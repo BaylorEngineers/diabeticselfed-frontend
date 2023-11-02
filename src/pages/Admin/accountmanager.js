@@ -28,7 +28,7 @@ const AccountManager = () => {
       },
       body: JSON.stringify({
         email, 
-        role: selectedOption.toUpperCase() // Make sure the role is transformed to uppercase.
+        role: selectedOption.toUpperCase()
       })
     })
     .then(response => {
