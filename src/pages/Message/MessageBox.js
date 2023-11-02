@@ -6,7 +6,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     const [conversation, setConversation] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const userId = 4; // Replace with localStorage.getItem('userId');
-    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWFvdGluZ3NodW9AZ21haWwuY29tIiwiaWF0IjoxNjk4OTUzMzcwLCJleHAiOjE2OTkwMzk3NzB9.4SYbJ5eKw2PUDXCa1ZPTaGc0x3i2xWiyn0ijX5tFRQE"; // Replace with localStorage.getItem('jwtToken');
+    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWFvdGluZ3NodW9AZ21haWwuY29tIiwiaWF0IjoxNjk4OTU4MjkyLCJleHAiOjE2OTkwNDQ2OTJ9.RL4jfq_4GCpxWxPB3GM8PrDYL8IXFLJnUHz9xz51-I4"; // Replace with localStorage.getItem('jwtToken');
     const [stompClient, setStompClient] = useState(null);
 
     useEffect(() => {
