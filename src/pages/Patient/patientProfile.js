@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
-
 import "./css/patientProfile.css";
 
 const PatientProfile = ({ name, onChangeName, onSave, onChangePassword }) => {
@@ -14,19 +13,50 @@ const [formData, setFormData] = useState({
     profileType: '',
   });
 
+  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGluaWNpYW5AbWFpbC5jb20iLCJpYXQiOjE2OTg4NjY3MjMsImV4cCI6MTY5ODk1MzEyM30.9HWe9R9mPbOwIlSPgK6sUi_854m88dBK_sEnt4UJXIE"
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e)  => {
+//    e.preventDefault();
     // You can perform validation here before submitting the data
 
     // Assuming you want to log the form data for demonstration purposes
     console.log('Form Data:', formData);
 
     // You can also send the data to an API or perform other actions here
+
+try {
+      const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          dob: formData.dob,
+          age: formData.age,
+          education: formData.education,
+          profileType: formData.profileType,
+        }),
+      });
+
+      if (response.ok) {
+        // Handle a successful response from your backend here
+        console.log('Data sent to the backend successfully.');
+      } else {
+        // Handle errors from your backend here
+        console.error('Error sending data to the backend.');
+      }
+    } catch (error) {
+      console.error('An error occurred while sending data:', error);
+    }
+
+//    setIsEditMode(false); // Exit edit mode after submission
   };
 
   return (
@@ -96,7 +126,7 @@ const [formData, setFormData] = useState({
                     {/* Add more options as needed */}
                   </select>
                 </div>
-                <Button label = "Submit" type="submit">Submit</Button>
+                <button label = "Submit" type="submit">Submit</button>
               </form>
             </div>
         </>
