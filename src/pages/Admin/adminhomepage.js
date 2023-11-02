@@ -25,7 +25,7 @@ const AdminPage = () => {
 
   return (
   <>
-  <Header role = "admin"/>
+  <Header role = "ADMIN"/>
   {/* <Sidebar sidebarType="sidebarAdmin" /> */}
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <div>

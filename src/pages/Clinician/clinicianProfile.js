@@ -39,7 +39,7 @@ const ClinicianProfile = ({ firstname, lastname, onSave, onChangePassword }) => 
 
     return (
         <>
-            <Header  role="clinician"/>
+            <Header  role="CLINICIAN"/>
             {/* <Sidebar sidebarType="sidebarClinician" /> */}
             <div
                 style={{

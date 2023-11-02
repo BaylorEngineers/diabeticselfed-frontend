@@ -29,9 +29,9 @@ function Header({ role }) { // role prop to determine which links to display
         </div>
         <div className="HeaderLinks">
           {/* Conditional rendering based on the role */}
-          {role === 'admin' && renderLinks(SidebarAdminData)}
-          {role === 'clinician' && renderLinks(SidebarDataClinician)}
-          {role === 'patient' && renderLinks(SidebarData)}
+          {role === 'ADMIN' && renderLinks(SidebarAdminData)}
+          {role === 'CLINICIAN' && renderLinks(SidebarDataClinician)}
+          {role === 'PATIENT' && renderLinks(SidebarData)}
         </div>
         <Dropdown className="userDropdown" text="User" />
       </div>

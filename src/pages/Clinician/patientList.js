@@ -37,7 +37,7 @@ const PatientList = () => {
 
     return (
         <>
-            <Header  role="clinician"/>
+            <Header  role="CLINICIAN"/>
             {/* <Sidebar sidebarType="sidebarClinician" /> */}
             <div className="patient-list">
                 <h2>Patients List</h2>

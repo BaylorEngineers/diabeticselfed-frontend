@@ -30,8 +30,8 @@ const AccountManager = () => {
 
   return (
     <>
-      <Header />
-      <Sidebar sidebarType="sidebarAdmin" />
+      <Header role = "ADMIN" />
+      {/* <Sidebar sidebarType="sidebarAdmin" /> */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
 
         <form style={{ marginTop: '20px', textAlign: 'center' }}>

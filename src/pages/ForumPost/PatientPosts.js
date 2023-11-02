@@ -10,6 +10,7 @@ const PatientPosts = () => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  
   const patientId = 5;
   const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg4MTc0MSwiZXhwIjoxNjk4OTY4MTQxfQ.d5gPvb711alDpUfvT8NCEejRu-1yI17EekT0D6u1Wpc"
 // const patientId = localStorage.getItem('patientId'); // Retrieve the patientId from local storage
@@ -63,7 +64,7 @@ useEffect(() => {
 
   return (
     <div className="forum-page">
-      <Header role="clinician" />
+      <Header role="PATIENT" />
       <div className="forum-content">
         <div className="forum-post-container">
         {error && <div className="error-message">{error}</div>} 

@@ -34,7 +34,7 @@ const AccessRecords = () => {
 
   return (
     <>
-      <Header role = "admin"/>
+      <Header role = "ADMIN"/>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <form>
           <label>

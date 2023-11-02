@@ -8,6 +8,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
     const [content, setContent] = useState('');
     const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg5ODY1NywiZXhwIjoxNjk4OTg1MDU3fQ.-oJwBlduclU_nFNUkHN9JiypVK-ezbggn4mcGCx_azI";//localStorage.getItem('jwtToken'); // Get the token from local storage
     const [showReplyForm, setShowReplyForm] = useState(false);
+    const role = localStorage.getItem('role');
     const handleSubmit = async (e) => {
       e.preventDefault();
       if (!content.trim()) return;

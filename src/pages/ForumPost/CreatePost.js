@@ -47,7 +47,7 @@ const CreatePost = () => {
   };
   return (
     <>
-      <Header role="patient" /> {/* Pass role as a prop */}
+      <Header role="PATIENT" /> {/* Pass role as a prop */}
       <div className="create-post-container">
         <h2>Create a New Post</h2>
         <form onSubmit={handleSubmit} className="post-form">
