@@ -25,8 +25,8 @@ const AdminPage = () => {
 
   return (
   <>
-  <Header/>
-  <Sidebar sidebarType="sidebarAdmin" />
+  <Header role = "admin"/>
+  {/* <Sidebar sidebarType="sidebarAdmin" /> */}
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <div>
       <p> This will be the home page </p>

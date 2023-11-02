@@ -10,6 +10,10 @@ import AdminAccessRecords from './pages/Admin/accessrecords'
 import AccountManager from './pages/Admin/accountmanager'
 import ClinicianProfile from "./pages/Clinician/clinicianProfile"
 import PatientList from "./pages/Clinician/patientList";
+import ForumPost from "./pages/ForumPost/ForumPost";
+import CreatePost from "./pages/ForumPost/CreatePost";
+import PostDetail from "./pages/ForumPost/PostDetail";
+import PatientPosts from "./pages/ForumPost/PatientPosts";
 import "./App.css";
 
 // import Course from "./components/Course";
@@ -30,7 +34,10 @@ function App() {
         <Route path="/accountmanager" element={<AccountManager />}></Route>
         <Route path="/clinicianprofile" element={<ClinicianProfile />}></Route>
         <Route path="/patientlist" element={<PatientList />}></Route>
-
+        <Route path="/posts" element={<ForumPost />}></Route>
+        <Route path="/create-post"  element={<CreatePost />}></Route>
+        <Route path="/posts/:postId" element={<PostDetail />}></Route>
+        <Route path="/myposts" element={<PatientPosts />}></Route>
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>
