@@ -393,7 +393,8 @@ input[type="text"] {
 }
 
 .nav-menu {
-  background-color: rgb(9, 105, 30);
+  margin-top: 70px;
+  background-color: rgb(154, 173, 171);
   width: 250px;
   height: 100vh;
   display: flex;
@@ -449,6 +450,7 @@ input[type="text"] {
 }
 
 span {
+
   margin-left: 16px;
 }
 

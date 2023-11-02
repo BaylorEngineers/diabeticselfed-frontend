@@ -34,8 +34,7 @@ const AccessRecords = () => {
 
   return (
     <>
-      <Header />
-      <Sidebar sidebarType="sidebarAdmin" />
+      <Header role = "ADMIN"/>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <form>
           <label>

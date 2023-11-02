@@ -1,13 +1,12 @@
 /* Apply basic styling to the form */
-form {
+/* form {
   max-width: 400px;
   width: 40%;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc; /* Add a border around the form */
-  border-radius: 5px;
-  background-color: #f9f9f9; /* Light gray background color */
-}
+  border: 1px solid #ccc; 
+  background-color: #f9f9f9;
+} */
 
 /* Style input fields and labels */
 label {

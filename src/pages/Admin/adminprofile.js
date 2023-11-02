@@ -75,8 +75,8 @@ const AdminProfile = ({onSave, onChangePassword }) => {
 
   return (
     <>
-    <Header/>
-    <Sidebar sidebarType="sidebarAdmin" />
+    <Header role = "ADMIN"/>
+    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <div>
       <label>

@@ -1,0 +1,219 @@
+/* ForumPost.css */
+.forum-post{
+  display: flex;
+  flex-direction: column;
+}
+.forum-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f7f7; /* Light grey background */
+}
+  .Header {
+   
+    flex: 1; 
+  }
+  /* Style for the Sidebar */
+  /* .sidebar {
+    flex: 2; 
+    max-width: 7.5%;
+    background-color: #30cebb; 
+    color: #fff;
+    padding: 1em;
+    width: 250px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s; 
+    
+  }
+  
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 3.2%;
+  }
+  
+  .nav-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .nav-menu-items li {
+    text-align: left;
+  }
+  
+  .nav-menu-items li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+   */
+
+   .sidebar {
+    width: 250px;
+    background-color: #2C3E50;
+    color: white;
+    min-height: 100vh; /* Full height of the viewport */
+    padding: 20px 0;
+    box-sizing: border-box;
+  }
+  
+  .sidebar-logo {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #4B6080;
+  }
+  
+  .sidebar-nav {
+    margin-top: 20px;
+  }
+  
+  .nav-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-item {
+    display: block;
+    padding: 10px 20px;
+  }
+  
+  .nav-item .active-link,
+  .nav-item:hover {
+    background-color: #34495E;
+    border-left: 4px solid #18BC9C;
+    color: #18BC9C;
+    text-decoration: none;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #18BC9C;
+  }
+  
+  /* ForumPost.css */
+  .forum-page-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .forum-main-content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  /* Add additional styles for your Dropdown component if needed */
+  
+.posts-container {
+  width: 60%;
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff; /* White background for posts */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.post-entry {
+  border-bottom: 1px solid #e1e1e1;
+  padding: 20px;
+  transition: background-color 0.3s;
+}
+
+.post-entry:hover {
+  background-color: #f0f0f0; /* Slight grey background on hover */
+}
+
+.post-title {
+  font-size: 1.5rem;
+  color: #333; /* Dark grey color for text */
+  margin: 0;
+  font-weight: 500; /* Semi-bold font */
+}
+
+.post-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.post-owner {
+  font-size: 1rem;
+  color: #666;
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.create-post-link {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #5C6BC0; /* Example primary color */
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.post-entry-link {
+  text-decoration: none; /* Ensures no underline on links */
+  color: inherit; /* Inherits the color from post-entry for consistency */
+}
+
+.create-post-link:hover {
+  background-color: #3f51b5; /* Darken button on hover */
+}
+.post-entry-link:hover .post-entry {
+  background-color: #f0f0f0; /* Slight grey background on hover for the entry */
+}
+/* You can add media queries to make the design responsive */
+@media (max-width: 768px) {
+  .posts-container {
+    width: 95%;
+  }
+}
+
+
+
+.delete-post-button {
+  padding: 5px 10px;
+  background-color: #ff4d4f; /* Red color for delete button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-post-button:hover {
+  background-color: #ff7875; /* Lighten red color on hover */
+}
+
+
+@media (max-width: 768px) {
+  .delete-post-button {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
+}
+
+.error-message {
+  color: red;
+  margin: 10px;
+  text-align: center;
+}

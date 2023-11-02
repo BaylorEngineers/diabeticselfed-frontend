@@ -28,7 +28,7 @@ const AccountManager = () => {
       },
       body: JSON.stringify({
         email, 
-        role: selectedOption.toUpperCase() // Make sure the role is transformed to uppercase.
+        role: selectedOption.toUpperCase()
       })
     })
     .then(response => {
@@ -53,8 +53,8 @@ const AccountManager = () => {
 
   return (
     <>
-      <Header />
-      <Sidebar sidebarType="sidebarAdmin" />
+      <Header role = "ADMIN" />
+      {/* <Sidebar sidebarType="sidebarAdmin" /> */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <form style={{ marginTop: '20px', textAlign: 'center' }}>
           <label>
