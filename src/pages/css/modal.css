@@ -1,0 +1,35 @@
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 500px; /* Adjust the width to make the modal smaller */
+    height: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .submit-button {
+    flex: 1;
+    background-color: darkgreen; /* Set dark green color for the submit button */
+    color: white;
+    width: 50%;
+    text-align: center;
+  }
+  
+  .close-button {
+    flex: 1;
+    background-color: maroon; /* Set maroon color for the close button */
+    color: white;
+    width: 50%;
+    text-align: center;
+  }

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./css/patientProfile.css";
+
+import CustomModal from '../SurveyModal'
 
 const PatientProfile = ({ name, onChangeName, onSave, onChangePassword }) => {
 const [formData, setFormData] = useState({
@@ -13,12 +15,74 @@ const [formData, setFormData] = useState({
     profileType: '',
   });
 
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGluaWNpYW5AbWFpbC5jb20iLCJpYXQiOjE2OTg4NjY3MjMsImV4cCI6MTY5ODk1MzEyM30.9HWe9R9mPbOwIlSPgK6sUi_854m88dBK_sEnt4UJXIE"
+  const [patientData, setPatientData] = useState('');
+  const [error, setError] = useState('');
+
+  // const jwtToken = localStorage.getItem('accessToken');
+  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
+
+  // console.log(jwtToken);
+  console.log(localStorage.getItem('userId'));
+  console.log(localStorage.getItem('patientId'));
+
+  useEffect(() => {
+    const patientId = Number(localStorage.getItem('patientId'));
+    console.log(patientId);
+
+    // const accessToken = String(localStorage.getItem('accessToken'));
+    const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
+
+    // console.log(accessToken);
+
+    const fetchPatientData = async () => {
+      const apiURL = 'http://localhost:8080/api/v1/patient-profile/detail/' + patientId ;
+      try {
+        const response = await fetch(apiURL, {
+          mode: 'cors',
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+        }
+
+        const patientData = await response.json();
+        console.log("Data: ")
+        console.log(patientData);
+        setPatientData(patientData);
+        console.log('Fetched userData:', patientData);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchPatientData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+        const[firstLoginOfTheDay, setFirstLoginOfTheDay] = useState(false);
+
+        const openModal = () => {
+          setIsModalOpen(true);
+          setFirstLoginOfTheDay(true);
+        };
+
+        const closeModal = () => {
+          setIsModalOpen(false);
+        };
+
+        const handleModalSubmit = (modalInput) => {
+          console.log(modalInput);
+        }
 
   const handleSubmit = async (e)  => {
 //    e.preventDefault();
@@ -28,6 +92,8 @@ const [formData, setFormData] = useState({
     console.log('Form Data:', formData);
 
     // You can also send the data to an API or perform other actions here
+
+
 
 try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
@@ -64,6 +130,17 @@ try {
   <Header/>
     <Sidebar sidebarType="sidebarAdmin" />
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            
+            
+            <button onClick={openModal}>Show Modal</button>
+
+            {firstLoginOfTheDay && <CustomModal
+              isOpen={isModalOpen}
+              onRequestClose={closeModal}
+              onSubmit={handleModalSubmit}
+            />}
+
+
               <h1>Patient Profile</h1>
               <form onSubmit={handleSubmit}>
                 <div>

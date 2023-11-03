@@ -3,6 +3,10 @@ import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
 
+// import Popup from '../pages/SurveyPopUp';
+
+// import CustomModal from '../pages/SurveyModal'
+
 
 function Login() {
     const [errorMessages, error_login] = useState('');
@@ -11,6 +15,7 @@ function Login() {
     const [password, setPassword] = useState();
     const [role, setRole] = useState();
     const [userId, setUserID] = useState();
+    const [patientID, setPatientID] = useState();
     const [accessToken, setAccessToken] = useState();
   
     const errors = {
@@ -55,6 +60,12 @@ function Login() {
             setUserID(userID);
             localStorage.setItem('userId', userID);
 
+            const patientID = responseData.patientID;
+            console.log('patientID:', patientID);
+            setPatientID(patientID);
+            localStorage.setItem('patientId', patientID);
+
+
             const access_token = responseData.access_token;
             console.log('access_token:', access_token);
             setAccessToken(access_token);
@@ -70,6 +81,24 @@ function Login() {
             error_login({ name: 'ID', message: error.message + ": Wrong email or password" });
           }
         };
+
+    
+        // const [isModalOpen, setIsModalOpen] = useState(false);
+        // const[firstLoginOfTheDay, setFirstLoginOfTheDay] = useState(false);
+
+        // const openModal = () => {
+        //   setIsModalOpen(true);
+        //   setFirstLoginOfTheDay(true);
+        // };
+
+        // const closeModal = () => {
+        //   setIsModalOpen(false);
+        // };
+
+        // const handleModalSubmit = (modalInput) => {
+        //   console.log(modalInput);
+        // }
+
 
 
     const renderErrorMessage = (name) =>
@@ -126,6 +155,17 @@ function Login() {
         backgroundRepeat: 'no-repeat',
       }}>
       <div className="app">
+
+
+      {/* <button onClick={openModal}>Show Modal</button>
+
+      {firstLoginOfTheDay && <CustomModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        onSubmit={handleModalSubmit}
+      />} */}
+
+
         <div className="login_frame">
           <div className="title">Log In</div>
           <Link to="/">
