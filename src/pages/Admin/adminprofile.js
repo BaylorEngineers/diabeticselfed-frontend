@@ -12,20 +12,23 @@ const AdminProfile = ({onSave, onChangePassword }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userData, setUserData] = useState('');
   const [error, setError] = useState('');
-  const [id, setId] = useState('');
+  const [userId, setId] = useState('');
+  const [accessToken, setAccessToken] = useState('');
 
 //   const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY5ODg3NzMzNCwiZXhwIjoxNjk4OTYzNzM0fQ.kQTkRDTFMK2vNA75XCFHIj87R8a0MNbW05Obsqb3OEc';
 
    useEffect(() => {
-     const userId = Number(localStorage.getItem('userId'));
+     const userId = localStorage.getItem('userId');
      console.log(userId);
+     setId(userId);
 
      const accessToken = String(localStorage.getItem('accessToken'));
      console.log(accessToken);
+     setAccessToken(accessToken);
 
      const fetchUserData = async () => {
        try {
-         const response = await fetch('http://localhost:8080/api/v1/users/get-user-data?id=3', {
+         const response = await fetch(`http://localhost:8080/api/v1/users/get-user-data?id=${userId}`, {
            mode: 'cors',
            method: 'GET',
            headers: {
@@ -48,89 +51,115 @@ const AdminProfile = ({onSave, onChangePassword }) => {
      };
 
      fetchUserData();
-   }, []);
+   }, [accessToken, userId]);
 
-  const handleSave = () => {
-    // Logic to save the profile changes
-  };
-
-  const handleChangePassword = () => {
-    setShowChangePassword(true);
-  };
-
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e.preventDefault();
     setShowChangePassword(false);
-    // Reset password fields
     setCurrentPassword('');
     setNewPassword('');
     setConfirmPassword('');
   };
 
-  const handleSubmitPasswordChange = () => {
-    // Logic to handle password change
-    onChangePassword(currentPassword, newPassword);
-    console.log('Password changed:', { currentPassword, newPassword });
-    handleCancel();
-  };
+  const handleChangePassword = () => {
+      setShowChangePassword(true);
+    };
 
-  return (
-    <>
-    <Header role = "ADMIN"/>
-    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-      <div>
-      <label>
-       Name: {userData.name}
-      </label>
-      </div>
-      <div>
-       <label>
+  const handleSavePassword = async () => {
+
+  if (!currentPassword || !newPassword || !confirmPassword) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    setError("");
+
+    try {
+    console.log("in try:" + accessToken);
+        const response = await fetch('http://localhost:8080/api/v1/users/change-password', {
+          mode: 'cors',
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+            confirmationPassword: confirmPassword,
+          }),
+        });
+        console.log("done")
+
+        console.log("password entered");
+
+        if (!response.ok) {
+          throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+        }
+
+        // Handle successful password change
+        console.log('Password changed successfully');
+      } catch (error) {
+        // Handle error
+        console.error('Error changing password:', error.message);
+      }
+    };
+
+ return (
+     <>
+       <Header role="ADMIN" />
+       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+         <div>
+           <label>
+             Name: {userData.firstName} {userData.lastName}
+           </label>
+         </div>
+         <div>
+           <label>
              Email: {userData.email}
-            </label>
-      </div>
-      <div style={{ marginTop: '20px' }}>
-      <Button label="Change Password" onClick={handleChangePassword} size="small"/>
-      </div>
-      <div style={{ marginTop: '20px' }}>
-      <Button label="Save" onClick={handleSave} size="small"/>
-      <Button label="Cancel" onClick={handleCancel} size="small"/>
-      </div>
-      {showChangePassword && (
-        <div style={{ marginTop: '20px' }}>
-          <label>
-                      Current Password:
-                      <input
-                        type="password"
-                        value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      New Password:
-                      <input
-                        type="password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Confirm Password:
-                      <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                      />
-                    </label>
-                    <br />
-          <Button label="Submit" onClick={handleSubmitPasswordChange} size="small"/>
-          <Button label="Cancel" onClick={handleCancel} size="small"/>
-        </div>
-      )}
-    </div>
-    </>
-  );
-};
+           </label>
+         </div>
+         <div style={{ marginTop: '20px' }}>
+           <Button label="Change Password" onClick={handleChangePassword} size="small" />
+         </div>
+         {showChangePassword && (
+           <form style={{ marginTop: '20px', textAlign: 'center' }}>
+             <div style={{ marginTop: '20px' }}>
+               <label>
+                 Current Password:
+                 <input
+                   type="password"
+                   value={currentPassword}
+                   onChange={(e) => setCurrentPassword(e.target.value)}
+                 />
+               </label>
+               <br />
+               <label>
+                 New Password:
+                 <input
+                   type="password"
+                   value={newPassword}
+                   onChange={(e) => setNewPassword(e.target.value)}
+                 />
+               </label>
+               <br />
+               <label>
+                 Confirm Password:
+                 <input
+                   type="password"
+                   value={confirmPassword}
+                   onChange={(e) => setConfirmPassword(e.target.value)}
+                 />
+               </label>
+               <br />
+               <Button type="submit" label="Save" size="small" onClick={(e) => { e.preventDefault(); handleSavePassword();}}/>
+               <Button label="Cancel" onClick={(e) => handleCancel(e)} size="small" />
+             </div>
+           </form>
+         )}
+       </div>
+     </>
+   );
+ };
 
 export default AdminProfile;

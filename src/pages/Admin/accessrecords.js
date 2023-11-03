@@ -1,73 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
+
 // Dummy data
-const clinicians = ['Dr. Smith', 'Dr. Johnson', 'Dr. Williams', 'Dr. Brown'];
-
+//const clinicians = ['Dr. Smith', 'Dr. Johnson', 'Dr. Williams', 'Dr. Brown'];
+const accessToken = String(localStorage.getItem('accessToken'));
+console.log(accessToken);
 const AccessRecords = () => {
-  const [selectedUser, setSelectedUser] = useState('');
-  const [recordData, setRecordData] = useState(null); // State to store record data
 
-  const handleUserChange = (e) => {
-    setSelectedUser(e.target.value);
+const [clinicians, setClinicians] = useState([]);
+useEffect(() => {
+const getAllClinicians = async () => {
+          try {
+              const response = await fetch('http://localhost:8080/api/v1/clinicians/getAll', {
+              mode:'cors',
+              method: 'GET',
+              headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${accessToken}`,
+              },
+          });
+
+          if (!response.ok) {
+              throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+          }
+
+          const cliniciansData = await response.json();
+          setClinicians(cliniciansData);
+      } catch (error) {
+          console.error('Error fetching clinicians:', error.message);
+      }
   };
 
-  const handlePullRecords = (e) => {
+  getAllClinicians();
+}, [accessToken]);
 
-    e.preventDefault();
-
-    // Logic to pull records based on selected user and email
-    console.log('Pulling records for:', selectedUser);
-
-    // Dummy record data (replace this with your actual logic to fetch records)
-    const dummyRecords = [
-      { date: '2023-10-10', description: 'Record 1' },
-      { date: '2023-10-11', description: 'Record 2' },
-      { date: '2023-10-12', description: 'Record 3' },
-    ];
-
-    setRecordData(dummyRecords);
-  };
+//  const handlePullRecords = (e) => {
+//
+//    e.preventDefault();
+//
+//    // Logic to pull records based on selected user and email
+//    console.log('Pulling records for:', selectedUser);
+//
+//    // Dummy record data (replace this with your actual logic to fetch records)
+//    const dummyRecords = [
+//      { date: '2023-10-10', description: 'Record 1' },
+//      { date: '2023-10-11', description: 'Record 2' },
+//      { date: '2023-10-12', description: 'Record 3' },
+//    ];
+//
+//    setRecordData(dummyRecords);
+//  };
 
   return (
-    <>
-      <Header role = "ADMIN"/>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <form>
-          <label>
-            Clinicians:
-            <select value={selectedUser} onChange={handleUserChange}>
-              <option value="">Select Clinician</option>
-              {clinicians.map((clinician, index) => (
-                <option key={index} value={clinician}>
-                  {clinician}
-                </option>
+  <>
+  <Header role="ADMIN" />
+          <div className="clinicians-list">
+              {clinicians.map((clinician) => (
+                <div key={`${clinician.firstname}-${clinician.lastname}`} className="clinician-preview">
+                  <div className="clinician-name">{clinician.firstname} {clinician.lastname}</div>
+                  {/* Add other clinician details as needed */}
+                </div>
               ))}
-            </select>
-          </label>
-          <br />
-          <br />
-          <Button label="Access Records" onClick={handlePullRecords} size="small"/>
-        </form>
-
-        {recordData && (
-          <div style={{ marginTop: '20px' }}>
-            <h2>Records for {selectedUser}</h2>
-            <ul>
-              {recordData.map((record, index) => (
-                <li key={index}>
-                  <strong>Date:</strong> {record.date}, <strong>Description:</strong> {record.description}
-                </li>
-              ))}
-            </ul>
           </div>
-        )}
-      </div>
-    </>
-  );
-};
+          </>
+      );
+  };
+
 
 export default AccessRecords;
