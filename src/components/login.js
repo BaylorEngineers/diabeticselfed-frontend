@@ -60,6 +60,10 @@ function Login() {
             setAccessToken(access_token);
             localStorage.setItem('accessToken', access_token);
 
+            const role = responseData.role;
+            setRole('role',role);
+            localStorage.setItem('role', role);
+
             login_set_true(true);
           } catch (error) {
             console.error('Error:', error);

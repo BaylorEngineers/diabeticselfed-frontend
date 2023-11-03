@@ -6,7 +6,7 @@ import "./PostDetail.css";
 
 const CommentForm = ({ postId, onCommentAdded }) => {
     const [content, setContent] = useState('');
-    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg5ODY1NywiZXhwIjoxNjk4OTg1MDU3fQ.-oJwBlduclU_nFNUkHN9JiypVK-ezbggn4mcGCx_azI";//localStorage.getItem('jwtToken'); // Get the token from local storage
+    const token =  localStorage.getItem('accessToken');
     const [showReplyForm, setShowReplyForm] = useState(false);
     const role = localStorage.getItem('role');
     const handleSubmit = async (e) => {
@@ -48,7 +48,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
   };
 
   const Comment = ({ comment, onCommentDeleted, onCommentAdded  }) => {
-    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg5ODY1NywiZXhwIjoxNjk4OTg1MDU3fQ.-oJwBlduclU_nFNUkHN9JiypVK-ezbggn4mcGCx_azI";//localStorage.getItem('jwtToken'); // Get the token from local storage
+    const token =  localStorage.getItem('accessToken');
     const userId = 4; //JSON.parse(localStorage.getItem('user')).id; // Get the user ID from local storage
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [replyContent, setReplyContent] = useState('');
@@ -152,7 +152,8 @@ const CommentForm = ({ postId, onCommentAdded }) => {
   const PostDetail = () => {
     const [post, setPost] = useState(null);
     const { postId } = useParams();
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg4MTc0MSwiZXhwIjoxNjk4OTY4MTQxfQ.d5gPvb711alDpUfvT8NCEejRu-1yI17EekT0D6u1Wpc'; // Replace with actual token retrieval from secure storage
+    const role = localStorage.getItem('role');
+    const token =  localStorage.getItem('accessToken');
   
     const fetchPost = async () => {
         try {
@@ -188,7 +189,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
   
     return (
       <div className="container">
-        <Header role="clinician" />
+        <Header role={role} />
         <div className="main-content">
           <div className="post-content">
             <div className="post-header">

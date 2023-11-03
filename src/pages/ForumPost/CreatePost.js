@@ -20,7 +20,7 @@ const CreatePost = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const jwtToken = localStorage.getItem('jwtToken'); // Retrieve the JWT token from local storage
+    const jwtToken = localStorage.getItem('accessToken'); // Retrieve the JWT token from local storage
 
     const post = { title, content, patientId };
 
