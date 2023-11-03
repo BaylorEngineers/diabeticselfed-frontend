@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from "../../components/Header/Header";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import "./PostDetail.css";
 
 const CommentForm = ({ postId, onCommentAdded }) => {

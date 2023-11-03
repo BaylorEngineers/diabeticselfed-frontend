@@ -2,10 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // make sure you have react-router-dom installed
 import Header from "../../components/Header/Header";
-// import Sidebar from "../../components/Sidebar/Sidebar";
 import Post from "./Post"; // This is a component we will create to display each post
 import "./ForumPost.css";
-// import Sidebar from "./Sidebar.";
 
 
 const ForumPost = () => {
