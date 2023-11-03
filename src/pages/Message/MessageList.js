@@ -3,11 +3,15 @@ import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import ClinicianListModal from './ClinicianListModal';
+
 const MessageList = () => {
     const [messages, setMessages] = useState([]);
     const [selectedConversation, setSelectedConversation] = useState(null);
     const [stompClient, setStompClient] = useState(null);
     const [subscription, setSubscription] = useState(null);
+    const [isClinicianListVisible, setClinicianListVisible] = useState(false);
+
     const userId =4;// localStorage.getItem('userId');
     const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWFvdGluZ3NodW9AZ21haWwuY29tIiwiaWF0IjoxNjk4OTU4MjkyLCJleHAiOjE2OTkwNDQ2OTJ9.RL4jfq_4GCpxWxPB3GM8PrDYL8IXFLJnUHz9xz51-I4"//localStorage.getItem('jwtToken');
    
@@ -55,7 +59,10 @@ const MessageList = () => {
         };
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
+    const handleSendMessageToClinician = () => {
+        fetchMessages(); // Refresh the message list
+        setClinicianListVisible(false); // Close the modal
+      };
     return (
         <div className="message-list">
             {messages.map((message) => (
@@ -71,6 +78,17 @@ const MessageList = () => {
                     receiverId={selectedConversation}
                     onClose={() => setSelectedConversation(null)}
                 />
+            )}
+
+            <button className="show-clinicians" onClick={() => setClinicianListVisible(true)}>Send a Message</button>
+
+            {isClinicianListVisible && (
+            <ClinicianListModal
+                onClose={() => setClinicianListVisible(false)}
+                jwtToken={jwtToken}
+                userId={userId}
+                onMessageSent={handleSendMessageToClinician}
+            />
             )}
         </div>
     );
