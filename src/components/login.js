@@ -99,16 +99,10 @@ function Login() {
           <div className="button-container">
             <input type="submit" value="Login"/>
           </div>
-          <div className="forgotandreg">
-          <div className="regis">
-                <a href={"/registration"}>
-                  <l className="regisText"  n/>Sign up
-                </a>
-                </div>
-
-                <div className="forgotP">
+          <div className="forgotandreg" style={{ display: 'flex', justifyContent: 'center'}}>
+                <div className="forgotP" >
                 <a href={"/forgotpassword"}>
-                  <l className="regisText"  n/>Forget Password?
+                  <l className="regisText"/>Forget Password?
                 </a>
                 </div>
             </div>
@@ -139,7 +133,7 @@ function Login() {
             </Link>
           {(() => {
                         if (islogin) {
-//                            window.location.href = "/"+role;
+                            window.location.href = "/";
                         } else {
           return (
             renderForm
