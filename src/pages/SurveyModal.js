@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
-import '../css/modal.css'
+import '../pages/css/modal.css'
 
-Modal.setAppElement('#root'); // Set the root element for accessibility
+Modal.setAppElement('#root'); 
 
 function CustomModal({ isOpen, onRequestClose, onSubmit }) {
   const [modalInput, setModalInput] = useState('');
@@ -27,7 +27,7 @@ function CustomModal({ isOpen, onRequestClose, onSubmit }) {
 
   const handleSubmit = () => {
     if (selectedOption) {
-      onSubmit(selectedOption); // Pass the selected option to the parent component onSubmit handler
+      onSubmit(selectedOption); 
       onRequestClose();
     }
   }
