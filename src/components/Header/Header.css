@@ -1,8 +1,7 @@
+/* Header styles */
 .Header {
-  height: 10%;
-  background-color: #30cebb;
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #2C3E50; /* Example background color */
+  color: #FFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,78 +10,94 @@
 
 .HeaderContent {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 }
 
-.Header h1 {
-  font-size: 24px;
-  margin: 0;
+.HeaderLogo h1 {
+  color: #FFF; /* Change as needed */
 }
-.nav-menu {
-  display: flex;
-  align-items: center; /* This will ensure your items are in the same row and vertically aligned */
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
+
+/* Navigation styles */
 .HeaderLinks {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .nav-item {
+  color: #FFF;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-text-link {
   display: flex;
   align-items: center;
-  padding: 10px;
-  color: white;
+  color: inherit; /* Inherits color from .nav-item */
   text-decoration: none;
-  transition: background 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.nav-text {
-  display: flex;
-  align-items: center;
-  padding: 0.5em 1em;
+.nav-text-link:hover,
+.nav-text-link:focus {
+  color: #18BC9C; /* Highlight color on hover/focus */
+}
+
+.nav-item-with-submenu:hover .nav-sub-menu {
+  display: block; /* Show sub-menu on hover */
+}
+
+.nav-item-with-submenu .nav-sub-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: #34495E; /* Sub-menu background color */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Adds shadow for depth */
+  border-radius: 4px; /* Slight rounding on edges */
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px); /* Starts slightly above for slide down effect */
+  z-index: 999;
+}
+
+.nav-item-with-submenu:hover .nav-sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+}
+
+.nav-sub-item {
+  color: #FFF;
+  padding: 10px 20px;
+  display: block;
   text-decoration: none;
-  color: white;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
+}
+
+.nav-sub-item:hover,
+.nav-sub-item:focus {
+  background-color: #2C3E50; /* Darken background on hover/focus */
 }
 
 
-
-.nav-text + .nav-text {
-  margin-left: 1rem; /* Space out inline items */
+.nav-item-with-submenu {
+  position: relative;
 }
 
-.userDropdown {
-  margin-left: auto; /* Pushes the dropdown to the end of the header */
+.nav-sub-menu {
+  display: none;
+  position: absolute;
+  left: 0; /* Adjust if needed */
+  top: 100%; /* Adjust if needed */
+  z-index: 10;
 }
 
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .HeaderContent {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-menu {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-text {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .userDropdown {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
+.nav-item-with-submenu:hover .nav-sub-menu {
+  display: block;
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import { jwtDecode } from 'jwt-decode';
@@ -14,7 +13,6 @@ const AdminProfile = ({onSave, onChangePassword }) => {
   const [error, setError] = useState('');
   const [id, setId] = useState('');
 
-//   const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY5ODg3NzMzNCwiZXhwIjoxNjk4OTYzNzM0fQ.kQTkRDTFMK2vNA75XCFHIj87R8a0MNbW05Obsqb3OEc';
 
    useEffect(() => {
      const userId = Number(localStorage.getItem('userId'));
@@ -51,7 +49,6 @@ const AdminProfile = ({onSave, onChangePassword }) => {
    }, []);
 
   const handleSave = () => {
-    // Logic to save the profile changes
   };
 
   const handleChangePassword = () => {
