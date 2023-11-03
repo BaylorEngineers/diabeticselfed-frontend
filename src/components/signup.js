@@ -11,7 +11,8 @@ function SignUp() {
       firstname: '',
       lastname: '',
       DOB: '',
-      LevelofEdu: ''
+      LevelofEdu: '',
+      token: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
     const location = useLocation();
@@ -24,7 +25,7 @@ function SignUp() {
 
     const handleSignUp = async (event) => {
       event.preventDefault();
-
+      console.log(formData);
       try {
         const response = await fetch('http://localhost:8080/api/v1/auth/register', {
           method: 'POST',
@@ -117,6 +118,17 @@ function SignUp() {
                     type="text"
                     id="lastname"
                     name="lastname"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <label htmlFor="lastname">Token </label>
+                  <input
+                    type="text"
+                    id="token"
+                    name="token"
                     required
                     onChange={handleInputChange}
                   />
