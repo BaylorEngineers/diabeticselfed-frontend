@@ -10,11 +10,12 @@ import "./ForumPost.css";
 
 const ForumPost = () => {
   const [posts, setPosts] = useState([]);
+  const role = localStorage.getItem('role');
 
   useEffect(() => {
     const fetchPosts = async () => {
         // Your JWT token
-        const jwtToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg4MTc0MSwiZXhwIjoxNjk4OTY4MTQxfQ.d5gPvb711alDpUfvT8NCEejRu-1yI17EekT0D6u1Wpc';
+        const jwtToken = localStorage.getItem('accessToken');
       
         const response = await fetch('http://localhost:8080/api/v1/forum-posts/allposts', {
           method: 'GET',
@@ -34,7 +35,7 @@ const ForumPost = () => {
 
   return (
     <div className="forum-page">
-      <Header role="clinician" />
+      <Header role={role} />
       <div className="forum-content">
         {/* <Sidebar /> */}
         <div className="forum-post-container">

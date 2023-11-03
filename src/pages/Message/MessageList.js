@@ -13,10 +13,11 @@ const MessageList = () => {
     const [isClinicianListVisible, setClinicianListVisible] = useState(false);
 
     const userId =4;// localStorage.getItem('userId');
-    const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWFvdGluZ3NodW9AZ21haWwuY29tIiwiaWF0IjoxNjk4OTU4MjkyLCJleHAiOjE2OTkwNDQ2OTJ9.RL4jfq_4GCpxWxPB3GM8PrDYL8IXFLJnUHz9xz51-I4"//localStorage.getItem('jwtToken');
+    const jwtToken = localStorage.getItem('accessToken');
    
     // Function to fetch messages
     const fetchMessages = async () => {
+        console.log(jwtToken);
         try {
             const response = await fetch(`http://localhost:8080/api/v1/messages/last-messages/${userId}`, {
                 headers: { 'Authorization': `Bearer ${jwtToken}` },

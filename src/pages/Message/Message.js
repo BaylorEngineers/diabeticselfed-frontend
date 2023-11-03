@@ -5,9 +5,11 @@ import MessageList from './MessageList';
 import './Message.css';
 
 function Message() {
+  const role = localStorage.getItem('role');
+
   return (
     <div className="App">
-        <Header role="PATIENT"/>
+        <Header role={role}/>
       <MessageList />
     </div>
   );

@@ -3,16 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Header from "../../components/Header/Header";
-import Post from "./Post"; // This is a component we will create to display each post
 import "./ForumPost.css";
 
 const PatientPosts = () => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  
+  const role = localStorage.getItem('role');
   const patientId = 5;
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODg4MTc0MSwiZXhwIjoxNjk4OTY4MTQxfQ.d5gPvb711alDpUfvT8NCEejRu-1yI17EekT0D6u1Wpc"
+  const jwtToken = localStorage.getItem('accessToken');
 // const patientId = localStorage.getItem('patientId'); // Retrieve the patientId from local storage
 // const jwtToken = localStorage.getItem('jwtToken'); // Retrieve the JWT token from local storage
 useEffect(() => {
@@ -64,7 +63,7 @@ useEffect(() => {
 
   return (
     <div className="forum-page">
-      <Header role="PATIENT" />
+      <Header role={role} />
       <div className="forum-content">
         <div className="forum-post-container">
         {error && <div className="error-message">{error}</div>} 
