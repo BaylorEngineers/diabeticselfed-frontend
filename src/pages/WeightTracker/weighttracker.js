@@ -33,7 +33,7 @@ const WeightTrackerPage = () => {
 
   return (
   <>
-  <Header role="PATIENT">
+  <Header role="PATIENT"/>
     <div>
       <table>
         <thead>
