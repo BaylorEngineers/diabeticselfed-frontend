@@ -1,11 +1,88 @@
-.Title {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  justify-content: right;
-  align-items: baseline;
-  padding: 1em;
-  margin-bottom: 2em;
-  background-color: rgb(9, 105, 30);
+.Header {
+  height: 10%;
+  background-color: #30cebb;
   color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.HeaderContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+.nav-menu {
+  display: flex;
+  align-items: center; /* This will ensure your items are in the same row and vertically aligned */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.HeaderLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.nav-text {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+
+
+.nav-text + .nav-text {
+  margin-left: 1rem; /* Space out inline items */
+}
+
+.userDropdown {
+  margin-left: auto; /* Pushes the dropdown to the end of the header */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .HeaderContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-menu {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-text {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .userDropdown {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 }

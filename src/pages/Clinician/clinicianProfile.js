@@ -39,8 +39,8 @@ const ClinicianProfile = ({ firstname, lastname, onSave, onChangePassword }) => 
 
     return (
         <>
-            <Header />
-            <Sidebar sidebarType="sidebarClinician" />
+            <Header  role="CLINICIAN"/>
+            {/* <Sidebar sidebarType="sidebarClinician" /> */}
             <div
                 style={{
                     display: "flex",

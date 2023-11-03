@@ -1,0 +1,195 @@
+
+/* ForumPost.css */
+
+  .header {
+    display: flex;
+    width: 100%;
+  }
+  .Header {
+    flex: 1; /* Take up available space */
+  }
+  /* Style for the Sidebar */
+  .sidebar {
+    z-index: 10;
+    height: 70px;
+    max-width: 7.5%;
+    background-color: #30cebb; /* Adjust sidebar background color */
+    color: #fff;
+    padding: 1em;
+    width: 250px; 
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s; /* Add smooth width transition */
+    
+  }
+  
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .nav-menu-items li {
+    text-align: left;
+  }
+  
+  .nav-menu-items li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* Add additional styles for your Dropdown component if needed */
+  
+
+  
+  .main-content {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  /* .sidebar {
+    flex: 1;
+  } */
+  
+  .post-content {
+    flex: 3;
+    
+    margin-left: 30%; /* Adjust according to the sidebar's width */
+    padding: 20px;
+    max-width: 800px; /* Sets a maximum width for the post content */
+    box-sizing: border-box; /* Includes padding in the element's total width and height */
+    margin-right: auto; /* Centers the content */
+  }
+  
+  .post-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .post-owner {
+    font-style: italic;
+    color: #666;
+  }
+  
+  .post-body {
+    margin-top: 20px;
+  }
+  
+  .comments-section {
+    margin-top: 40px;
+  }
+  
+  .comment {
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .comment-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .child-comments {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  /* Below are additional styles you can adjust for better visuals */
+  .commenter-name {
+    font-weight: bold;
+  }
+  
+  .comment-content {
+    margin-bottom: 5px;
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .comment-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-height: 100px;
+  }
+  
+  .comment-form button {
+    padding: 10px 20px;
+    background-color: #30cebb;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .delete-comment {
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .delete-comment:hover {
+    opacity: 0.8;
+  }
+
+  .reply-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .reply-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-height: 60px;
+  }
+  
+  .reply-form button {
+    padding: 5px 15px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .reply-button {
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .reply-button:hover {
+    background: #555;
+  }

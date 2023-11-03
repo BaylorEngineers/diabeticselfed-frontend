@@ -13,7 +13,6 @@ function Test() {
     const [stompClient, setStompClient] = useState(null);
     const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODcyMDg2NCwiZXhwIjoxNjk4ODA3MjY0fQ.bjyd8bFVye2MGWcmWAfP4WVa_wHwYTsH19Z_EblTC9k"
     useEffect(() => {
-        console.log("USE EFFECT RAN")
         let subscription; // declare the variable here
         const socket = new SockJS('http://localhost:8080/ws');
         const stomp = Stomp.over(socket);
@@ -28,7 +27,6 @@ function Test() {
             
             setStompClient(stomp);
         });
-        console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
         // Cleanup function
         return () => {
             console.log("Unsubscribing and disconnecting...");

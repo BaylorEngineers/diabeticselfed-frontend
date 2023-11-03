@@ -10,4 +10,22 @@ export const SidebarData = [
     icons: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
+  {
+    title: "Forum",
+    path: "/posts",
+    icons: <AiIcons.AiFillHome/>,
+    cName: "nav-text",
+},
+{
+  title: "My Forum Posts",
+  path: "/myposts",
+  icons: <AiIcons.AiFillHome/>,
+  cName: "nav-text",
+},
+{
+  title: "Message",
+  path: "/message",
+  icons: <AiIcons.AiFillHome/>,
+  cName: "nav-text",
+}
 ]

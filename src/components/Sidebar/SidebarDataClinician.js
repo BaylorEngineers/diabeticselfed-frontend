@@ -24,14 +24,14 @@ export const SidebarDataClinician = [
     },
     {
         title: "Message",
-        path: "/",
+        path: "/message",
         icons: <AiIcons.AiFillHome/>,
         cName: "nav-text",
     },
 
     {
-        title: "Access Forums",
-        path: "/",
+        title: "Forums",
+        path: "/posts",
         icons: <AiIcons.AiFillHome/>,
         cName: "nav-text",
     },
