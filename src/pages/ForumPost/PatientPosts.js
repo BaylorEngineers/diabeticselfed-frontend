@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Header from "../../components/Header/Header";
-import Post from "./Post"; // This is a component we will create to display each post
 import "./ForumPost.css";
 
 const PatientPosts = () => {
