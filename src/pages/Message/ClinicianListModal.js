@@ -64,7 +64,7 @@ const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
           {clinicians.map(clinician => (
             <li key={clinician.userId} className="clinician-item">
               <span className="clinician-name">{clinician.name}</span>
-              <button className="send-message-button" onClick={() => setSelectedClinician(clinician.clinicianId)}>Send Message</button>
+              <button className="send-message-button" onClick={() => setSelectedClinician(clinician.userId)}>Send Message</button>
             </li>
           ))}
         </ul>

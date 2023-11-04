@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
+    console.log(receiverId);
     const [conversation, setConversation] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    const userId = 4; // Replace with localStorage.getItem('userId');
+    const userId =  localStorage.getItem('userId');
     const token = localStorage.getItem('accessToken');
     const [stompClient, setStompClient] = useState(null);
 
@@ -42,7 +43,12 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
                 console.log("Received a message via subscription");
                 const newMsg = JSON.parse(message.body);
                 console.log(newMsg);
-                setConversation(prevMessages => [...prevMessages, newMsg]);
+                console.log(userId);
+                console.log(newMsg.receiverId);
+                if(newMsg.receiverId == userId){
+                    console.log("Set");
+                    setConversation(prevMessages => [...prevMessages, newMsg]);
+                }
             });
         });
 
