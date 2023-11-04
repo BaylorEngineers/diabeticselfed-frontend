@@ -12,7 +12,7 @@ const MessageList = () => {
     const [subscription, setSubscription] = useState(null);
     const [isClinicianListVisible, setClinicianListVisible] = useState(false);
 
-    const userId =4;// localStorage.getItem('userId');
+    const userId =localStorage.getItem('userId');
     const jwtToken = localStorage.getItem('accessToken');
    
     // Function to fetch messages

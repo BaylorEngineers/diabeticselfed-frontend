@@ -5,16 +5,21 @@ import Header from "../../components/Header/Header";
 import Post from "./Post"; // This is a component we will create to display each post
 import "./ForumPost.css";
 
-
 const ForumPost = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
+  const [error, setError] = useState(''); // Add an error state
   const role = localStorage.getItem('role');
 
   useEffect(() => {
     const fetchPosts = async () => {
-        // Your JWT token
-        const jwtToken = localStorage.getItem('accessToken');
+      setLoading(true); // Start loading
+      setError(''); // Clear previous errors
+
+      // Your JWT token
+      const jwtToken = localStorage.getItem('accessToken');
       
+
         const response = await fetch('http://localhost:8080/api/v1/forum-posts/allposts', {
           method: 'GET',
           headers: {
@@ -23,10 +28,24 @@ const ForumPost = () => {
             'Content-Type': 'application/json'
           },
         });
-      
+        
+        if (!response.ok) {
+          // If the response is not ok, set an error message
+          setError("Unable to fetch posts. Please try again later.");
+          
+          // Clear the error after 5 seconds
+          const timer = setTimeout(() => {
+            setError("");
+          }, 5000);
+          setLoading(false);
+          // Clear timeout if the component unmounts
+          return () => clearTimeout(timer);
+        }
         const data = await response.json();
+        setLoading(false);
         setPosts(data);
-      };
+
+    };
 
     fetchPosts();
   }, []);
@@ -35,8 +54,12 @@ const ForumPost = () => {
     <div className="forum-page">
       <Header role={role} />
       <div className="forum-content">
-        {/* <Sidebar /> */}
         <div className="forum-post-container">
+          {loading && <div>Loading posts...</div>}
+          {error && <div className="error-message">{error}</div>}
+          {!loading && !error && posts.length === 0 && (
+            <div>No posts available.</div>
+          )}
           <div className="posts-container">
             {posts.map((post) => (
               <Link to={`/posts/${post.id}`} key={post.id} className="post-entry-link">
@@ -58,3 +81,4 @@ const ForumPost = () => {
 };
 
 export default ForumPost;
+
