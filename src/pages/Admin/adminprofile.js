@@ -18,9 +18,11 @@ const AdminProfile = ({onSave, onChangePassword }) => {
    useEffect(() => {
      const userId = Number(localStorage.getItem('userId'));
      console.log(userId);
+     setId(userId);
 
      const accessToken = String(localStorage.getItem('accessToken'));
      console.log(accessToken);
+     setAccessToken(accessToken);
 
      const fetchUserData = async () => {
        try {
@@ -74,6 +76,7 @@ const AdminProfile = ({onSave, onChangePassword }) => {
     }
 
     try {
+    console.log("in try-"+accessToken)
       const response = await fetch('http://localhost:8080/api/v1/users/change-password', {
         method: 'PATCH',
         headers: {
@@ -117,13 +120,9 @@ const AdminProfile = ({onSave, onChangePassword }) => {
           <div style={{ marginTop: '20px' }}>
             <Button label="Change Password" onClick={handleChangePassword} size="small" />
           </div>
-          <div style={{ marginTop: '20px' }}>
-            <Button label="Save" onClick={onSave} size="small" />
-            <Button label="Cancel" onClick={handleCancel} size="small" />
-          </div>
           {showChangePassword && (
-            <form onSubmit={(e) => handleSubmitPasswordChange(e)}>
-              <div style={{ marginTop: '20px' }}>
+            <form onSubmit={(e) => handleSubmitPasswordChange(e)} style={{ marginTop: '20px', textAlign: 'center' }}>
+              <div >
                 <label>
                   Current Password:
                   <input
