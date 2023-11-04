@@ -213,7 +213,27 @@
 }
 
 .error-message {
-  color: red;
-  margin: 10px;
-  text-align: center;
+  color: #721c24; /* darker shade of red for better readability */
+  background-color: #f8d7da; /* light pink background */
+  border-color: #f5c6cb; /* light red border */
+  padding: .75rem 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+  transition: transform .3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.error-message:hover {
+  transform: translateY(-3px); /* Slight raise effect on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* deeper shadow for hover effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .error-message {
+    padding: .5rem .75rem;
+    font-size: .875rem; /* smaller font size on smaller screens */
+  }
 }
