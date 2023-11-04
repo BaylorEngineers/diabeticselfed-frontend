@@ -1,0 +1,28 @@
+/* WeightTrackerPage.css */
+
+/* Styles for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Styles for the Plotly graph container */
+.graph-container {
+  margin-top: 20px;
+}
+
+/* Ensure the graph takes up the entire width of the container */
+.graph-container > div {
+  width: 100%;
+}

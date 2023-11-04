@@ -15,6 +15,7 @@ import CreatePost from "./pages/ForumPost/CreatePost";
 import PostDetail from "./pages/ForumPost/PostDetail";
 import PatientPosts from "./pages/ForumPost/PatientPosts";
 import Message from "./pages/Message/Message";
+import WeightTracker from "./pages/WeightTracker/weighttracker";
 // import PatientList from "./pages/Clinician/patientList"
 
 import PatientProfile from "./pages/Patient/patientProfile";
@@ -44,7 +45,7 @@ function App() {
         <Route path="/myposts" element={<PatientPosts />}></Route>
         <Route path="/patientprofile" element={<PatientProfile />}></Route>
         <Route path="/message" element={<Message />}></Route>
-
+        <Route path="/weighttracker" element={<WeightTracker />}></Route>
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>
