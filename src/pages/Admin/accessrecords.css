@@ -1,0 +1,30 @@
+/* accessrecords.css */
+
+.clinicians-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.clinician-preview {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.clinician-name {
+  font-weight: bold;
+}
+
+.clinician-email {
+  color: #555;
+}
+
+h2 {
+  margin-bottom: 10px;
+}

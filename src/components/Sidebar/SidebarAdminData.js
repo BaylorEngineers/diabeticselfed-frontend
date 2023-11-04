@@ -28,23 +28,23 @@ export const useSidebarAdminData = () => {
         cName: "nav-text",
       },
       {
-        title: "Forum",
-        path: "/posts",
+        title: "Account Manager",
+        path: "/accountmanager",
         icons: <AiIcons.AiFillHome/>,
         cName: "nav-text",
       },
       {
-        title: "My Forum Posts",
-        path: "/myposts",
+        title: "Access Records",
+        path: "/adminaccessrecords",
         icons: <AiIcons.AiFillHome/>, 
         cName: "nav-text",
       },
-      {
-        title: "Message",
-        path: "/message",
-        icons: <AiIcons.AiFillHome/>, 
-        cName: "nav-text",
-      },
+//      {
+//        title: "Message",
+//        path: "/message",
+//        icons: <AiIcons.AiFillHome/>,
+//        cName: "nav-text",
+//      },
       {
         title: "Learn",
         path: "#",

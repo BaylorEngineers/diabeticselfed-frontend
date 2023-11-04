@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../../components/Button/Button';
-import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
+import './accessrecords.css';
 
 
 // Dummy data
@@ -29,6 +28,7 @@ const getAllClinicians = async () => {
 
           const cliniciansData = await response.json();
           setClinicians(cliniciansData);
+          console.log(cliniciansData);
       } catch (error) {
           console.error('Error fetching clinicians:', error.message);
       }
@@ -55,19 +55,20 @@ const getAllClinicians = async () => {
 //  };
 
   return (
-  <>
-  <Header role="ADMIN" />
-          <div className="clinicians-list">
-              {clinicians.map((clinician) => (
-                <div key={`${clinician.firstname}-${clinician.lastname}`} className="clinician-preview">
-                  <div className="clinician-name">{clinician.firstname} {clinician.lastname}</div>
-                  {/* Add other clinician details as needed */}
-                </div>
-              ))}
+    <>
+      <Header role="ADMIN" />
+      <div className="clinicians-list">
+      <h2>Clinicians</h2>
+        {clinicians.map((clinician) => (
+          <div key={clinician.userId} className="clinician-preview">
+            <div className="clinician-name">{clinician.name}</div>
+            <div className="clinician-email">{clinician.email}</div>
           </div>
-          </>
-      );
-  };
+        ))}
+      </div>
+    </>
+  );
+ };
 
 
 export default AccessRecords;
