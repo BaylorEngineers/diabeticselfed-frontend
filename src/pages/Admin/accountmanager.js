@@ -38,11 +38,10 @@ const AccountManager = () => {
     })
     .then(data => {
       console.log('Success:', data);
-      // Optional: Show success message or clear the form
     })
     .catch((error) => {
       console.error('Error:', error);
-      setErrorMessage(error.message); // Set the error message
+      setErrorMessage(error.message); 
     });
   };
 
@@ -53,7 +52,6 @@ const AccountManager = () => {
   return (
     <>
       <Header role = "ADMIN" />
-      {/* <Sidebar sidebarType="sidebarAdmin" /> */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <form style={{ marginTop: '20px', textAlign: 'center' }}>
           <label>

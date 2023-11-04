@@ -15,12 +15,17 @@ import CreatePost from "./pages/ForumPost/CreatePost";
 import PostDetail from "./pages/ForumPost/PostDetail";
 import PatientPosts from "./pages/ForumPost/PatientPosts";
 import Message from "./pages/Message/Message";
-// import PatientList from "./pages/Clinician/patientList"
+import ModuleList from "./pages/Modules/ModuleList.js"
+import { useParams } from 'react-router-dom';
 
 import PatientProfile from "./pages/Patient/patientProfile";
 import "./App.css";
 
-// import Course from "./components/Course";
+
+const ModuleListWrapper = () => {
+  const { contentAreaId } = useParams(); 
+  return <ModuleList contentAreaId={contentAreaId} />;
+};
 
 function App() {
 
@@ -44,6 +49,10 @@ function App() {
         <Route path="/myposts" element={<PatientPosts />}></Route>
         <Route path="/patientprofile" element={<PatientProfile />}></Route>
         <Route path="/message" element={<Message />}></Route>
+        {/* <Route path="/content-area/:contentAreaId" element={<ModuleList />} /> */}
+        <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
+
+
 
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}

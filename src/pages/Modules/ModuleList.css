@@ -1,0 +1,80 @@
+.module-list-container {
+    font-family: 'Arial', sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.module-list-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.module-list-header h1 {
+    font-size: 2.5em;
+    color: #333;
+    padding: 10px;
+    border-bottom: 3px solid #5CDB95; /* Adjust color to match your theme */
+}
+
+.module-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.module-list th,
+.module-list td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.module-list th {
+    background-color: #f2f2f2;
+}
+
+.module-list td {
+    background-color: #ffffff; /* or any color that suits your design */
+}
+
+.module-list .module-id {
+    width: 10%;
+}
+
+.module-list .module-name {
+    width: 20%;
+}
+
+.module-list .module-description {
+    width: 50%;
+}
+
+.module-list .module-format {
+    width: 10%;
+}
+
+.module-link {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #39739D;
+    padding: 10px 15px; /* Adjust the padding to make sure the button is large enough */
+    font-size: 0.9rem; /* Adjust font-size if needed */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Prevents the text from wrapping */
+    overflow: hidden; /* Ensures that the text doesn't spill outside the button */
+    text-overflow: ellipsis; /* Adds an ellipsis if the text is too long to fit */
+  }
+  .module-link:hover {
+    background-color: #28527A;
+  }
+  
+
+.module-list tbody tr:hover {
+    background-color: #f5f5f5; /* Adds a hover effect to rows */
+}
+
+.module-list-empty {
+    text-align: center;
+}
