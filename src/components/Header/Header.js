@@ -111,10 +111,10 @@ function Header({ role }) {
             borderRadius: '50%',
             backgroundColor: 'red',
             display: 'flex',
-            alignItems: 'center',
             justifyContent: 'center',
             fontSize: '0.75em',
-            color: 'white'
+            color: 'white',
+            boxShadow: '0 0 4px rgba(0, 0, 0, 0.25)',
           }}>
           </span>
         )}
