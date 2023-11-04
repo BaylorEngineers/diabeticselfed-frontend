@@ -15,8 +15,10 @@ import CreatePost from "./pages/ForumPost/CreatePost";
 import PostDetail from "./pages/ForumPost/PostDetail";
 import PatientPosts from "./pages/ForumPost/PatientPosts";
 import Message from "./pages/Message/Message";
-import ModuleList from "./pages/Modules/ModuleList.js";
+import ModuleList from "./pages/Modules/ModuleList";
 import ModuleDetails from "./pages/Modules/ModuleDetails";
+import PDFViewer from "./pages/Modules/PDFViewer";
+
 import { useParams } from 'react-router-dom';
 
 import PatientProfile from "./pages/Patient/patientProfile";
@@ -59,6 +61,8 @@ function App() {
         {/* <Route path="/content-area/:contentAreaId" element={<ModuleList />} /> */}
         <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
         <Route path="/module/:moduleId" element={<ModuleDetailsWrapper />} />
+        <Route path="/view-pdf/:pdfId" element={<PDFViewer />} />
+
 
 
 
