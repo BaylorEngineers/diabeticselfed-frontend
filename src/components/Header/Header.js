@@ -20,17 +20,23 @@ function Header({ role }) {
       cName: "nav-text",
     },
     {
-      title: "Forum",
-      path: "/posts",
-      icons: <AiIcons.AiFillHome />,
-      cName: "nav-text",
-    },
-    {
-      title: "My Forum Posts",
-      path: "/myposts",
-      icons: <AiIcons.AiFillHome />,
-      cName: "nav-text",
-    },
+    title: "Forum",
+    path: "#",
+    icons: <AiIcons.AiFillHome />,
+    cName: "nav-text",
+    subNav: [
+      {
+        title: "Forum",
+        path: "/posts",
+        cName: "nav-sub-item",
+      },
+      {
+        title: "My Forum Posts",
+        path: "/myposts",
+        cName: "nav-sub-item",
+      },
+    ],
+  },
     {
       title: "Message",
       path: "/message",
@@ -83,7 +89,6 @@ function Header({ role }) {
           <div className="nav-sub-menu">
             {item.subNav.map((subItem, subIndex) => (
               <NavLink to={subItem.path} key={subIndex} className="nav-sub-item">
-                {subItem.icons}
                 <span className="nav-text">{subItem.title}</span>
               </NavLink>
             ))}
@@ -111,7 +116,6 @@ function Header({ role }) {
             fontSize: '0.75em',
             color: 'white'
           }}>
-            {/* Optionally, you can add text or a number here if needed */}
           </span>
         )}
       </div>
