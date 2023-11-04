@@ -11,6 +11,7 @@ const AdminProfile = ({onSave, onChangePassword }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userData, setUserData] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [id, setId] = useState('');
   const [accessToken, setAccessToken] = useState('');
 
@@ -76,7 +77,6 @@ const AdminProfile = ({onSave, onChangePassword }) => {
     }
 
     try {
-    console.log("in try-"+accessToken)
       const response = await fetch('http://localhost:8080/api/v1/users/change-password', {
         method: 'PATCH',
         headers: {
@@ -96,6 +96,14 @@ const AdminProfile = ({onSave, onChangePassword }) => {
 
       // Handle successful password change
       console.log('Password changed successfully');
+      // Clear form fields
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+        setShowChangePassword(false);
+
+        // Show success message
+        setSuccessMessage('Password changed successfully');
     } catch (error) {
       // Handle error
       console.error('Error changing password:', error.message);
@@ -120,6 +128,20 @@ const AdminProfile = ({onSave, onChangePassword }) => {
           <div style={{ marginTop: '20px' }}>
             <Button label="Change Password" onClick={handleChangePassword} size="small" />
           </div>
+          {successMessage && (
+                  <div
+                    style={{
+                      backgroundColor: '#4CAF50',
+                      color: 'white',
+                      padding: '10px',
+                      textAlign: 'center',
+                      borderRadius: '5px',
+                      margin: '10px 0',
+                    }}
+                  >
+                    {successMessage}
+                  </div>
+                  )}
           {showChangePassword && (
             <form onSubmit={(e) => handleSubmitPasswordChange(e)} style={{ marginTop: '20px', textAlign: 'center' }}>
               <div >
