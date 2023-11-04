@@ -1,26 +1,136 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as AiIcons from "react-icons/ai";
-import {SidebarAdminData} from "../Sidebar/SidebarAdminData";
-import {SidebarDataClinician} from "../Sidebar/SidebarDataClinician";
-
-import {SidebarData} from "../Sidebar/SidebarData";
+import { useSidebarAdminData } from '../Sidebar/SidebarAdminData';
+import { SidebarDataClinician } from "../Sidebar/SidebarDataClinician";
 import './Header.css';
 import Dropdown from '../Dropdown/Dropdown';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 
-function Header({ role }) { // role prop to determine which links to display
-  // Function to render link items based on the role
+function Header({ role }) {
+  const adminData = useSidebarAdminData();
+  const clinicianData = SidebarDataClinician;
+  const [newMessage, setNewMessage] = useState(false);
+  const [sidebarData, setSidebarData] = useState([
+    {
+      title: "Home",
+      path: "/",
+      icons: <AiIcons.AiFillHome />,
+      cName: "nav-text",
+    },
+    {
+      title: "Forum",
+      path: "/posts",
+      icons: <AiIcons.AiFillHome />,
+      cName: "nav-text",
+    },
+    {
+      title: "My Forum Posts",
+      path: "/myposts",
+      icons: <AiIcons.AiFillHome />,
+      cName: "nav-text",
+    },
+    {
+      title: "Message",
+      path: "/message",
+      icons: <AiIcons.AiOutlineMail />,
+      cName: "nav-text",
+    }
+  ]);
+  const userId = localStorage.getItem('userId'); 
+  const jwtToken = localStorage.getItem('accessToken');
+
+  useEffect(() => {
+    let subscription;
+    const socket = new SockJS('http://localhost:8080/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
+      subscription = stompClient.subscribe(`/topic/messages/${userId}`, (message) => {
+        setNewMessage(true);
+        updateMessageIcon(true);
+      });
+    });
+
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+      stompClient.disconnect();
+    };
+  }, [userId, jwtToken]);
+
+
   const renderLinks = (data) => {
-    return data.map((item, index) => {
-      return (
-        <NavLink to={item.path} key={index} className="nav-item">
+    return data.map((item, index) => (
+      <div className={`nav-item ${item.subNav ? 'nav-item-with-submenu' : ''}`} key={index}>
+        <NavLink
+          to={item.path}
+          className="nav-link"
+          onClick={() => {
+            if (item.title === "Message" && newMessage) {
+              setNewMessage(false);
+              updateMessageIcon(false);
+            }
+          }}
+        >
           {item.icons}
           <span className="nav-text">{item.title}</span>
+          {item.subNav && <AiIcons.AiOutlineDown />}
         </NavLink>
-      );
-    });
+        {item.subNav && (
+          <div className="nav-sub-menu">
+            {item.subNav.map((subItem, subIndex) => (
+              <NavLink to={subItem.path} key={subIndex} className="nav-sub-item">
+                {subItem.icons}
+                <span className="nav-text">{subItem.title}</span>
+              </NavLink>
+            ))}
+          </div>
+        )}
+      </div>
+    ));
   };
-
+  const MailIconWithDot = ({ hasNewMessage }) => {
+    return (
+      <div style={{ position: 'relative' }}>
+        <AiIcons.AiOutlineMail />
+        {hasNewMessage && (
+          <span style={{
+            position: 'absolute',
+            top: '-0.25em',
+            right: '-0.25em',
+            height: '0.5em',
+            width: '0.5em',
+            borderRadius: '50%',
+            backgroundColor: 'red',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '0.75em',
+            color: 'white'
+          }}>
+            {/* Optionally, you can add text or a number here if needed */}
+          </span>
+        )}
+      </div>
+    );
+  };
+  
+  const updateMessageIcon = (hasNewMessage) => {
+    setSidebarData(data =>
+      data.map(item => {
+        if (item.title === "Message") {
+          return {
+            ...item,
+            icons: <MailIconWithDot hasNewMessage={hasNewMessage} />
+          };
+        }
+        return item;
+      })
+    );
+  };
   return (
     <div className="Header">
       <div className="HeaderContent">
@@ -28,10 +138,9 @@ function Header({ role }) { // role prop to determine which links to display
           <h1>DDDDDDDDDDD</h1>
         </div>
         <div className="HeaderLinks">
-          {/* Conditional rendering based on the role */}
-          {role === 'ADMIN' && renderLinks(SidebarAdminData)}
-          {role === 'CLINICIAN' && renderLinks(SidebarDataClinician)}
-          {role === 'PATIENT' && renderLinks(SidebarData)}
+          {role === 'ADMIN' && renderLinks(adminData)}
+          {role === 'CLINICIAN' && renderLinks(clinicianData)}
+          {role === 'PATIENT' && renderLinks(sidebarData)}
         </div>
         <Dropdown className="userDropdown" text="User" />
       </div>

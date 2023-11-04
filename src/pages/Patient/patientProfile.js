@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./css/patientProfile.css";
@@ -18,10 +17,8 @@ const [formData, setFormData] = useState({
   const [patientData, setPatientData] = useState('');
   const [error, setError] = useState('');
 
-  // const jwtToken = localStorage.getItem('accessToken');
   const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
 
-  // console.log(jwtToken);
   console.log(localStorage.getItem('userId'));
   console.log(localStorage.getItem('patientId'));
 
@@ -29,10 +26,7 @@ const [formData, setFormData] = useState({
     const patientId = Number(localStorage.getItem('patientId'));
     console.log(patientId);
 
-    // const accessToken = String(localStorage.getItem('accessToken'));
     const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
-
-    // console.log(accessToken);
 
     const fetchPatientData = async () => {
       const apiURL = 'http://localhost:8080/api/v1/patient-profile/detail/' + patientId ;
@@ -85,16 +79,7 @@ const [formData, setFormData] = useState({
         }
 
   const handleSubmit = async (e)  => {
-//    e.preventDefault();
-    // You can perform validation here before submitting the data
-
-    // Assuming you want to log the form data for demonstration purposes
     console.log('Form Data:', formData);
-
-    // You can also send the data to an API or perform other actions here
-
-
-
 try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
         method: 'POST',
@@ -112,23 +97,19 @@ try {
       });
 
       if (response.ok) {
-        // Handle a successful response from your backend here
         console.log('Data sent to the backend successfully.');
       } else {
-        // Handle errors from your backend here
         console.error('Error sending data to the backend.');
       }
     } catch (error) {
       console.error('An error occurred while sending data:', error);
     }
-
-//    setIsEditMode(false); // Exit edit mode after submission
   };
 
   return (
   <>
   <Header/>
-    <Sidebar sidebarType="sidebarAdmin" />
+    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             
             
