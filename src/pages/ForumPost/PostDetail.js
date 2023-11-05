@@ -41,7 +41,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
           placeholder="Write your comment here..."
           required
         />
-        <button type="submit">Post Comment</button>
+        <button id="postcomment" type="submit">Post Comment</button>
       </form>
     );
   };
