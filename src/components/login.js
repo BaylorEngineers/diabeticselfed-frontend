@@ -11,6 +11,7 @@ function Login() {
     const [password, setPassword] = useState();
     const [role, setRole] = useState();
     const [userId, setUserID] = useState();
+    const [patientID, setPatientID] = useState();
     const [accessToken, setAccessToken] = useState();
   
     const errors = {
@@ -54,6 +55,11 @@ function Login() {
             console.log('UserID:', userID);
             setUserID(userID);
             localStorage.setItem('userId', userID);
+
+            const patientID = responseData.patientID;
+            console.log('patientID:', patientID);
+            setUserID(patientID);
+            localStorage.setItem('patientID', patientID);
 
             const access_token = responseData.access_token;
             console.log('access_token:', access_token);
