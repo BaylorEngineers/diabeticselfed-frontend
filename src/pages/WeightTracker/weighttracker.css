@@ -1,6 +1,9 @@
-/* WeightTrackerPage.css */
+h2 {
+  textAlign: 'center';
+  color: '#007BFF';
+  margin-bottom: 20px;
+}
 
-/* Styles for the table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -17,12 +20,26 @@ th {
   background-color: #f2f2f2;
 }
 
-/* Styles for the Plotly graph container */
 .graph-container {
   margin-top: 20px;
 }
 
-/* Ensure the graph takes up the entire width of the container */
 .graph-container > div {
   width: 100%;
 }
+
+.weight-goal-section label {
+  font-size: 14px;
+}
+
+.weight-goal-section input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  max-width: 80px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+

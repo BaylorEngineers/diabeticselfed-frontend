@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Login from "./components/login.js";
+import Home from "./home";
+import Login from "./components/login";
 import SignUp from "./components/signup";
 import Forget from "./components/forget";
 import Modules from "./pages/Clinician/modules"
@@ -29,7 +30,8 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Login />}></Route>\
+        <Route path="/" element={<Home />}></Route>\
+        <Route path="/login" element={<Login />}></Route>\
         <Route path="/registration" element={<SignUp />}></Route>
         <Route path="/forgotpassword" element={<Forget />}></Route>
         <Route path="/modules" element={<Modules />}></Route>
