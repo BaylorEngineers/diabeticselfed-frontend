@@ -1,88 +1,193 @@
+/* Header styles */
 .Header {
-  height: 10%;
-  background-color: #30cebb;
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #2C3E50; /* Example background color */
+  color: #FFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  height: 80px;
 }
 
 .HeaderContent {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 }
 
-.Header h1 {
-  font-size: 24px;
-  margin: 0;
+.HeaderLogo h1 {
+  color: #FFF; /* Change as needed */
 }
-.nav-menu {
-  display: flex;
-  align-items: center; /* This will ensure your items are in the same row and vertically aligned */
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
+
+/* Navigation styles */
 .HeaderLinks {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px; /* Adds space between items */
 }
 
 .nav-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  color: white;
+  color: #FFF;
+  padding: 10px 15px;
   text-decoration: none;
-  transition: background 0.3s ease;
+  display: flex; /* Align icons and text */
+  align-items: center;
+  gap: 5px; /* Space between icon and text */
+  position: relative;
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.nav-item:hover,
+.nav-item:focus {
+  background-color: #18BC9C; /* Highlight color on hover/focus */
+  color: #FFF;
+}
+
+.nav-text-link {
+  color: inherit; /* Inherits color from .nav-item */
+  text-decoration: none;
+}
+.nav-text-link:hover,
+.nav-text-link:focus {
+  color: #18BC9C; /* Highlight color on hover/focus */
+}
+
+.nav-item-with-submenu:hover .nav-sub-menu {
+  display: block; /* Show sub-menu on hover */
+}
+
+.nav-item-with-submenu .nav-sub-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: #34495E; /* Sub-menu background color */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Adds shadow for depth */
+  border-radius: 4px; /* Slight rounding on edges */
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px); /* Starts slightly above for slide down effect */
+  z-index: 999;
+}
+
+.nav-item-with-submenu:hover .nav-sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+}
+
+.nav-sub-item {
+  color: #FFF;
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+
+.nav-sub-item:hover,
+.nav-sub-item:focus {
+  background-color: #2C3E50; /* Darken background on hover/focus */
+}
+
+
+.nav-item-with-submenu {
+  position: relative;
+}
+
+.nav-sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #2C3E50; /* Sub-menu background color */
+  border-radius: 0 0 4px 4px; /* Rounded corners on bottom */
+  padding: 0;
+  min-width: 100%; /* Ensure min width matches parent */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Adds shadow for depth */
+  z-index: 999;
+}
+.nav-item-with-submenu:hover .nav-sub-menu {
+  display: block;
+}
+
+/* Navbar CSS */
+.navbar {
+  background-color: #ffffff;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+  color: #000;
+}
+
+.nav-menu {
+  margin-top: 70px;
+  background-color: rgb(154, 173, 171);
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: left;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 450ms;
 }
 
 .nav-text {
+  justify-content: flex-start;
+  align-items: center;
+  /* padding: 8px 0px 8px 16px; */
+  list-style: none;
+
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #151414;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
   display: flex;
   align-items: center;
-  padding: 0.5em 1em;
-  text-decoration: none;
-  color: white;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+  padding: 0 16px;
+  border-radius: 4px;
 }
 
-
-
-.nav-text + .nav-text {
-  margin-left: 1rem; /* Space out inline items */
+.nav-text a:hover {
+  background-color: #000000;
+  color: #fff;
 }
 
-.userDropdown {
-  margin-left: auto; /* Pushes the dropdown to the end of the header */
+.nav-menu-items {
+  width: 100%;
 }
 
+.navbar-toggle {
+  background-color: #ffffff;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .HeaderContent {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+span {
 
-  .nav-menu {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-text {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .userDropdown {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
+  margin-left: 16px;
 }

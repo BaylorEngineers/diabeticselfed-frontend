@@ -19,6 +19,8 @@ const WeightTrackerPage = () => {
   const [weightLossPercent, setWeightLossPercent] = useState('');
   const [newWeightLossPercent, setNewWeightLossPercent] = useState('');
   const [teapotMessage, setTeapotMessage] = useState('');
+  const [earliestReport, setEarliestReport] = useState('');
+  const [earliestHeight, setEarliestHeight] = useState('');
 
   // List of numbers to choose from
   const numberOptions = [0, 1, 2, 3, 4, 5];
@@ -26,6 +28,13 @@ const WeightTrackerPage = () => {
   // Handle the change event when a number is selected
   const handleNumberChange = (event) => {
     const selectedValue = event.target.value;
+    const earliest = reports.reduce((earliest, current) => {
+      if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
+        return current;
+      }
+      return earliest;
+    }, null);
+    setEarliestReport(earliest);
     setWeightLossPercent(selectedValue);
     setNewWeightLossPercent(selectedValue);
   };
@@ -62,6 +71,19 @@ useEffect(() => {
     .then(reports => {
       setReports(reports);
       console.log('Reports:', reports);
+
+     // Calculate the earliest report
+     const earliest = reports.reduce((earliest, current) => {
+      if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
+        return current;
+      }
+      return earliest;
+    }, null);
+    setEarliestReport(earliest);
+    setEarliestHeight(earliest.height);
+    console.log(earliest);
+
+
     })
     .catch(error => {
       console.error('Error fetching reports:', error.message);
@@ -86,6 +108,7 @@ useEffect(() => {
         return response.json();
       })
       .then(data => {
+
         setWeightLossPercent(data.weightLossPercent);
         setNewWeightLossPercent(data.weightLossPercent);
       })
@@ -155,12 +178,21 @@ const updatedData = reports.map((report) => ({
     marker: { color: 'blue' },
   };
 
-  const earliestReport = reports.reduce((earliest, current) => {
-    if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
-      return current;
-    }
-    return earliest;
-  }, null);
+  // const earliestReport = reports.reduce((earliest, current) => {
+  //   if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
+  //     return current;
+  //   }
+  //   return earliest;
+  // }, 0);
+
+  const findEarliestReport = () => {
+    return reports.reduce((earliest, current) => {
+      if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
+        return current;
+      }
+      return earliest;
+    }, null);
+  };
 
   const handleUpdateGoal = async () => {
     
@@ -207,7 +239,14 @@ const updatedData = reports.map((report) => ({
             {errorMessage}
           </div>
         )}
-      <h2>Your current Weight Loss Goal is: {earliestReport ? (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2) : 'No reports found'} lbs</h2>
+      {/* <h2>Your current Weight Loss Goal is: {earliestReport != null ? (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2) : {newWeightLossPercent}} </h2> */}
+      {earliestReport != null ? (
+          <h2 >
+          Your current Weight Loss Goal is: {(earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2)} lbs 
+          </h2>
+          ) : <h2>
+            Your current Weight Loss Goal is: {newWeightLossPercent} % weight loss
+            </h2>}
       <label>Select a Weight Loss Percentage:
           <select
               value={newWeightLossPercent} // Use the new weight loss percent
@@ -220,28 +259,29 @@ const updatedData = reports.map((report) => ({
                 </option>
               ))}
           </select>
-          <Button label="Update Goal" size="small" onClick={handleUpdateGoal} />{/* Add a button to update the goal */}
+          <Button label="Update Goal" size="small" onClick={handleUpdateGoal} />
           </label>
-          {(newWeightLossPercent < 2) && calculateBMI(height, earliestReport.weight) > 23.5 ? (
+          {earliestReport != null && (newWeightLossPercent < 2) && calculateBMI(earliestHeight, earliestReport != null ? earliestReport.weight : 0) > 23.5 ? (
           <div style={{ color: 'red' }}>
           Please consider that losing the recommended weight of 2-3% has many health benefits. Some of the benefits include preventing or delaying type 2 diabetes and ease sleep problems, arthritis, and depression
           </div>
           ) : null}
-          {(newWeightLossPercent > 3) && calculateBMI(height, earliestReport.weight) > 23.5 ? (
+          {earliestReport != null && (newWeightLossPercent > 3) && calculateBMI(earliestHeight, earliestReport != null ? earliestReport.weight : 0) > 23.5 ? (
           <div style={{ color: 'red' }}>
-          Your current BMI is {calculateBMI(height, earliestReport.weight)} at the start of the program, please consider lower the weight loss goal to have a healthy weight loss plan.
+          Your current BMI is {calculateBMI(earliestHeight, earliestReport != null ? earliestReport.weight : 0)} at the start of the program, please consider lower the weight loss goal to have a healthy weight loss plan.
           </div>
           ) : null}
-          {(newWeightLossPercent > 3) && calculateBMI(height, earliestReport.weight) < 23.5 && calculateBMI(height, earliestReport.weight) > 18.5 ? (
+          {earliestReport != null && (newWeightLossPercent > 3) && calculateBMI(earliestHeight, earliestReport != null ? earliestReport.weight : 0) < 23.5 && calculateBMI(height, earliestReport != null ? earliestReport.weight : 0) > 18.5 ? (
           <div style={{ color: 'red' }}>
           The recommended weight loss range is between 0 ~ 3 percent.
           </div>
           ) : null}
-          {(newWeightLossPercent > 3) && calculateBMI(height, earliestReport.weight) < 18.5 ? (
+          {earliestReport != null && (newWeightLossPercent > 3) && calculateBMI(earliestHeight, earliestReport != null ? earliestReport.weight : 0) < 18.5 ? (
           <div style={{ color: 'red' }}>
-          A BMI value of {calculateBMI(height, earliestReport.weight)} is considered underweight, there is no need to lose weight!
+          A BMI value of {calculateBMI(earliestHeight, earliestReport != null ? earliestReport.weight : 0)} is considered underweight, there is no need to lose weight!
           </div>
           ) : null}
+          
     </div>
     <h2>Add Weight Loss Report</h2>
     <div className="weight-goal-section">

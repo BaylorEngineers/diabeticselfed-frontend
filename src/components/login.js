@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // import Popup from '../pages/SurveyPopUp';
 
@@ -17,6 +18,10 @@ function Login() {
     const [userId, setUserID] = useState();
     const [patientID, setPatientID] = useState();
     const [accessToken, setAccessToken] = useState();
+    const[isFirstLogInToday, setIsFirstLogInToday] = useState();
+    const navigate = useNavigate();
+    const { state } = useLocation();
+    
   
     const errors = {
       username: "This user Id does not exit or invalid password",
@@ -49,6 +54,18 @@ function Login() {
             if (!response.ok) {
               const errorMessage = await response.text();
               throw new Error(` ${response.status}`);
+            } else {
+              // fetch if firstLogIn
+              if(true){
+                setIsFirstLogInToday(true);
+              }
+              
+              if(isFirstLogInToday) {
+                navigate("/survey");
+              }
+                
+                
+              
             }
 
             const responseData = await response.json();

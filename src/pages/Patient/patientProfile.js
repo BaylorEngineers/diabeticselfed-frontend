@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./css/patientProfile.css";
@@ -16,51 +15,47 @@ const [formData, setFormData] = useState({
   });
 
   const [patientData, setPatientData] = useState('');
+  const [question, setQuestion] = useState('');
+
   const [error, setError] = useState('');
+  const [accessToken, setAccessToken] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  // const jwtToken = localStorage.getItem('accessToken');
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
-
-  // console.log(jwtToken);
-  console.log(localStorage.getItem('userId'));
-  console.log(localStorage.getItem('patientId'));
-
+  const jwtToken = localStorage.getItem('accessToken');
   useEffect(() => {
-    const patientId = Number(localStorage.getItem('patientId'));
-    console.log(patientId);
+    const fetchSurvey = async () => {
+      const patientId = localStorage.getItem('patientId');
 
-    // const accessToken = String(localStorage.getItem('accessToken'));
-    const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
 
-    // console.log(accessToken);
-
-    const fetchPatientData = async () => {
-      const apiURL = 'http://localhost:8080/api/v1/patient-profile/detail/' + patientId ;
-      try {
-        const response = await fetch(apiURL, {
-          mode: 'cors',
+        const response = await fetch('http://localhost:8080/api/v1/question/get/'+1, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json'
           },
         });
-
+        
         if (!response.ok) {
-          throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+          // If the response is not ok, set an error message
+          setError("Unable to fetch posts. Please try again later.");
+          
+          // Clear the error after 5 seconds
+          const timer = setTimeout(() => {
+            setError("");
+          }, 5000);
+          setLoading(false);
+          // Clear timeout if the component unmounts
+          return () => clearTimeout(timer);
         }
 
-        const patientData = await response.json();
-        console.log("Data: ")
-        console.log(patientData);
-        setPatientData(patientData);
-        console.log('Fetched userData:', patientData);
-      } catch (error) {
-        setError(error.message);
-      }
+        const data = await response.json();
+        setLoading(false);
+        setQuestion(data['description']);
+        console.log(data['description']);
+
     };
 
-    fetchPatientData();
+    fetchSurvey();
   }, []);
 
   const handleChange = (e) => {
@@ -85,16 +80,7 @@ const [formData, setFormData] = useState({
         }
 
   const handleSubmit = async (e)  => {
-//    e.preventDefault();
-    // You can perform validation here before submitting the data
-
-    // Assuming you want to log the form data for demonstration purposes
     console.log('Form Data:', formData);
-
-    // You can also send the data to an API or perform other actions here
-
-
-
 try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
         method: 'POST',
@@ -112,23 +98,19 @@ try {
       });
 
       if (response.ok) {
-        // Handle a successful response from your backend here
         console.log('Data sent to the backend successfully.');
       } else {
-        // Handle errors from your backend here
         console.error('Error sending data to the backend.');
       }
     } catch (error) {
       console.error('An error occurred while sending data:', error);
     }
-
-//    setIsEditMode(false); // Exit edit mode after submission
   };
 
   return (
   <>
   <Header/>
-    <Sidebar sidebarType="sidebarAdmin" />
+    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             
             
@@ -138,6 +120,7 @@ try {
               isOpen={isModalOpen}
               onRequestClose={closeModal}
               onSubmit={handleModalSubmit}
+              question = {question}
             />}
 
 

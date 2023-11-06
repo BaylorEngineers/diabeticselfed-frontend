@@ -18,11 +18,27 @@ import PatientPosts from "./pages/ForumPost/PatientPosts";
 import Message from "./pages/Message/Message";
 import WeightTracker from "./pages/WeightTracker/weighttracker";
 // import PatientList from "./pages/Clinician/patientList"
+import ModuleList from "./pages/Modules/ModuleList";
+import ModuleDetails from "./pages/Modules/ModuleDetails";
+import PDFViewer from "./pages/Modules/PDFViewer";
+import Survey from "./pages/MotivationalMessage/survey.js"
+
+import { useParams } from 'react-router-dom';
 
 import PatientProfile from "./pages/Patient/patientProfile";
 import "./App.css";
 
-// import Course from "./components/Course";
+
+const ModuleListWrapper = () => {
+  const { contentAreaId } = useParams(); 
+  return <ModuleList contentAreaId={contentAreaId} />;
+};
+
+const ModuleDetailsWrapper = () => {
+  const { moduleId } = useParams();
+  return <ModuleDetails moduleId={moduleId} />;
+};
+
 
 function App() {
 
@@ -48,6 +64,17 @@ function App() {
         <Route path="/patientprofile" element={<PatientProfile />}></Route>
         <Route path="/message" element={<Message />}></Route>
         <Route path="/weighttracker" element={<WeightTracker />}></Route>
+        {/* <Route path="/content-area/:contentAreaId" element={<ModuleList />} /> */}
+        <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
+        <Route path="/module/:moduleId" element={<ModuleDetailsWrapper />} />
+        <Route path="/view-pdf/:pdfId" element={<PDFViewer />} />
+        <Route path="/survey" element={<Survey />} />
+
+
+
+
+
+
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>

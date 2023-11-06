@@ -11,7 +11,7 @@ function Test() {
     const [userId, setUserId] = useState("3");
     const [receiverId, setReceiverId] = useState("2");
     const [stompClient, setStompClient] = useState(null);
-    const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODcyMDg2NCwiZXhwIjoxNjk4ODA3MjY0fQ.bjyd8bFVye2MGWcmWAfP4WVa_wHwYTsH19Z_EblTC9k"
+    const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY5OTA1MTg0NCwiZXhwIjoxNjk5MTM4MjQ0fQ.x_6pjym3sSfOvHrf85hjavt6JtKXwb1XcjFFy8SERP0"
     useEffect(() => {
         let subscription; // declare the variable here
         const socket = new SockJS('http://localhost:8080/ws');

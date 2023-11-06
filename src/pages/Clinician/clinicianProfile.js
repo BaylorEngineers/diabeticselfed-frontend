@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 
