@@ -15,46 +15,52 @@ const [formData, setFormData] = useState({
   });
 
   const [patientData, setPatientData] = useState('');
+  const [question, setQuestion] = useState('');
+
   const [error, setError] = useState('');
+  const [accessToken, setAccessToken] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
-
-  console.log(localStorage.getItem('userId'));
-  console.log(localStorage.getItem('patientId'));
-
+  // const jwtToken = localStorage.getItem('accessToken');
+  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5OTE1MzYyNywiZXhwIjoxNjk5MjQwMDI3fQ.kG88oT0NqLriOsDJ02rFZteX2G5knFM-CVfdvQoHcgk";
   useEffect(() => {
-    const patientId = Number(localStorage.getItem('patientId'));
-    console.log(patientId);
+    const fetchSurvey = async () => {
+      // setLoading(true); // Start loading
+      // setError(''); // Clear previous errors
+      const patientId = localStorage.getItem('patientId');
 
-    const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
+      // Your JWT token
 
-    const fetchPatientData = async () => {
-      const apiURL = 'http://localhost:8080/api/v1/patient-profile/detail/' + patientId ;
-      try {
-        const response = await fetch(apiURL, {
-          mode: 'cors',
+        const response = await fetch('http://localhost:8080/api/v1/question/get/'+1, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
+            // Include the Authorization header with the token
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json'
           },
         });
-
+        
         if (!response.ok) {
-          throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+          // If the response is not ok, set an error message
+          setError("Unable to fetch posts. Please try again later.");
+          
+          // Clear the error after 5 seconds
+          const timer = setTimeout(() => {
+            setError("");
+          }, 5000);
+          setLoading(false);
+          // Clear timeout if the component unmounts
+          return () => clearTimeout(timer);
         }
 
-        const patientData = await response.json();
-        console.log("Data: ")
-        console.log(patientData);
-        setPatientData(patientData);
-        console.log('Fetched userData:', patientData);
-      } catch (error) {
-        setError(error.message);
-      }
+        const data = await response.json();
+        setLoading(false);
+        setQuestion(data['description']);
+        console.log(data['description']);
+
     };
 
-    fetchPatientData();
+    fetchSurvey();
   }, []);
 
   const handleChange = (e) => {
@@ -119,6 +125,7 @@ try {
               isOpen={isModalOpen}
               onRequestClose={closeModal}
               onSubmit={handleModalSubmit}
+              question = {question}
             />}
 
 

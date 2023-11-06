@@ -17,7 +17,8 @@ const ForumPost = () => {
       setError(''); // Clear previous errors
 
       // Your JWT token
-      const jwtToken = localStorage.getItem('accessToken');
+      const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5OTE2MDM0OCwiZXhwIjoxNjk5MjQ2NzQ4fQ.u689cF_N2IxwZn-g_cX5RlJ9moO1F7Hgrtt4E5GeYx0";
+      // localStorage.getItem('accessToken');
       
 
         const response = await fetch('http://localhost:8080/api/v1/forum-posts/allposts', {
