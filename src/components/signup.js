@@ -7,11 +7,11 @@ function SignUp() {
     const [formData, setFormData] = useState({
       email: '',
       password: '',
-      repassword: '',
+      // repassword: '',
       firstname: '',
       lastname: '',
-      DOB: '',
-      LevelofEdu: '',
+      dob: '',
+      levelofedu: '',
       token: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
@@ -39,6 +39,7 @@ function SignUp() {
           window.location.href = "/";
         } else {
           const errorData = await response.json();
+          console.log(formData);
           setErrorMessage(`Error (${response.status}): ${errorData.message || 'Registration failed'}`);
         }
       } catch (error) {
@@ -90,7 +91,7 @@ function SignUp() {
                   />
                 </div>
 
-                <div className="input-container">
+                {/* <div className="input-container">
                   <label htmlFor="repassword">Re-enter Password </label>
                   <input
                     type="password"
@@ -99,7 +100,7 @@ function SignUp() {
                     required
                     onChange={handleInputChange}
                   />
-                </div>
+                </div> */}
 
                 <div className="input-container">
                   <label htmlFor="firstname">First Name </label>
@@ -123,7 +124,7 @@ function SignUp() {
                   />
                 </div>
 
-                <div className="input-container">
+                {/* <div className="input-container">
                   <label htmlFor="lastname">Token </label>
                   <input
                     type="text"
@@ -132,24 +133,24 @@ function SignUp() {
                     required
                     onChange={handleInputChange}
                   />
-                </div>
+                </div> */}
 
                 <div className="input-container">
                   <label htmlFor="dob">Date of Birth</label>
                   <input
                     type="date"
                     id="dob"
-                    name="DOB"
+                    name="dob"
                     required
                     onChange={handleInputChange}
                   />
                 </div>
 
                 <div className="input-container">
-                  <label htmlFor="levelOfEdu">Level of Education</label>
+                  <label htmlFor="levelOfedu">Level of Education</label>
                   <select
-                    id="levelOfEdu"
-                    name="LevelofEdu"
+                    id="levelOfedu"
+                    name="levelofedu"
                     required
                     onChange={handleInputChange}
                   >
