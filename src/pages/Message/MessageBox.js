@@ -29,7 +29,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
         };
         
         fetchConversation();
-    }, [receiverId, token]);
+    }, [receiverId, conversation]);
 
     useEffect(() => {
         // Setting up WebSocket connection

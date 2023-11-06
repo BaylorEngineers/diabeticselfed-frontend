@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as AiIcons from "react-icons/ai";
 import { useSidebarAdminData } from '../Sidebar/SidebarAdminData';
-import { SidebarDataClinician } from "../Sidebar/SidebarDataClinician";
 import './Header.css';
 import Dropdown from '../Dropdown/Dropdown';
 import SockJS from 'sockjs-client';
@@ -10,8 +9,41 @@ import Stomp from 'stompjs';
 
 function Header({ role }) {
   const adminData = useSidebarAdminData();
-  const clinicianData = SidebarDataClinician;
   const [newMessage, setNewMessage] = useState(false);
+  const [SidebarDataClinician, setSidebarDataClinician] = useState([
+    {
+        title: "Home",
+        path: "/",
+        icons: <AiIcons.AiFillHome/>,
+        cName: "nav-text",
+    },
+    {
+        title: "View Patient",
+        path: "/patientlist",
+        icons: <AiIcons.AiFillHome/>,
+        cName: "nav-text",
+    },
+    {
+        title: "View Profile",
+        path: "/clinicianprofile",
+        icons: <AiIcons.AiFillHome/>,
+        cName: "nav-text",
+    },
+    {
+        title: "Message",
+        path: "/message",
+        icons: <AiIcons.AiOutlineMail/>,
+        cName: "nav-text",
+    },
+
+    {
+        title: "Forums",
+        path: "/posts",
+        icons: <AiIcons.AiFillHome/>,
+        cName: "nav-text",
+    },
+]);
+
   const [sidebarData, setSidebarData] = useState([
     {
       title: "Home",
@@ -104,8 +136,8 @@ function Header({ role }) {
         {hasNewMessage && (
           <span style={{
             position: 'absolute',
-            top: '-0.25em',
-            right: '-0.25em',
+            top: '-0.1em',
+            right: '-0.1em',
             height: '0.5em',
             width: '0.5em',
             borderRadius: '50%',
@@ -128,7 +160,18 @@ function Header({ role }) {
         if (item.title === "Message") {
           return {
             ...item,
-            icons: <MailIconWithDot hasNewMessage={hasNewMessage} />
+            icons: <AiIcons.AiFillAlert hasNewMessage={hasNewMessage} />
+          };
+        }
+        return item;
+      })
+    );
+    setSidebarDataClinician(data =>
+      data.map(item => {
+        if (item.title === "Message") {
+          return {
+            ...item,
+            icons: <AiIcons.AiFillAlert hasNewMessage={hasNewMessage} />
           };
         }
         return item;
@@ -143,7 +186,7 @@ function Header({ role }) {
         </div>
         <div className="HeaderLinks">
           {role === 'ADMIN' && renderLinks(adminData)}
-          {role === 'CLINICIAN' && renderLinks(clinicianData)}
+          {role === 'CLINICIAN' && renderLinks(SidebarDataClinician)}
           {role === 'PATIENT' && renderLinks(sidebarData)}
         </div>
         <Dropdown className="userDropdown" text="User" />

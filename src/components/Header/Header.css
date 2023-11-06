@@ -31,6 +31,7 @@
   color: #FFF;
   padding: 10px 15px;
   text-decoration: none;
+  position: relative;
   display: flex; /* Align icons and text */
   align-items: center;
   gap: 5px; /* Space between icon and text */
