@@ -5,7 +5,6 @@ import Login from "./components/login";
 import SignUp from "./components/signup";
 import Forget from "./components/forget";
 import Modules from "./pages/Clinician/modules"
-import AdminPage from "./pages/Admin/adminhomepage"
 import AdminProfile from "./pages/Admin/adminprofile"
 import AdminAccessRecords from './pages/Admin/accessrecords'
 import AccountManager from './pages/Admin/accountmanager'
@@ -51,7 +50,6 @@ function App() {
         <Route path="/registration" element={<SignUp />}></Route>
         <Route path="/forgotpassword" element={<Forget />}></Route>
         <Route path="/modules" element={<Modules />}></Route>
-        <Route path="/admin" element={<AdminPage />}></Route>
         <Route path="/adminprofile" element={<AdminProfile />}></Route>
         <Route path="/adminaccessrecords" element={<AdminAccessRecords />}></Route>
         <Route path="/accountmanager" element={<AccountManager />}></Route>

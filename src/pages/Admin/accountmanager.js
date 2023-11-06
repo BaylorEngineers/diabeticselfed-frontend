@@ -71,7 +71,6 @@ const AccountManager = () => {
           {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
   
           <Button label="Invite User" size="small" onClick={(e) => { e.preventDefault(); handleInviteUser(); }}/>
-          <Button label="Reset Password" size="small" onClick={handleResetPassword}/>
         </form>
       </div>
     </>
