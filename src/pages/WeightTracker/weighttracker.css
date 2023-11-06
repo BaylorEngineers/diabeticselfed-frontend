@@ -1,0 +1,55 @@
+h2 {
+  textAlign: 'center';
+  color: '#007BFF';
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.graph-container {
+  margin-top: 20px;
+}
+
+.graph-container > div {
+  width: 100%;
+}
+
+.weight-goal-section label {
+  font-size: 14px;
+}
+
+.weight-goal-section input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  max-width: 160px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.program-goal-section select{
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  max-width: 160px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+
