@@ -18,6 +18,7 @@ import Message from "./pages/Message/Message";
 import ModuleList from "./pages/Modules/ModuleList";
 import ModuleDetails from "./pages/Modules/ModuleDetails";
 import PDFViewer from "./pages/Modules/PDFViewer";
+import Survey from "./pages/MotivationalMessage/survey.js"
 
 import { useParams } from 'react-router-dom';
 
@@ -62,6 +63,8 @@ function App() {
         <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
         <Route path="/module/:moduleId" element={<ModuleDetailsWrapper />} />
         <Route path="/view-pdf/:pdfId" element={<PDFViewer />} />
+        <Route path="/survey" element={<Survey />} />
+
 
 
 

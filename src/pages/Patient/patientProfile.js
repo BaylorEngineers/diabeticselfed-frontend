@@ -14,47 +14,42 @@ const [formData, setFormData] = useState({
     profileType: '',
   });
 
-  const [patientData, setPatientData] = useState('');
+  const [question, setQuestion] = useState('');
+
   const [error, setError] = useState('');
-
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
-
-  console.log(localStorage.getItem('userId'));
-  console.log(localStorage.getItem('patientId'));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const patientId = Number(localStorage.getItem('patientId'));
-    console.log(patientId);
+    const fetchSurvey = async () => {
+      const patientId = localStorage.getItem('patientId');
 
-    const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5ODk1NDIzMCwiZXhwIjoxNjk5MDQwNjMwfQ.XX8GPd_hbt0smd9s1mqCTWj1xrkeRhqPx97yWGUJERU";
 
-    const fetchPatientData = async () => {
-      const apiURL = 'http://localhost:8080/api/v1/patient-profile/detail/' + patientId ;
-      try {
-        const response = await fetch(apiURL, {
-          mode: 'cors',
+        const response = await fetch('http://localhost:8080/api/v1/question/get/'+1, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json'
           },
         });
-
+        
         if (!response.ok) {
-          throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+          setError("Unable to fetch posts. Please try again later.");
+          
+          const timer = setTimeout(() => {
+            setError("");
+          }, 5000);
+          setLoading(false);
+          return () => clearTimeout(timer);
         }
 
-        const patientData = await response.json();
-        console.log("Data: ")
-        console.log(patientData);
-        setPatientData(patientData);
-        console.log('Fetched userData:', patientData);
-      } catch (error) {
-        setError(error.message);
-      }
+        const data = await response.json();
+        setLoading(false);
+        setQuestion(data['description']);
+        console.log(data['description']);
+
     };
 
-    fetchPatientData();
+    fetchSurvey();
   }, []);
 
   const handleChange = (e) => {
@@ -84,8 +79,7 @@ try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwtToken}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           name: formData.name,
@@ -109,7 +103,6 @@ try {
   return (
   <>
   <Header/>
-    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             
             
@@ -119,6 +112,7 @@ try {
               isOpen={isModalOpen}
               onRequestClose={closeModal}
               onSubmit={handleModalSubmit}
+              question = {question}
             />}
 
 
@@ -181,7 +175,6 @@ try {
                     <option value="Option 1">Option 1</option>
                     <option value="Option 2">Option 2</option>
                     <option value="Option 3">Option 3</option>
-                    {/* Add more options as needed */}
                   </select>
                 </div>
                 <button label = "Submit" type="submit">Submit</button>
