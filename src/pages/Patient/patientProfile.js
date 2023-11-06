@@ -14,42 +14,31 @@ const [formData, setFormData] = useState({
     profileType: '',
   });
 
-  const [patientData, setPatientData] = useState('');
   const [question, setQuestion] = useState('');
 
   const [error, setError] = useState('');
-  const [accessToken, setAccessToken] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // const jwtToken = localStorage.getItem('accessToken');
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBtYWlsLmNvbSIsImlhdCI6MTY5OTE1MzYyNywiZXhwIjoxNjk5MjQwMDI3fQ.kG88oT0NqLriOsDJ02rFZteX2G5knFM-CVfdvQoHcgk";
   useEffect(() => {
     const fetchSurvey = async () => {
-      // setLoading(true); // Start loading
-      // setError(''); // Clear previous errors
       const patientId = localStorage.getItem('patientId');
 
-      // Your JWT token
 
         const response = await fetch('http://localhost:8080/api/v1/question/get/'+1, {
           method: 'GET',
           headers: {
-            // Include the Authorization header with the token
             'Authorization': `Bearer ${jwtToken}`,
             'Content-Type': 'application/json'
           },
         });
         
         if (!response.ok) {
-          // If the response is not ok, set an error message
           setError("Unable to fetch posts. Please try again later.");
           
-          // Clear the error after 5 seconds
           const timer = setTimeout(() => {
             setError("");
           }, 5000);
           setLoading(false);
-          // Clear timeout if the component unmounts
           return () => clearTimeout(timer);
         }
 
@@ -90,8 +79,7 @@ try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwtToken}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           name: formData.name,
@@ -115,7 +103,6 @@ try {
   return (
   <>
   <Header/>
-    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             
             
@@ -188,7 +175,6 @@ try {
                     <option value="Option 1">Option 1</option>
                     <option value="Option 2">Option 2</option>
                     <option value="Option 3">Option 3</option>
-                    {/* Add more options as needed */}
                   </select>
                 </div>
                 <button label = "Submit" type="submit">Submit</button>
