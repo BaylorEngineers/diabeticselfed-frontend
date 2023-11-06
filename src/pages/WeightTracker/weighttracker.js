@@ -153,6 +153,16 @@ console.log(dateT);
           if (updatedReportsResponse.ok) {
             const updatedReports = await updatedReportsResponse.json();
             setReports(updatedReports);
+
+            const earliest = updatedReports.reduce((earliest, current) => {
+              if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
+                return current;
+              }
+              return earliest;
+            }, null);
+            setEarliestReport(earliest);
+            setEarliestHeight(earliest.height);
+
           } else {
             console.error('Failed to fetch updated reports after adding a new report.');
           }
