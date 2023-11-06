@@ -6,6 +6,7 @@ import './weighttracker.css';
 import Plot from 'react-plotly.js';
 
 const WeightTrackerPage = () => {
+  // variables for weight report
   const [goalWeight, setGoalWeight] = useState('');
   const [height, setHeight] = useState('');
   const [dateT, setDateT] = useState('');
@@ -13,20 +14,35 @@ const WeightTrackerPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [reports, setReports] = useState([]);
   const [updatedReports, setUpdatedReports] = useState([]);
+  
+  // variables for program goals
+  const [weightLossPercent, setWeightLossPercent] = useState('');
+  const [newWeightLossPercent, setNewWeightLossPercent] = useState('');
+  const [teapotMessage, setTeapotMessage] = useState('');
+
+  // List of numbers to choose from
+  const numberOptions = [0, 1, 2, 3, 4, 5];
+
+  // Handle the change event when a number is selected
+  const handleNumberChange = (event) => {
+    const selectedValue = event.target.value;
+    setWeightLossPercent(selectedValue);
+    setNewWeightLossPercent(selectedValue);
+  };
 
 
   // Function to calculate BMI
   const calculateBMI = (height, weight) => {
     // Formula: BMI = weight (kg) / (height (m) * height (m))
-    const heightInMeters = height / 100; // Convert height to meters
-    return (weight / (heightInMeters * heightInMeters)).toFixed(2);
+    // const heightInMeters = height / 100; // Convert height to meters
+    return ((weight / (height * height)) * 703).toFixed(2);
   };
 
   const patientID = Number(localStorage.getItem('patientID'));
   console.log(patientID);
 
-   const accessToken = String(localStorage.getItem('accessToken'));
-   console.log(accessToken);
+  const accessToken = String(localStorage.getItem('accessToken'));
+  console.log(accessToken);
 
 useEffect(() => {
   // Fetch report by patientId
@@ -50,6 +66,34 @@ useEffect(() => {
     .catch(error => {
       console.error('Error fetching reports:', error.message);
     });
+
+    // Fetching weightloss goal
+    // Fetch weight loss percentage from the backend
+    fetch(`http://localhost:8080/api/v1/goals/getGoal`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    })
+      .then(response => {
+        if (response.status === 418) {
+          setTeapotMessage("It seems like you haven't set a program goal yet!");
+          return 100; // Set to 0 in case of teapot response
+        } else if (!response.ok) {
+          throw new Error(`Network response was not ok (${response.status}: ${response.statusText})`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setWeightLossPercent(data.weightLossPercent);
+        setNewWeightLossPercent(data.weightLossPercent);
+      })
+      .catch(error => {
+        console.error('Error fetching weight loss percentage:', error.message);
+        setErrorMessage('Error fetching weight loss percentage: ' + error.message);
+      });
+
 }, []);
 
 const handleAddReport = async () => {
@@ -111,12 +155,95 @@ const updatedData = reports.map((report) => ({
     marker: { color: 'blue' },
   };
 
+  const earliestReport = reports.reduce((earliest, current) => {
+    if (!earliest || new Date(current.dateT) < new Date(earliest.dateT)) {
+      return current;
+    }
+    return earliest;
+  }, null);
+
+  const handleUpdateGoal = async () => {
+    
+    try {
+      const response = await fetch('http://localhost:8080/api/v1/goals/setGoal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          patientId: patientID,
+          weightLossPercent: newWeightLossPercent, // Use the new weight loss percent
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok (${response.status}: ${response.statusText}): ${errorText}`);
+      }
+
+      setSuccessMessage('Weight loss goal updated successfully!');
+      setErrorMessage('');
+
+      // Update the current weight loss percent after the update
+      setWeightLossPercent(newWeightLossPercent);
+
+    } catch (error) {
+      console.error('Error updating weight loss goal:', error.message);
+      setErrorMessage('Error updating weight loss goal: ' + error.message);
+      setSuccessMessage('');
+    }
+  };
+
   return (
   <>
   <Header role="PATIENT"/>
 
-     <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center' }}>
     <h2>Set Your Weight Loss Goal</h2>
+    <div className="program-goal-section">
+        {errorMessage && (
+          <div style={{ color: 'red' }}>
+            {errorMessage}
+          </div>
+        )}
+      <h2>Your current Weight Loss Goal is: {earliestReport ? (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2) : 'No reports found'} lbs</h2>
+      <label>Select a Weight Loss Percentage:
+          <select
+              value={newWeightLossPercent} // Use the new weight loss percent
+              onChange={handleNumberChange}
+            >
+              <option value="">Select a weight loss percentage</option>
+              {numberOptions.map((number) => (
+                <option key={number} value={number}>
+                  {number}
+                </option>
+              ))}
+          </select>
+          <Button label="Update Goal" size="small" onClick={handleUpdateGoal} />{/* Add a button to update the goal */}
+          </label>
+          {(newWeightLossPercent < 2) && calculateBMI(height, earliestReport.weight) > 23.5 ? (
+          <div style={{ color: 'red' }}>
+          Please consider that losing the recommended weight of 2-3% has many health benefits. Some of the benefits include preventing or delaying type 2 diabetes and ease sleep problems, arthritis, and depression
+          </div>
+          ) : null}
+          {(newWeightLossPercent > 3) && calculateBMI(height, earliestReport.weight) > 23.5 ? (
+          <div style={{ color: 'red' }}>
+          Your current BMI is {calculateBMI(height, earliestReport.weight)} at the start of the program, please consider lower the weight loss goal to have a healthy weight loss plan.
+          </div>
+          ) : null}
+          {(newWeightLossPercent > 3) && calculateBMI(height, earliestReport.weight) < 23.5 && calculateBMI(height, earliestReport.weight) > 18.5 ? (
+          <div style={{ color: 'red' }}>
+          The recommended weight loss range is between 0 ~ 3 percent.
+          </div>
+          ) : null}
+          {(newWeightLossPercent > 3) && calculateBMI(height, earliestReport.weight) < 18.5 ? (
+          <div style={{ color: 'red' }}>
+          A BMI value of {calculateBMI(height, earliestReport.weight)} is considered underweight, there is no need to lose weight!
+          </div>
+          ) : null}
+    </div>
+    <h2>Add Weight Loss Report</h2>
     <div className="weight-goal-section">
                 <label>
                   Height (in inches):
@@ -132,16 +259,26 @@ const updatedData = reports.map((report) => ({
                 type="number"
                 value={goalWeight}
                 onChange={(e) => setGoalWeight(e.target.value)}
+                required
               />
             </label>
-                        <label>
-                          Date (in mm-dd-yyyy):
-                          <input
-                            type="text"
-                            value={dateT}
-                            onChange={(e) => setDateT(e.target.value)}
-                          />
-                        </label>
+            <label>
+              Date (in yyyy-MM-dd):
+              {/* <input
+                type="text"
+                value={dateT}
+                onChange={(e) => setDateT(e.target.value)}
+              /> */}
+              <input
+                type="date"
+                value={dateT}
+                onChange={(e) => {
+                  const inputDate = new Date(e.target.value); // Convert the input to a Date object
+                  setDateT(format(inputDate, 'yyyy-MM-dd'));
+                }}
+                required
+              />
+            </label>
 
      <Button label="Add Report" size="small" onClick={handleAddReport}/>
            {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
