@@ -10,6 +10,7 @@ const WeightTrackerPage = () => {
   const [goalWeight, setGoalWeight] = useState('');
   const [height, setHeight] = useState('');
   const [dateT, setDateT] = useState('');
+  const [dateString, setDateString] =  useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [reports, setReports] = useState([]);
@@ -132,7 +133,7 @@ console.log(dateT);
           patientId: patientID, // Replace with the actual patientId
           height: height,
           weight: goalWeight,
-          dateT: dateT,
+          dateT: dateString,
         }),
       });
 
@@ -313,18 +314,21 @@ const updatedData = reports.map((report) => ({
               />
             </label>
             <label>
-              Date (in yyyy-MM-dd):
-              {/* <input
-                type="text"
-                value={dateT}
-                onChange={(e) => setDateT(e.target.value)}
-              /> */}
+              Date (in mm/dd/yyyy):
               <input
                 type="date"
                 value={dateT}
                 onChange={(e) => {
-                  const inputDate = new Date(e.target.value); // Convert the input to a Date object
-                  setDateT(format(inputDate, 'yyyy-MM-dd'));
+                  if (e.target.value) {
+                    const inputDate = new Date(e.target.value); // Convert the input to a Date object
+                    setDateT(e.target.value);
+                    setDateString(format(inputDate, 'yyyy-MM-dd'));
+                    setDateString(format(inputDate.setDate(inputDate.getDate()+1), 'yyyy-MM-dd'));
+                  } else {
+                    const currentDate = new Date();
+                    setDateT(currentDate);
+                    setDateString(format(currentDate.setDate(currentDate.getDate()+1), 'yyyy-MM-dd'));
+                  }
                 }}
                 required
               />

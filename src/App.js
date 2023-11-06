@@ -21,11 +21,14 @@ import ModuleList from "./pages/Modules/ModuleList";
 import ModuleDetails from "./pages/Modules/ModuleDetails";
 import PDFViewer from "./pages/Modules/PDFViewer";
 import Survey from "./pages/MotivationalMessage/survey.js"
+import SignupWeightAndHeight from "./pages/signUpContinued/signUpWeightAndHeight";
+import SignupProgramGoal from "./pages/signUpContinued/signUpSetProgramGoal";
 
 import { useParams } from 'react-router-dom';
 
 import PatientProfile from "./pages/Patient/patientProfile";
 import "./App.css";
+
 
 
 const ModuleListWrapper = () => {
@@ -67,6 +70,8 @@ function App() {
         <Route path="/module/:moduleId" element={<ModuleDetailsWrapper />} />
         <Route path="/view-pdf/:pdfId" element={<PDFViewer />} />
         <Route path="/survey" element={<Survey />} />
+        <Route path="/signUp/weight-height" element={<SignupWeightAndHeight />} />
+        <Route path="/signUp/goal" element={<SignupProgramGoal />} />
 
 
 

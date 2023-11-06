@@ -36,7 +36,7 @@ function SignUp() {
         });
 
         if (response.status === 200) {
-          window.location.href = "/";
+          window.location.href = `/signUp/weight-height?token=${token}`;
         } else {
           const errorData = await response.json();
           console.log(formData);
