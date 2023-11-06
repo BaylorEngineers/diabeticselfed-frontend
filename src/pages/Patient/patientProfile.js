@@ -14,11 +14,14 @@ const [formData, setFormData] = useState({
     profileType: '',
   });
 
+  const [patientData, setPatientData] = useState('');
   const [question, setQuestion] = useState('');
 
   const [error, setError] = useState('');
+  const [accessToken, setAccessToken] = useState('');
   const [loading, setLoading] = useState(true);
 
+  const jwtToken = localStorage.getItem('accessToken');
   useEffect(() => {
     const fetchSurvey = async () => {
       const patientId = localStorage.getItem('patientId');
@@ -33,12 +36,15 @@ const [formData, setFormData] = useState({
         });
         
         if (!response.ok) {
+          // If the response is not ok, set an error message
           setError("Unable to fetch posts. Please try again later.");
           
+          // Clear the error after 5 seconds
           const timer = setTimeout(() => {
             setError("");
           }, 5000);
           setLoading(false);
+          // Clear timeout if the component unmounts
           return () => clearTimeout(timer);
         }
 
@@ -79,7 +85,8 @@ try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`
         },
         body: JSON.stringify({
           name: formData.name,
@@ -103,6 +110,7 @@ try {
   return (
   <>
   <Header/>
+    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             
             
@@ -175,6 +183,7 @@ try {
                     <option value="Option 1">Option 1</option>
                     <option value="Option 2">Option 2</option>
                     <option value="Option 3">Option 3</option>
+                    {/* Add more options as needed */}
                   </select>
                 </div>
                 <button label = "Submit" type="submit">Submit</button>
