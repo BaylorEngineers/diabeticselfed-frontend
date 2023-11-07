@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import '../pages/css/modal.css'
 import Survey from './MotivationalMessage/survey';
@@ -16,6 +17,7 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
   const [submitted, setSubmitted] = useState(false);
   const [viewMotivationalMessage, setViewMotivationalMessage] = useState(false);
   const [message_content, setMessage_content] = useState('');
+  const navigate = useNavigate();
 
 
   const patientId = localStorage.getItem('patientId');
@@ -73,12 +75,13 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
           console.log(data['message_content']);
 
           if (message_content !== null) {
-            console.log("Set true motivational message");
+            console.log("Set motivational message true: " + message_content);
+            navigate("/survey");
             setViewMotivationalMessage(true);
           }
 
     setSubmitted(true) ;
-    onRequestClose();
+    // onRequestClose();
   }
 
 
@@ -89,7 +92,7 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
       contentLabel="Survey Modal"
       className="modal-container"
     >
-      <h4>{ modalTitle }</h4>
+      <h4 className="title">{ modalTitle }</h4>
 
       {
         viewMotivationalMessage &&
@@ -97,8 +100,10 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
           
         )
       }
+      <div className="question">
+        <text>{ question }</text>
+      </div>
       
-      <label>{ question }</label>
       <div className="radio-container">
         <label>
           <input
