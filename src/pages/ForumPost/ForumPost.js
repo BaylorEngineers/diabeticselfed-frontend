@@ -73,7 +73,10 @@ const ForumPost = () => {
               </Link>
             ))}
           </div>
-          <Link to="/create-post" className="create-post-link">Create New Post</Link>
+          {role === "PATIENT" && (
+            <Link to="/create-post" className="create-post-link">Create New Post</Link>
+          )}
+
         </div>
       </div>
     </div>

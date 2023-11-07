@@ -33,22 +33,26 @@ export const useSidebarData = (role) => {
     ];
 
     if (['ADMIN', 'CLINICIAN', 'PATIENT'].includes(role)) {
-        baseData.push({
-          title: 'Forum',
-          path: '/forum', 
-          icon: <AiIcons.AiOutlineWechat />,
-          cName: 'nav-text',
-          subNav: [
-            {
-              title: "My Posts",
-              path: "/myposts", 
-              icon: <AiIcons.AiOutlineUnorderedList  />, 
-              cName: "nav-sub-item" 
-            },
-          ]
-        });
+      const forumData = {
+        title: 'Forum',
+        path: '/posts', 
+        icon: <AiIcons.AiOutlineWechat />,
+        cName: 'nav-text'
+      };
+  
+      if (role === "PATIENT") {
+        forumData.subNav = [
+          {
+            title: "My Posts",
+            path: "/myposts", 
+            icon: <AiIcons.AiOutlineUnorderedList />, 
+            cName: "nav-sub-item"
+          },
+        ];
       }
-      
+  
+      baseData.push(forumData);
+  }
   
       if (['CLINICIAN', 'PATIENT'].includes(role)) {
         baseData.push({
