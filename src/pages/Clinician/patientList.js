@@ -8,7 +8,7 @@ const PatientList = () => {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [note, setNote] = useState("");
-    const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqcmVuMjZAZm9yZGhhbS5lZHUiLCJpYXQiOjE2OTkzNzkyMzgsImV4cCI6MTY5OTQ2NTYzOH0.JCLMb2YmCg2Pi-pTPPTPJFLFLgaA7l9B0mhwQje8mKU';
+    // const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqcmVuMjZAZm9yZGhhbS5lZHUiLCJpYXQiOjE2OTkzNzkyMzgsImV4cCI6MTY5OTQ2NTYzOH0.JCLMb2YmCg2Pi-pTPPTPJFLFLgaA7l9B0mhwQje8mKU';
 
     useEffect(() => {
         const fetchData = async () => {
