@@ -67,6 +67,7 @@ const Survey = () => {
                     onRequestClose={closeModal}
                     onSubmit={handleModalSubmit}
                     question = {question}
+                    className = "centered-component"
                     />
                 }
           </div>

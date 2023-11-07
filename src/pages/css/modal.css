@@ -1,35 +1,87 @@
 .modal-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    transform: translate(-50%, -50%);
-    width: 500px; /* Adjust the width to make the modal smaller */
-    height: 300px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* Set the height to 500px */
+  width: 500px; /* Set the width to 400px */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  margin-left: 40%;
+  margin-top: 10%;
+}
+
+.question {
+  padding: 30px;
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: bold;
   
-  .button-container {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .submit-button {
-    flex: 1;
-    background-color: darkgreen; /* Set dark green color for the submit button */
-    color: white;
-    width: 50%;
-    text-align: center;
-  }
-  
-  .close-button {
-    flex: 1;
-    background-color: maroon; /* Set maroon color for the close button */
-    color: white;
-    width: 50%;
-    text-align: center;
-  }
+}
+
+/* Style the label for the question */
+/* .label-question {
+  font-size: 14px;
+  margin-bottom: 10px;
+} */
+
+/* Style the radio container */
+.radio-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Style the radio input and labels */
+.radio-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 1rem;
+
+}
+
+.title {
+  color: green;
+}
+
+label {
+  padding: 20px;
+}
+
+/* Style the radio input */
+.radio-input {
+  margin-right: 5px;
+}
+
+/* Style the button container at the bottom */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Style the "Submit" button */
+.submit-button {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Style the "Close" button */
+.close-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
