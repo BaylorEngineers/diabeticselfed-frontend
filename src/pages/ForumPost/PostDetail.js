@@ -6,8 +6,6 @@ import "./PostDetail.css";
 const CommentForm = ({ postId, onCommentAdded }) => {
     const [content, setContent] = useState('');
     const token =  localStorage.getItem('accessToken');
-    const [showReplyForm, setShowReplyForm] = useState(false);
-    const role = localStorage.getItem('role');
     const handleSubmit = async (e) => {
       e.preventDefault();
       if (!content.trim()) return;
