@@ -45,7 +45,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
                 console.log(newMsg);
                 console.log(userId);
                 console.log(newMsg.receiverId);
-                if(newMsg.receiverId == userId){
+                if(newMsg.receiverId === userId){
                     console.log("Set");
                     setConversation(prevMessages => [...prevMessages, newMsg]);
                 }
