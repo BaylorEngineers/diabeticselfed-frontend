@@ -8,7 +8,7 @@ const PatientList = () => {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [note, setNote] = useState("");
-    const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLlNtaXRoX3BhdGllbnQyQGV4YW1wbGUuY29tIiwiaWF0IjoxNjk5MzI1Njc0LCJleHAiOjE2OTk0MTIwNzR9.NbWoiNEyJG9GD4iKeXgl7PD7qZSeBtZgKGVOt8SGoC4';
+    const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqcmVuMjZAZm9yZGhhbS5lZHUiLCJpYXQiOjE2OTkzNzkyMzgsImV4cCI6MTY5OTQ2NTYzOH0.JCLMb2YmCg2Pi-pTPPTPJFLFLgaA7l9B0mhwQje8mKU';
 
     useEffect(() => {
         const fetchData = async () => {
@@ -162,7 +162,7 @@ const PatientList = () => {
                     <div className="profile">
                         <h3>{selectedPatient.patientName}'s Profile:</h3>
                         <p>Date of Birth: {new Date(selectedPatient.patientDOB).toLocaleDateString()}</p>
-                        <p>Height: {selectedPatient.height ? `${selectedPatient.height} inches` : 'N/A'}</p>
+                        <p>Height(inches): {selectedPatient.height ? `${selectedPatient.height} ` : 'N/A'}</p>
                         <div className="profile-spacing"></div>
                         {/* This adds the space */}
                         {renderSurveyAnswers(selectedPatient)}
