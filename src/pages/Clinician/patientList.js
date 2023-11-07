@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./PatientList.css";
@@ -9,6 +7,8 @@ const PatientList = () => {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [note, setNote] = useState("");
+
+    const accessToken = localStorage.getItem("accessToken")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -134,8 +134,6 @@ const PatientList = () => {
 
     return (
         <>
-            <Header/>
-            <Sidebar sidebarType="sidebarClinician"/>
             <Header  role="CLINICIAN"/>
             {/* <Sidebar sidebarType="sidebarClinician" /> */}
             <div className="patient-list">

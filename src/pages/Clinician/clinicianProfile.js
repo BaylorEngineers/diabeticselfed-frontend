@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
-
-import React, { useState } from "react";
-
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 
@@ -17,8 +13,8 @@ const ClinicianProfile = ({ onSave, onChangePassword }) => {
     useEffect(() => {
         const fetchUserData = async () => {
             const userId = localStorage.getItem('userId'); // Replace with your auth context or state management
-            // const token = localStorage.getItem('accessToken'); // Replace with your auth context or state management
-            const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLlNtaXRoX3BhdGllbnQyQGV4YW1wbGUuY29tIiwiaWF0IjoxNjk5MzI1Njc0LCJleHAiOjE2OTk0MTIwNzR9.NbWoiNEyJG9GD4iKeXgl7PD7qZSeBtZgKGVOt8SGoC4';
+            const token = localStorage.getItem('accessToken'); // Replace with your auth context or state management
+            // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLlNtaXRoX3BhdGllbnQyQGV4YW1wbGUuY29tIiwiaWF0IjoxNjk5MzI1Njc0LCJleHAiOjE2OTk0MTIwNzR9.NbWoiNEyJG9GD4iKeXgl7PD7qZSeBtZgKGVOt8SGoC4';
 
             if (userId && token) {
                 setAccessToken(token);
