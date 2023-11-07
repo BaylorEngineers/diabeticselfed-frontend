@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
@@ -27,7 +26,6 @@ function Test() {
             
             setStompClient(stomp);
         });
-        // Cleanup function
         return () => {
             console.log("Unsubscribing and disconnecting...");
             if (subscription) {

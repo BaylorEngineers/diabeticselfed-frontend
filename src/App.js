@@ -72,8 +72,7 @@ function App() {
         <Route path="/survey" element={<Survey />} />
         <Route path="/signUp/weight-height" element={<SignupWeightAndHeight />} />
         <Route path="/signUp/goal" element={<SignupProgramGoal />} />
-
-
+        <Route path="/logout" element={<Home />}></Route>
 
 
 

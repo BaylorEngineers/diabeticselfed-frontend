@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './ModuleDetails.css';
 import Header from '../../components/Header/Header';
 import moduleImage from '../../images/Family-Why-I-Prevent-T2.png'; 
-import PDFViewer from './PDFViewer';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 
@@ -12,9 +11,6 @@ const ModuleDetails = ({ moduleId }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
-
-
-  const [showPDF, setShowPDF] = useState(false);
 
   const handleStartClick = () => {
     navigate(`/view-pdf/${moduleId}`);

@@ -109,8 +109,8 @@ try {
 
   return (
   <>
-  <Header/>
-    {/* <Sidebar sidebarType="sidebarAdmin" /> */}
+    <Header role="PATIENT" />
+
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             
             

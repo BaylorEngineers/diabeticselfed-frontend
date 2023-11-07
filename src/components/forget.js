@@ -8,12 +8,6 @@ function Login() {
     const [errorMessages, error_login] = useState({});
     const [username, setUserName] = useState();
 
-  
-    const errors = {
-      username: "This user Id does not exit or invalid password",
-     
-    };
-  
     const login_handle = (event) => {
       event.preventDefault();
   
@@ -28,13 +22,12 @@ function Login() {
       })
         .then(response => {
            
-          if (response.status == 200) {
+          if (response.status === 200) {
             console.log('go'); 
             window.location.href =  "/resetpassword";
             
-          } else if (response.status == 400) {
+          } else if (response.status === 400) {
             error_login({ name: "ID", message: "Email does not exist"});
-            //throw new Error('Something went wrong ...');
   
           }else{
             error_login({ name: "ID", message: "Send email fail"});
@@ -52,11 +45,6 @@ function Login() {
         <div className="error">{errorMessages.message}</div>
       );
   
-      var sectionStyle = {
-        width: "100%",
-        height: "400px",
-        backgroundImage: backgroundImage
-      };
 
     const renderForm = (
       <div className="form">

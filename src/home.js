@@ -5,7 +5,7 @@ import './home.css';
 const home = () => {
   return (
     <>
-      <Header role="PATIENT"/>
+      <Header role=""/>
         <div className="landingPage">
           <h1>Welcome to the landing Page</h1>
         </div>
