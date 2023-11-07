@@ -4,11 +4,6 @@ import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-// import Popup from '../pages/SurveyPopUp';
-
-// import CustomModal from '../pages/SurveyModal'
-
-
 function Login() {
     const [errorMessages, error_login] = useState('');
     const [islogin, login_set_true] = useState(false);
@@ -27,7 +22,6 @@ function Login() {
       username: "This user Id does not exit or invalid password",
      
     };
-    const [err, setErr] = useState('');
 
     useEffect(() => {
       console.log("IN")
@@ -35,8 +29,6 @@ function Login() {
 
     const test = async (event) => {
           event.preventDefault();
-          console.log(username);
-          console.log(password);
 
           try {
             const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
@@ -55,7 +47,6 @@ function Login() {
               const errorMessage = await response.text();
               throw new Error(` ${response.status}`);
             } else {
-              // fetch if firstLogIn
               if(true){
                 setIsFirstLogInToday(true);
               }
@@ -63,22 +54,17 @@ function Login() {
               if(isFirstLogInToday) {
                 navigate("/survey");
               }
-                
-                
               
             }
 
             const responseData = await response.json();
-            console.log('Response Data:', responseData);
             setRole(responseData.role);
 
             const userID = responseData.userID;
-            console.log('UserID:', userID);
             setUserID(userID);
             localStorage.setItem('userId', userID);
 
             const patientID = responseData.patientID;
-            console.log('patientID:', patientID);
 
             setPatientID(patientID);
             localStorage.setItem('patientId', patientID);
@@ -87,38 +73,18 @@ function Login() {
             localStorage.setItem('patientID', patientID);
 
             const access_token = responseData.access_token;
-            console.log('access_token:', access_token);
             setAccessToken(access_token);
             localStorage.setItem('accessToken', access_token);
 
             const role = responseData.role;
-            setRole('role',role);
+            setRole('role', role);
             localStorage.setItem('role', role);
 
             login_set_true(true);
           } catch (error) {
-            console.error('Error:', error);
             error_login({ name: 'ID', message: error.message + ": Wrong email or password" });
           }
         };
-
-    
-        // const [isModalOpen, setIsModalOpen] = useState(false);
-        // const[firstLoginOfTheDay, setFirstLoginOfTheDay] = useState(false);
-
-        // const openModal = () => {
-        //   setIsModalOpen(true);
-        //   setFirstLoginOfTheDay(true);
-        // };
-
-        // const closeModal = () => {
-        //   setIsModalOpen(false);
-        // };
-
-        // const handleModalSubmit = (modalInput) => {
-        //   console.log(modalInput);
-        // }
-
 
 
     const renderErrorMessage = (name) =>

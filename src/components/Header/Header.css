@@ -1,193 +1,154 @@
-/* Header styles */
-.Header {
-  background-color: #2C3E50; /* Example background color */
-  color: #FFF;
+/* Resets for good measure */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use your preferred font */
+}
+
+/* Header styling */
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  height: 80px;
+  padding: 1rem 2rem;
+  background: rgba(0, 66, 75, 0.596); 
+  box-shadow: 0 2px 10px rgba(2, 110, 69, 0.1)
 }
 
-.HeaderContent {
-  display: flex;
-  align-items: center;
+.header-content {
   width: 100%;
-  justify-content: space-between;
-}
-
-.HeaderLogo h1 {
-  color: #FFF; /* Change as needed */
-}
-
-/* Navigation styles */
-.HeaderLinks {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px; /* Adds space between items */
+}
+
+/* Navigation Menu */
+.header-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
 }
 
 .nav-item {
-  color: #FFF;
-  padding: 10px 15px;
-  text-decoration: none;
-  display: flex; /* Align icons and text */
+  position: relative; /* For absolute positioning of sub-menus */
+}
+
+.nav-link {
+  display: flex;
   align-items: center;
-  gap: 5px; /* Space between icon and text */
-  position: relative;
-  border-radius: 4px; /* Rounded corners */
-  transition: background-color 0.3s; /* Smooth background transition */
-}
-
-.nav-item:hover,
-.nav-item:focus {
-  background-color: #18BC9C; /* Highlight color on hover/focus */
-  color: #FFF;
-}
-
-.nav-text-link {
-  color: inherit; /* Inherits color from .nav-item */
+  padding: 0 1rem; /* Adjust the spacing around the links */
+  font-size: 1rem;
+  color: transparent; /* Make the text transparent initially */
   text-decoration: none;
-}
-.nav-text-link:hover,
-.nav-text-link:focus {
-  color: #18BC9C; /* Highlight color on hover/focus */
+  transition: color 0.5s ease; /* Smooth transition for color change */
+  position: relative;
 }
 
-.nav-item-with-submenu:hover .nav-sub-menu {
-  display: block; /* Show sub-menu on hover */
+.nav-link:hover .nav-text,
+.nav-link:focus .nav-text {
+  color: #333; /* Text color on hover or focus */
 }
 
-.nav-item-with-submenu .nav-sub-menu {
+/* Submenu */
+.nav-sub-menu {
   display: none;
   position: absolute;
   left: 0;
   top: 100%;
-  background-color: #34495E; /* Sub-menu background color */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Adds shadow for depth */
-  border-radius: 4px; /* Slight rounding on edges */
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-  transform: translateY(-10px); /* Starts slightly above for slide down effect */
-  z-index: 999;
+  min-width: 200px; /* Set a minimum width for submenu */
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
 }
 
 .nav-item-with-submenu:hover .nav-sub-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0px);
+  display: block; /* Show the submenu */
 }
 
 .nav-sub-item {
-  color: #FFF;
-  padding: 10px 20px;
   display: block;
+  padding: 10px 20px;
+  color: #333;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-
-.nav-sub-item:hover,
-.nav-sub-item:focus {
-  background-color: #2C3E50; /* Darken background on hover/focus */
+.nav-sub-item:hover {
+  background-color: #f8f8f8; /* Light grey background on hover */
 }
 
-
-.nav-item-with-submenu {
-  position: relative;
-}
-
-.nav-sub-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #2C3E50; /* Sub-menu background color */
-  border-radius: 0 0 4px 4px; /* Rounded corners on bottom */
-  padding: 0;
-  min-width: 100%; /* Ensure min width matches parent */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Adds shadow for depth */
-  z-index: 999;
-}
-.nav-item-with-submenu:hover .nav-sub-menu {
-  display: block;
-}
-
-/* Navbar CSS */
-.navbar {
-  background-color: #ffffff;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: left;
-}
-
-.menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
-  color: #000;
-}
-
-.nav-menu {
-  margin-top: 70px;
-  background-color: rgb(154, 173, 171);
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: left;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
-}
-
-.nav-menu.active {
-  left: 0;
-  transition: 450ms;
-}
-
-.nav-text {
-  justify-content: flex-start;
-  align-items: center;
-  /* padding: 8px 0px 8px 16px; */
-  list-style: none;
-
-}
-
-.nav-text a {
-  text-decoration: none;
-  color: #151414;
-  font-size: 18px;
-  width: 95%;
-  height: 100%;
+/* Right-aligned items (e.g., login or user profile) */
+.header-right {
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  border-radius: 4px;
 }
 
-.nav-text a:hover {
-  background-color: #000000;
-  color: #fff;
+/* Dropdown/User Menu styling */
+.user-dropdown {
+  cursor: pointer;
+  padding: 0 1rem;
+  color: #333;
+  transition: color 0.5s ease;
 }
 
-.nav-menu-items {
-  width: 100%;
+.user-dropdown:hover {
+  color: #666; /* Darken the color slightly on hover */
 }
 
-.navbar-toggle {
-  background-color: #ffffff;
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0; /* Adjust padding for vertical layout */
+  }
+
+  .nav-item {
+    width: 100%; /* Full width nav items */
+  }
+
+  .nav-sub-menu {
+    width: 100%; /* Submenu takes full width */
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: flex-end;
+    padding-top: 1rem;
+  }
 }
 
-span {
-
-  margin-left: 16px;
+/* Hover effect for the main nav items */
+.nav-item:hover {
+  transform: translateY(-2px); /* Slight move up for tactile feedback */
+  transition: transform 0.3s ease;
 }
+
+/* Logo and User dropdown might need specific adjustments */
+.header-logo h1,
+.user-dropdown {
+  transition: transform 0.3s ease;
+}
+
+.header-logo h1:hover,
+.user-dropdown:hover {
+  transform: scale(1.05); /* Slight increase for interactivity */
+}
+
