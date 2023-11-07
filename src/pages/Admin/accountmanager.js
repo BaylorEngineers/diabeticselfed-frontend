@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
 
@@ -28,7 +27,7 @@ const AccountManager = () => {
       },
       body: JSON.stringify({
         email, 
-        role: selectedOption.toUpperCase() // Make sure the role is transformed to uppercase.
+        role: selectedOption.toUpperCase()
       })
     })
     .then(response => {
@@ -39,11 +38,10 @@ const AccountManager = () => {
     })
     .then(data => {
       console.log('Success:', data);
-      // Optional: Show success message or clear the form
     })
     .catch((error) => {
       console.error('Error:', error);
-      setErrorMessage(error.message); // Set the error message
+      setErrorMessage(error.message); 
     });
   };
 
@@ -53,8 +51,7 @@ const AccountManager = () => {
 
   return (
     <>
-      <Header />
-      <Sidebar sidebarType="sidebarAdmin" />
+      <Header role = "ADMIN" />
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <form style={{ marginTop: '20px', textAlign: 'center' }}>
           <label>
@@ -74,7 +71,6 @@ const AccountManager = () => {
           {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
   
           <Button label="Invite User" size="small" onClick={(e) => { e.preventDefault(); handleInviteUser(); }}/>
-          <Button label="Reset Password" size="small" onClick={handleResetPassword}/>
         </form>
       </div>
     </>

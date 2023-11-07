@@ -1,0 +1,260 @@
+
+/* ForumPost.css */
+:root {
+  --primary-color: #30cebb; /* Your brand primary color */
+  --text-primary: #333;
+  --text-secondary: #666;
+  --background-light: #f8f8f8;
+  --border-color: #ddd;
+  --error-color: #ff0033;
+  --success-color: #4CAF50;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: var(--text-primary);
+}
+
+  .header {
+    display: flex;
+    width: 100%;
+  }
+  .Header {
+    flex: 1; /* Take up available space */
+  }
+  /* Style for the Sidebar */
+  .sidebar {
+    z-index: 10;
+    height: 70px;
+    max-width: 7.5%;
+    background-color: #30cebb; /* Adjust sidebar background color */
+    color: #fff;
+    padding: 1em;
+    width: 250px; 
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s; /* Add smooth width transition */
+    
+  }
+  
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .nav-menu-items li {
+    text-align: left;
+  }
+  
+  .nav-menu-items li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* Add additional styles for your Dropdown component if needed */
+  
+
+  
+  .main-content {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  /* .sidebar {
+    flex: 1;
+  } */
+  
+  .post-content {
+    flex: 3;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .post-title {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+  
+  .post-owner {
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  
+  .post-body {
+    margin-top: 20px;
+  }
+  
+  .comments-section h3 {
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+  .comment {
+    background-color: var(--background-light);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease;
+  }
+  .comment-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .child-comments {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  /* Below are additional styles you can adjust for better visuals */
+  .commenter-name {
+    font-weight: bold;
+  }
+  
+  .comment-content {
+    margin-bottom: 5px;
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  textarea,
+input {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease;
+}
+textarea:focus,
+input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+  .comment-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-height: 100px;
+  }
+  button {
+    transition: all 0.2s ease;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .comment-form button {
+    padding: 10px 20px;
+    background-color: #30cebb;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .delete-comment {
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+.comment:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+  .delete-comment:hover {
+    opacity: 0.8;
+  }
+
+  .reply-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .reply-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-height: 60px;
+  }
+  
+  .reply-form button {
+    padding: 5px 15px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .reply-button {
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .reply-button:hover {
+    background: #555;
+  }
+
+  #postcomment{
+    margin: auto;
+    max-width: 20%;
+  }
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .post-content {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

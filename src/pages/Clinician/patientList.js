@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./PatientList.css";
@@ -8,7 +9,6 @@ const PatientList = () => {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [note, setNote] = useState("");
-    // const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqcmVuMjZAZm9yZGhhbS5lZHUiLCJpYXQiOjE2OTkzNzkyMzgsImV4cCI6MTY5OTQ2NTYzOH0.JCLMb2YmCg2Pi-pTPPTPJFLFLgaA7l9B0mhwQje8mKU';
 
     useEffect(() => {
         const fetchData = async () => {
@@ -136,6 +136,8 @@ const PatientList = () => {
         <>
             <Header/>
             <Sidebar sidebarType="sidebarClinician"/>
+            <Header  role="CLINICIAN"/>
+            {/* <Sidebar sidebarType="sidebarClinician" /> */}
             <div className="patient-list">
                 <h2>Patients List</h2>
                 <div>

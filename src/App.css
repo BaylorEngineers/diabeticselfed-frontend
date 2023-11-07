@@ -53,8 +53,7 @@ button:hover {
 }
 
 
-.forgotandreg{ 
-  margin-left: 9%;
+.forgotandreg{
   margin-top: 5%;
   display: flex;
 }
@@ -132,17 +131,14 @@ input[type="submit-perf-rev"] {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  margin: 11px;
+  gap: 6px;
+  margin: 6px;
   margin-left: auto;
   margin-right: auto;
 }
 .input-container input[type="date"] {
-  padding: 10px 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
   border-radius: 4px;
-  transition: border-color 0.3s;
+  box-shadow: inset 0 0 0.7px 0.7px rgba(0, 0, 0, 0.2);
 }
 
 .input-container input[type="date"]:focus {
@@ -150,12 +146,8 @@ input[type="submit-perf-rev"] {
   outline: none;
 }
 .input-container select {
-  padding: 10px 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
-  transition: border-color 0.3s;
+  box-shadow: inset 0 0 0.7px 0.7px rgba(0, 0, 0, 0.2);
 }
 
 .input-container select:focus {
@@ -176,6 +168,11 @@ input[type="submit-perf-rev"] {
 }
 
 input[type="text"] {
+  border-radius: 4px;
+  box-shadow: inset 0 0 0.7px 0.7px rgba(0, 0, 0, 0.2);
+}
+
+input[type="passwor"] {
   border-radius: 4px;
   box-shadow: inset 0 0 0.7px 0.7px rgba(0, 0, 0, 0.2);
 }
@@ -376,80 +373,6 @@ input[type="text"] {
   color: #fff;
 }
 
-/* Navbar CSS */
-.navbar {
-  background-color: #ffffff;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: left;
-}
 
-.menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
-  color: #000;
-}
-
-.nav-menu {
-  background-color: rgb(9, 105, 30);
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: left;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
-}
-
-.nav-menu.active {
-  left: 0;
-  transition: 450ms;
-}
-
-.nav-text {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 8px 0px 8px 16px;
-  list-style: none;
-  height: 60px;
-}
-
-.nav-text a {
-  text-decoration: none;
-  color: #151414;
-  font-size: 18px;
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  border-radius: 4px;
-}
-
-.nav-text a:hover {
-  background-color: #000000;
-  color: #fff;
-}
-
-.nav-menu-items {
-  width: 100%;
-}
-
-.navbar-toggle {
-  background-color: #ffffff;
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-span {
-  margin-left: 16px;
-}
 
 /* end Joseph Yu - testing sidebar CSS */

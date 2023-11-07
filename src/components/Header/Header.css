@@ -1,11 +1,154 @@
-.Title {
+/* Resets for good measure */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use your preferred font */
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 66, 75, 0.596); 
+  box-shadow: 0 2px 10px rgba(2, 110, 69, 0.1)
+}
+
+.header-content {
   width: 100%;
   display: flex;
-  justify-content: right;
-  align-items: baseline;
-  padding: 1em;
-  margin-bottom: 2em;
-  background-color: rgb(9, 105, 30);
-  color: #fff;
+  justify-content: space-between;
+  align-items: center;
 }
+
+/* Navigation Menu */
+.header-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.nav-item {
+  position: relative; /* For absolute positioning of sub-menus */
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem; /* Adjust the spacing around the links */
+  font-size: 1rem;
+  color: transparent; /* Make the text transparent initially */
+  text-decoration: none;
+  transition: color 0.5s ease; /* Smooth transition for color change */
+  position: relative;
+}
+
+.nav-link:hover .nav-text,
+.nav-link:focus .nav-text {
+  color: #333; /* Text color on hover or focus */
+}
+
+/* Submenu */
+.nav-sub-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 200px; /* Set a minimum width for submenu */
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.nav-item-with-submenu:hover .nav-sub-menu {
+  display: block; /* Show the submenu */
+}
+
+.nav-sub-item {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-sub-item:hover {
+  background-color: #f8f8f8; /* Light grey background on hover */
+}
+
+/* Right-aligned items (e.g., login or user profile) */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown/User Menu styling */
+.user-dropdown {
+  cursor: pointer;
+  padding: 0 1rem;
+  color: #333;
+  transition: color 0.5s ease;
+}
+
+.user-dropdown:hover {
+  color: #666; /* Darken the color slightly on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0; /* Adjust padding for vertical layout */
+  }
+
+  .nav-item {
+    width: 100%; /* Full width nav items */
+  }
+
+  .nav-sub-menu {
+    width: 100%; /* Submenu takes full width */
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: flex-end;
+    padding-top: 1rem;
+  }
+}
+
+/* Hover effect for the main nav items */
+.nav-item:hover {
+  transform: translateY(-2px); /* Slight move up for tactile feedback */
+  transition: transform 0.3s ease;
+}
+
+/* Logo and User dropdown might need specific adjustments */
+.header-logo h1,
+.user-dropdown {
+  transition: transform 0.3s ease;
+}
+
+.header-logo h1:hover,
+.user-dropdown:hover {
+  transform: scale(1.05); /* Slight increase for interactivity */
+}
+

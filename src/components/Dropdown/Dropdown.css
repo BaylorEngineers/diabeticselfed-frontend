@@ -8,25 +8,35 @@
   position: absolute;
   top: 70px;
   right: 20px;
-  background: rgb(73, 158, 94);
+  background: rgb(150, 190, 215);
   border-radius: var(--border-radius);
   padding: 10px 20px;
   width: 200px;
   
 }
 
-.menu-trigger{
-  
-  overflow: hidden;
+.menu-trigger {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: var(--border-radius);
   cursor: pointer;
-
+  padding: 5px 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-
+.account-icon {
+  font-size: 24px; /* Adjust the size as needed */
+  color: #ebe6e6;
+  margin-right: 5px;
+}
 .menu-trigger:hover{
-  color: rgb(223, 219, 15);
+  color: rgb(163, 184, 230);
 
 }
-
+.dropdown-icon {
+  font-size: 24px;
+  color: #333;
+}
 .dropdown-menu::before{
   content: '';
   position: absolute;
@@ -79,7 +89,7 @@ h3 span{
 }
 
 .dropdown-menu ul li:hover a{
-  color: rgb(223, 219, 15);
+  color: rgb(163, 184, 230);
   cursor: pointer;
 }
 
@@ -93,3 +103,74 @@ h3 span{
   margin-left: 10px;
   transition: var(--speed);
 }
+
+.menu-container {
+  position: relative;
+  font-size: 16px;
+}
+
+.menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #314355;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color var(--speed);
+}
+
+.menu-trigger:hover {
+  background-color: #394958; /* Light hover effect for trigger */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: rgb(233, 238, 253);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 5px 0;
+  width: 220px;
+  transition: all var(--speed) ease;
+  transform-origin: top right;
+}
+
+.dropdown-menu::before {
+  /* Arrow above the menu */
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  height: 16px;
+  width: 16px;
+  background: rgb(233, 238, 253);
+  transform: rotate(45deg);
+  border-radius: 4px;
+  /* border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: -1px -1px 2px rgba(0,0,0,0.1); */
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  transition: background-color var(--speed);
+}
+
+.dropdownItem:hover {
+  background-color: #f2f2f2; /* Light hover effect for items */
+}
+
+.dropdownItem a {
+  color: #333;
+  text-decoration: none;
+  padding-left: 10px;
+}
+
+/* Additional styles for icons */
+.dropdownItem svg {
+  min-width: 24px; /* Ensures icons align nicely */
+}
+

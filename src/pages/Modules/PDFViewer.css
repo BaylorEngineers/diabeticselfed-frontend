@@ -1,0 +1,124 @@
+.pdf-viewer {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    max-width: 100%;
+    padding: 20px; /* Add padding around the viewer for better spacing */
+  }
+  
+  .navigation {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .navigation .back-button {
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navigation .back-button:hover {
+    background-color: #ddd;
+  }
+  
+  .frame {
+    border: 2px solid #eaeaea; /* Lighter border for a subtle look */
+    border-radius: 8px; /* Rounded corners for the frame */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    position: relative;
+    display: inline-block; /* Align the frame in the center */
+    margin: auto;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    padding-bottom: 60px; /* Add space for controls */  
+}
+  
+  .frame:hover {
+    border-color: #5c6bc0; /* Highlight border on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+  }
+
+  .document {
+    display: flex;
+    justify-content: center;
+    padding: 10px; /* Padding inside the frame around the document */
+  }
+  
+  .document-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling on the document */
+    border: 1px solid #ddd; /* Add border for better visual separation */
+    border-radius: 8px; /* Rounded corners for the container */
+    margin: 0 auto; /* Center the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  .pdf-page {
+    box-shadow: none; /* We remove the shadow from the individual page since the container has it */
+    max-width: 100%; /* Ensure the page is responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%; /* Ensure controls stretch across the frame */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    padding: 10px 0; /* Padding for controls area */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-bottom-left-radius: 8px; /* Rounded corners at the bottom */
+    border-bottom-right-radius: 8px;
+  }
+  
+  .frame:hover .controls {
+    opacity: 1;
+  }
+  
+  /* Styles for .control-button and media queries remain the same */
+  
+  .controls .control-button {
+    padding: 10px 15px;
+    margin: 0 10px;
+    background-color: #5c6bc0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .controls .control-button:disabled {
+    background-color: #9fa8da;
+    cursor: default;
+  }
+  
+  .controls .control-button:hover:not(:disabled) {
+    background-color: #3949ab;
+  }
+  
+  .controls .page-info {
+    font-size: 1.1em;
+    margin: 0 15px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .controls .control-button {
+      padding: 8px 10px;
+    }
+  
+    .controls .page-info {
+      font-size: 0.9em;
+    }
+  }

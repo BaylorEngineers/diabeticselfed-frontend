@@ -7,11 +7,11 @@ function SignUp() {
     const [formData, setFormData] = useState({
       email: '',
       password: '',
-      repassword: '',
+      // repassword: '',
       firstname: '',
       lastname: '',
-      DOB: '',
-      LevelofEdu: ''
+      dob: '',
+      levelofedu: '',
     });
     const [errorMessage, setErrorMessage] = useState('');
     const location = useLocation();
@@ -24,7 +24,8 @@ function SignUp() {
 
     const handleSignUp = async (event) => {
       event.preventDefault();
-
+      console.log(formData);
+      console.log(token);
       try {
         const response = await fetch('http://localhost:8080/api/v1/auth/register', {
           method: 'POST',
@@ -35,9 +36,10 @@ function SignUp() {
         });
 
         if (response.status === 200) {
-          window.location.href = "/";
+          window.location.href = `/signUp/weight-height?token=${token}`;
         } else {
           const errorData = await response.json();
+          console.log(formData);
           setErrorMessage(`Error (${response.status}): ${errorData.message || 'Registration failed'}`);
         }
       } catch (error) {
@@ -89,7 +91,7 @@ function SignUp() {
                   />
                 </div>
 
-                <div className="input-container">
+                {/* <div className="input-container">
                   <label htmlFor="repassword">Re-enter Password </label>
                   <input
                     type="password"
@@ -98,7 +100,7 @@ function SignUp() {
                     required
                     onChange={handleInputChange}
                   />
-                </div>
+                </div> */}
 
                 <div className="input-container">
                   <label htmlFor="firstname">First Name </label>
@@ -122,22 +124,33 @@ function SignUp() {
                   />
                 </div>
 
+                {/* <div className="input-container">
+                  <label htmlFor="lastname">Token </label>
+                  <input
+                    type="text"
+                    id="token"
+                    name="token"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+
                 <div className="input-container">
                   <label htmlFor="dob">Date of Birth</label>
                   <input
                     type="date"
                     id="dob"
-                    name="DOB"
+                    name="dob"
                     required
                     onChange={handleInputChange}
                   />
                 </div>
 
                 <div className="input-container">
-                  <label htmlFor="levelOfEdu">Level of Education</label>
+                  <label htmlFor="levelOfedu">Level of Education</label>
                   <select
-                    id="levelOfEdu"
-                    name="LevelofEdu"
+                    id="levelOfedu"
+                    name="levelofedu"
                     required
                     onChange={handleInputChange}
                   >

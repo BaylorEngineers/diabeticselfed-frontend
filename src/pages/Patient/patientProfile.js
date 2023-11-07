@@ -1,135 +1,140 @@
-import React, { useState } from 'react';
-import Sidebar from "../../components/Sidebar/Sidebar";
+import React, { useState, useEffect } from 'react';
 import Header from "../../components/Header/Header";
-import Button from "../../components/Button/Button";
+import CustomModal from '../SurveyModal';
 import "./css/patientProfile.css";
 
-const PatientProfile = ({ name, onChangeName, onSave, onChangePassword }) => {
-const [formData, setFormData] = useState({
+const PatientProfile = () => {
+  const [formData, setFormData] = useState({
     name: '',
     dob: '',
-    age: '',
     education: '',
-    profileType: '',
   });
+  const [question, setQuestion] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [firstLoginOfTheDay, setFirstLoginOfTheDay] = useState(false);
+  
+  const jwtToken = localStorage.getItem('accessToken');
 
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGluaWNpYW5AbWFpbC5jb20iLCJpYXQiOjE2OTg4NjY3MjMsImV4cCI6MTY5ODk1MzEyM30.9HWe9R9mPbOwIlSPgK6sUi_854m88dBK_sEnt4UJXIE"
+  useEffect(() => {
+    const fetchSurvey = async () => {
+      setLoading(true);
+      try {
+        const patientId = localStorage.getItem('patientId'); // Assuming you need to use patientId
+        const response = await fetch(`http://localhost:8080/api/v1/question/get/1`, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch data. Please try again later.");
+        }
+
+        const data = await response.json();
+        setQuestion(data.description);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSurvey();
+  }, [jwtToken]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = async (e)  => {
-//    e.preventDefault();
-    // You can perform validation here before submitting the data
-
-    // Assuming you want to log the form data for demonstration purposes
-    console.log('Form Data:', formData);
-
-    // You can also send the data to an API or perform other actions here
-
-try {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
       const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwtToken}`
+          Authorization: `Bearer ${jwtToken}`,
         },
-        body: JSON.stringify({
-          name: formData.name,
-          dob: formData.dob,
-          age: formData.age,
-          education: formData.education,
-          profileType: formData.profileType,
-        }),
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        // Handle a successful response from your backend here
-        console.log('Data sent to the backend successfully.');
-      } else {
-        // Handle errors from your backend here
-        console.error('Error sending data to the backend.');
+      if (!response.ok) {
+        throw new Error('Error sending data to the backend.');
       }
-    } catch (error) {
-      console.error('An error occurred while sending data:', error);
-    }
 
-//    setIsEditMode(false); // Exit edit mode after submission
+      console.log('Data sent to the backend successfully.');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleModalSubmit = (modalInput) => {
+    console.log(modalInput);
   };
 
   return (
-  <>
-  <Header/>
-    <Sidebar sidebarType="sidebarAdmin" />
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <h1>Patient Profile</h1>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="name">Name:</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="dob">Date of Birth:</label>
-                  <input
-                    type="date"
-                    id="dob"
-                    name="dob"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="age">Age:</label>
-                  <input
-                    type="number"
-                    id="age"
-                    name="age"
-                    value={formData.age}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="education">Education:</label>
-                  <input
-                    type="text"
-                    id="education"
-                    name="education"
-                    value={formData.education}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="profileType">Profile Type:</label>
-                  <select
-                    id="profileType"
-                    name="profileType"
-                    value={formData.profileType}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Profile Type</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
-                    {/* Add more options as needed */}
-                  </select>
-                </div>
-                <button label = "Submit" type="submit">Submit</button>
-              </form>
-            </div>
-        </>
+    <>
+      <Header role="PATIENT" />
+      <div className="patient-profile-container">
+        {firstLoginOfTheDay && (
+          <CustomModal
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            onSubmit={handleModalSubmit}
+            question={question}
+          />
+        )}
+
+        <h1>My Profile</h1>
+        {error && <p className="error-message">{error}</p>}
+        <form className="patient-profile-form" onSubmit={handleSubmit}>
+          {/* Form fields */}
+          <div>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="dob">Date of Birth:</label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="education">Education:</label>
+            <input
+              type="text"
+              id="education"
+              name="education"
+              value={formData.education}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button className="submit-button" type="submit">Submit</button>
+        </form>
+      </div>
+      {loading && <p>Loading...</p>}
+    </>
   );
 };
 

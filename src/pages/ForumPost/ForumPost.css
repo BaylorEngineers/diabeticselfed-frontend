@@ -1,0 +1,215 @@
+/* ForumPost.css */
+
+.forum-post{
+  display: flex;
+  flex-direction: column;
+}
+.forum-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f7f7; /* Light grey background */
+}
+  .Header {
+   
+    flex: 1; 
+  }
+
+
+   .sidebar {
+    width: 250px;
+    background-color: #2C3E50;
+    color: white;
+    min-height: 100vh; /* Full height of the viewport */
+    padding: 20px 0;
+    box-sizing: border-box;
+  }
+  
+  .sidebar-logo {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #4B6080;
+  }
+  
+  .sidebar-nav {
+    margin-top: 20px;
+  }
+  
+  .nav-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-item {
+    display: block;
+    padding: 10px 20px;
+  }
+  
+  .nav-item .active-link,
+  .nav-item:hover {
+    background-color: #34495E;
+    border-left: 4px solid #18BC9C;
+    color: #18BC9C;
+    text-decoration: none;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #18BC9C;
+  }
+  
+  /* ForumPost.css */
+  .forum-page-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .forum-main-content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  /* Add additional styles for your Dropdown component if needed */
+  .forum-content, .post-entry, .create-post-link {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .posts-container {
+
+    width: 60%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Smooth box-shadow */
+    border-radius: 12px; /* Rounded corners for the container */
+    overflow: hidden; /* Ensures the child elements conform to the container's rounded corners */
+  }
+
+.post-entry {
+  border-bottom: 1px solid #e1e1e1;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s; /* Smoother transition effects */
+}
+.post-entry:last-child {
+  border-bottom: none; /* Removes the border for the last post-entry */
+}
+
+.post-entry:hover {
+  transform: translateY(-5px); /* Gentle lift effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12); /* Deeper shadow on hover */
+}
+
+.post-title {
+  color: #2C3E50; /* Dark blue color for a bit more contrast */
+  font-weight: 700; /* Bolder font weight for the title */
+}
+
+.post-details {
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.post-owner {
+  color: #607D8B; /* Soft blue color */
+  font-weight: 500; /* Medium font weight for the owner name */
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.create-post-link {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #5C6BC0; /* Example primary color */
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.post-entry-link {
+  text-decoration: none; /* Ensures no underline on links */
+  color: inherit; /* Inherits the color from post-entry for consistency */
+}
+
+.create-post-link:hover {
+  background-color: #1E88E5; /* A slightly darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow for interactive effect */
+}
+.post-entry-link:hover .post-entry {
+  background-color: #f0f0f0; /* Slight grey background on hover for the entry */
+}
+/* You can add media queries to make the design responsive */
+@media (max-width: 768px) {
+  .forum-post-container {
+    padding: 1rem;
+  }
+
+  .posts-container {
+    width: 100%;
+  }
+
+  .create-post-link, .delete-post-button {
+    padding: 12px 20px; /* Larger touch targets for mobile */
+    font-size: 1rem; /* Larger font size for readability */
+  }
+}
+
+
+
+.delete-post-button {
+  padding: 5px 10px;
+  background-color: #ff4d4f; /* Red color for delete button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-post-button:hover {
+  background-color: #ff7875; /* Lighten red color on hover */
+}
+
+
+@media (max-width: 768px) {
+  .delete-post-button {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
+}
+
+.error-message {
+  color: #721c24; /* darker shade of red for better readability */
+  background-color: #f8d7da; /* light pink background */
+  border-color: #f5c6cb; /* light red border */
+  padding: .75rem 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+  transition: transform .3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.error-message:hover {
+  transform: translateY(-3px); /* Slight raise effect on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* deeper shadow for hover effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .error-message {
+    padding: .5rem .75rem;
+    font-size: .875rem; /* smaller font size on smaller screens */
+  }
+}

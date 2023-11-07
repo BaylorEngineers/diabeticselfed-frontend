@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Login() {
     const [errorMessages, error_login] = useState('');
@@ -11,13 +11,17 @@ function Login() {
     const [password, setPassword] = useState();
     const [role, setRole] = useState();
     const [userId, setUserID] = useState();
+    const [patientID, setPatientID] = useState();
     const [accessToken, setAccessToken] = useState();
+    const[isFirstLogInToday, setIsFirstLogInToday] = useState();
+    const navigate = useNavigate();
+    const { state } = useLocation();
+    
   
     const errors = {
       username: "This user Id does not exit or invalid password",
      
     };
-    const [err, setErr] = useState('');
 
     useEffect(() => {
       console.log("IN")
@@ -25,8 +29,6 @@ function Login() {
 
     const test = async (event) => {
           event.preventDefault();
-          console.log(username);
-          console.log(password);
 
           try {
             const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
@@ -44,25 +46,42 @@ function Login() {
             if (!response.ok) {
               const errorMessage = await response.text();
               throw new Error(` ${response.status}`);
+            } else {
+              if(true){
+                setIsFirstLogInToday(true);
+              }
+              
+              if(isFirstLogInToday) {
+                navigate("/survey");
+              }
+              
             }
 
             const responseData = await response.json();
-            console.log('Response Data:', responseData);
             setRole(responseData.role);
 
             const userID = responseData.userID;
-            console.log('UserID:', userID);
             setUserID(userID);
             localStorage.setItem('userId', userID);
 
+            const patientID = responseData.patientID;
+
+            setPatientID(patientID);
+            localStorage.setItem('patientId', patientID);
+
+            setUserID(patientID);
+            localStorage.setItem('patientID', patientID);
+
             const access_token = responseData.access_token;
-            console.log('access_token:', access_token);
             setAccessToken(access_token);
             localStorage.setItem('accessToken', access_token);
 
+            const role = responseData.role;
+            setRole('role', role);
+            localStorage.setItem('role', role);
+
             login_set_true(true);
           } catch (error) {
-            console.error('Error:', error);
             error_login({ name: 'ID', message: error.message + ": Wrong email or password" });
           }
         };
@@ -95,16 +114,10 @@ function Login() {
           <div className="button-container">
             <input type="submit" value="Login"/>
           </div>
-          <div className="forgotandreg">
-          <div className="regis">
-                <a href={"/registration"}>
-                  <l className="regisText"  n/>Sign up
-                </a>
-                </div>
-
-                <div className="forgotP">
+          <div className="forgotandreg" style={{ display: 'flex', justifyContent: 'center'}}>
+                <div className="forgotP" >
                 <a href={"/forgotpassword"}>
-                  <l className="regisText"  n/>Forget Password?
+                  <l className="regisText"/>Forget Password?
                 </a>
                 </div>
             </div>
@@ -122,6 +135,17 @@ function Login() {
         backgroundRepeat: 'no-repeat',
       }}>
       <div className="app">
+
+
+      {/* <button onClick={openModal}>Show Modal</button>
+
+      {firstLoginOfTheDay && <CustomModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        onSubmit={handleModalSubmit}
+      />} */}
+
+
         <div className="login_frame">
           <div className="title">Log In</div>
           <Link to="/">
@@ -135,7 +159,7 @@ function Login() {
             </Link>
           {(() => {
                         if (islogin) {
-//                            window.location.href = "/"+role;
+                            window.location.href = "/";
                         } else {
           return (
             renderForm
