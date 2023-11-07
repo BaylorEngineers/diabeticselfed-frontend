@@ -1,4 +1,5 @@
 import "./App.css";
+import ProtectedRoute from './ProtectedRoute'; 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./home";
 import Login from "./components/login";
@@ -53,30 +54,26 @@ function App() {
         <Route path="/registration" element={<SignUp />}></Route>
         <Route path="/forgotpassword" element={<Forget />}></Route>
         <Route path="/modules" element={<Modules />}></Route>
-        <Route path="/adminprofile" element={<AdminProfile />}></Route>
-        <Route path="/adminaccessrecords" element={<AdminAccessRecords />}></Route>
-        <Route path="/accountmanager" element={<AccountManager />}></Route>
-        <Route path="/clinicianprofile" element={<ClinicianProfile />}></Route>
-        <Route path="/patientlist" element={<PatientList />}></Route>
-        <Route path="/posts" element={<ForumPost />}></Route>
-        <Route path="/create-post"  element={<CreatePost />}></Route>
-        <Route path="/posts/:postId" element={<PostDetail />}></Route>
-        <Route path="/myposts" element={<PatientPosts />}></Route>
-        <Route path="/patientprofile" element={<PatientProfile />}></Route>
-        <Route path="/message" element={<Message />}></Route>
-        <Route path="/weighttracker" element={<WeightTracker />}></Route>
-        {/* <Route path="/content-area/:contentAreaId" element={<ModuleList />} /> */}
-        <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
         <Route path="/module/:moduleId" element={<ModuleDetailsWrapper />} />
         <Route path="/view-pdf/:pdfId" element={<PDFViewer />} />
-        <Route path="/survey" element={<Survey />} />
-        <Route path="/signUp/weight-height" element={<SignupWeightAndHeight />} />
-        <Route path="/signUp/goal" element={<SignupProgramGoal />} />
+        <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
         <Route path="/logout" element={<Home />}></Route>
 
-
-
-
+        <Route path="/accountmanager" element={<ProtectedRoute component={AccountManager} />} />
+        <Route path="/adminprofile" element={<ProtectedRoute component={AdminProfile} />} />
+        <Route path="/adminaccessrecords" element={<ProtectedRoute component={AdminAccessRecords} />} />
+        <Route path="/clinicianprofile" element={<ProtectedRoute component={ClinicianProfile} />} />
+        <Route path="/patientlist" element={<ProtectedRoute component={PatientList} />} />
+        <Route path="/posts" element={<ProtectedRoute component={ForumPost} />} />
+        <Route path="/create-post" element={<ProtectedRoute component={CreatePost} />} />
+        <Route path="/posts/:postId" element={<ProtectedRoute component={PostDetail} />} />
+        <Route path="/myposts" element={<ProtectedRoute component={PatientPosts} />} />
+        <Route path="/patientprofile" element={<ProtectedRoute component={PatientProfile} />} />
+        <Route path="/message" element={<ProtectedRoute component={Message} />} />
+        <Route path="/weighttracker" element={<ProtectedRoute component={WeightTracker} />} />
+        <Route path="/survey" element={<ProtectedRoute component={Survey} />} />
+        <Route path="/signUp/weight-height" element={<ProtectedRoute component={SignupWeightAndHeight} />} />
+        <Route path="/signUp/goal" element={<ProtectedRoute component={SignupProgramGoal} />} />
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>
