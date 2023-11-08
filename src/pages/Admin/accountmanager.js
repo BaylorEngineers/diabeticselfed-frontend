@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
+import "./accountmanager.css"
 
 const AccountManager = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
 
 
   const handleOptionSelect = (option) => {
@@ -38,6 +41,10 @@ const AccountManager = () => {
     })
     .then(data => {
       console.log('Success:', data);
+      setSuccessMessage(`Invitation sent to ${email}`);
+      setEmail(''); 
+      setSelectedOption(''); 
+      setTimeout(() => setSuccessMessage(''), 5000);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -52,6 +59,11 @@ const AccountManager = () => {
   return (
     <>
       <Header role = "ADMIN" />
+      {successMessage && (
+          <div className="success-message">
+            {successMessage}
+          </div>
+        )}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <form style={{ marginTop: '20px', textAlign: 'center' }}>
           <label>
