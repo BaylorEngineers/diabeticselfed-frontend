@@ -71,8 +71,11 @@ function Dropdown(props) {
   return (
     <div className="menu-container" ref={DropdownRef}>
       <div className="menu-trigger" onClick={() => setOpen(!open)} title="Account Settings">
-        <span className="user-greeting">Hi, {userData.firstName}!</span>
-        <span className="user-role">{userData.role}</span> 
+      {accessToken && (
+          <span className="user-greeting">Hi, {userData.firstName}!</span>
+        )}
+        {/* Render user role if accessToken is not empty */}
+        {accessToken && <span className="user-role">{userData.role}</span>}
         <mdIcon.MdAccountCircle className="account-icon" />
         <mdIcon.MdArrowDropDown className="dropdown-icon"/>
       </div>
