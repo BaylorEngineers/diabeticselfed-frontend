@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Dropdown.css';
+import { useNavigate } from 'react-router-dom';
 import '../../App.css';
 import { Link } from 'react-router-dom';
 import * as mdIcon from "react-icons/md";
@@ -9,7 +10,11 @@ import * as AiIcon from "react-icons/ai";
 function Dropdown(props) {
   const [open, setOpen] = useState(false);
   const DropdownRef = useRef();
-
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear(); // This will clear the entire localStorage
+    navigate('/'); // Redirect to the home page
+  };
   useEffect(() => {
     const handler = (e) => {
       if (!DropdownRef.current.contains(e.target)) {
