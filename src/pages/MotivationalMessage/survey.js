@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import CustomModal from '../SurveyModal';
+import "./stylesurvey.css";
 
 const Survey = () => {
     const [isModalOpen, setIsModalOpen] = useState(true);

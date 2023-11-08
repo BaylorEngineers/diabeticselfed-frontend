@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../pages/css/modal.css'
 import Survey from './MotivationalMessage/survey';
 
-Modal.setAppElement('#root'); 
+// Modal.setAppElement('#root'); 
 
 function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
   const modalTitle = 'Healthy Diet Survey Question';
@@ -90,9 +90,9 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Survey Modal"
-      className="modal-container"
+      className="new-modal-container"
     >
-      <h4 className="title">{ modalTitle }</h4>
+      <h4 className="new-title">{ modalTitle }</h4>
 
       {
         viewMotivationalMessage &&
@@ -100,11 +100,11 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
           
         )
       }
-      <div className="question">
+      <div className="new-question">
         <text>{ question }</text>
       </div>
       
-      <div className="radio-container">
+      <div className="new-radio-container">
         <label>
           <input
             type="radio"
@@ -124,9 +124,9 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
           No
         </label>
       </div>
-      <div className="button-container">
-      <button className="submit-button" onClick={handleSubmit}>Submit</button>
-      <button className="close-button" onClick={onRequestClose}>Close</button>
+      <div className="new-button-container">
+      <button className="new-submit-button" onClick={handleSubmit}>Submit</button>
+      <button className="new-close-button" onClick={onRequestClose}>Close</button>
       </div>
       
     </Modal>

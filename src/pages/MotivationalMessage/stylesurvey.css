@@ -1,0 +1,87 @@
+.new-modal-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px; /* Set the height to 500px */
+    width: 500px; /* Set the width to 400px */
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    margin-left: 40%;
+    margin-top: 10%;
+  }
+  
+  .new-question {
+    padding: 30px;
+    font-size: 1.2rem;
+    text-align: left;
+    font-weight: bold;
+    
+  }
+  
+  /* Style the label for the question */
+  /* .label-question {
+    font-size: 14px;
+    margin-bottom: 10px;
+  } */
+  
+  /* Style the radio container */
+  .new-radio-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  /* Style the radio input and labels */
+  .new-radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 1rem;
+  
+  }
+  
+  .new-title {
+    color: green;
+  }
+  
+  .new-label {
+    padding: 20px;
+  }
+  
+  /* Style the radio input */
+  .new-radio-input {
+    margin-right: 5px;
+  }
+  
+  /* Style the button container at the bottom */
+  .new-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto;
+  }
+  
+  /* Style the "Submit" button */
+  .new-submit-button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  /* Style the "Close" button */
+  .new-close-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
