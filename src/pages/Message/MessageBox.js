@@ -108,7 +108,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
                             <strong>{ msg.senderName}</strong>
                             <span>{new Date(msg.time).toLocaleString()}</span>
                         </div>
-                        <p>{msg.content}</p>
+                        <p1>{msg.content}</p1>
                     </div>
                 ))}
             </div>
