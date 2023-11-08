@@ -170,10 +170,33 @@ h3 span{
   transition: background-color var(--speed);
 }
 
+
 .dropdownItem:hover {
   background-color: #f2f2f2; /* Light hover effect for items */
 }
 
+.dropdownItem .icon {
+  min-width: 24px; /* Ensures icon alignment */
+  color: #314355; /* Icon color */
+}
+.dropdown-link,
+.dropdown-action {
+  color: #333;
+  text-decoration: none;
+  padding-left: 10px;
+  flex-grow: 1; /* Ensure the text fills the available space */
+  text-align: left; /* Align text to the left */
+}
+
+.dropdown-action {
+  background: none; /* Remove button background */
+  border: none; /* Remove button border */
+  cursor: pointer; /* Show pointer cursor for buttons */
+  padding: 0; /* Remove button padding */
+}
+.dropdown-action:hover {
+  text-decoration: underline; /* Indicate clickable action */
+}
 .dropdownItem a {
   color: #333;
   text-decoration: none;

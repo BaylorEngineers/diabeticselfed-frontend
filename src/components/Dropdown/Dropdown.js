@@ -11,9 +11,12 @@ function Dropdown(props) {
   const [open, setOpen] = useState(false);
   const DropdownRef = useRef();
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.clear(); // This will clear the entire localStorage
-    navigate('/'); // Redirect to the home page
+  const handleLogout = (e) => {
+    e.preventDefault(); // Prevent default link behavior
+    e.stopPropagation(); // Stop click event from propagating to other elements
+    console.log('dsa');
+    localStorage.clear();
+    navigate('/');
   };
   useEffect(() => {
     const handler = (e) => {
@@ -69,7 +72,7 @@ function Dropdown(props) {
     <div className="menu-container" ref={DropdownRef}>
       <div className="menu-trigger" onClick={() => setOpen(!open)} title="Account Settings">
         <span className="user-greeting">Hi, {userData.firstName}!</span>
-        <span className="user-role">{userData.role}</span> {/* Add this line */}
+        <span className="user-role">{userData.role}</span> 
         <mdIcon.MdAccountCircle className="account-icon" />
         <mdIcon.MdArrowDropDown className="dropdown-icon"/>
       </div>
@@ -78,7 +81,7 @@ function Dropdown(props) {
         <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
           <ul>
             <DropdownItem img={AiIcon.AiOutlineUser} text={"My Profile"} link={profileLink} />
-            <DropdownItem img={BiIcon.BiLogOut} text={"Log Out"} link={"/logout"} />
+            <DropdownItem img={BiIcon.BiLogOut} text={"Log Out"} onClick={(e) => handleLogout(e)} />
           </ul>
         </div>
       ) : (
@@ -92,11 +95,15 @@ function Dropdown(props) {
   );
 }
 
-function DropdownItem({ img: Icon, text, link }) {
+function DropdownItem({ img: Icon, text, link, onClick }) {
   return (
     <li className="dropdownItem">
-      <Icon />
-      <Link to={link}>{text}</Link>
+      <Icon className="icon" />
+      {link ? (
+        <Link to={link} className="dropdown-link">{text}</Link>
+      ) : (
+        <button onClick={onClick} className="dropdown-action">{text}</button>
+      )}
     </li>
   );
 }
