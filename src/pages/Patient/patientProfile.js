@@ -219,7 +219,6 @@ const PatientProfile = () => {
                 <option value="OTHER">Other</option>
               </select>
             </div>
-            <p>education: {formData.education}</p>
 
           <button className="submit-button" type="submit" disabled={!formChanged}>Submit</button>
         </form>
