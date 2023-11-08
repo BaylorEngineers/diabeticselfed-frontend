@@ -4,8 +4,11 @@ import MessageBox from './MessageBox';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import ClinicianListModal from './ClinicianListModal';
+import PatientListModal from './PatientListModal';
+
 
 const MessageList = () => {
+    const role = localStorage.getItem('role');
     const [messages, setMessages] = useState([]);
     const [selectedConversation, setSelectedConversation] = useState(null);
     const [stompClient, setStompClient] = useState(null);
@@ -81,15 +84,26 @@ const MessageList = () => {
                 />
             )}
 
-            <button className="show-clinicians" onClick={() => setClinicianListVisible(true)}>Send a Message</button>
+            <button className="show-clinicians" onClick={() => setClinicianListVisible(true)}>
+                {role === "CLINICIAN" ? "Send a Message to Patient" : "Send a Message to Clinician"}
+            </button>
 
-            {isClinicianListVisible && (
-            <ClinicianListModal
-                onClose={() => setClinicianListVisible(false)}
-                jwtToken={jwtToken}
-                userId={userId}
-                onMessageSent={handleSendMessageToClinician}
-            />
+            {isClinicianListVisible && role === "PATIENT" && (
+                <ClinicianListModal
+                    onClose={() => setClinicianListVisible(false)}
+                    jwtToken={jwtToken}
+                    userId={userId}
+                    onMessageSent={handleSendMessageToClinician}
+                />
+            )}
+
+            {isClinicianListVisible && role === "CLINICIAN" && (
+                <PatientListModal
+                    onClose={() => setClinicianListVisible(false)}
+                    jwtToken={jwtToken}
+                    userId={userId}
+                    onMessageSent={handleSendMessageToClinician}
+                />
             )}
         </div>
     );
