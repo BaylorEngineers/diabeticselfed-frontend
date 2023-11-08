@@ -1,0 +1,27 @@
+.success-message {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    animation: slideDown 0.5s ease-out forwards;
+  }
+  
+  @keyframes slideDown {
+    from {
+      top: -50px;
+    }
+    to {
+      top: 0;
+    }
+  }
+  
