@@ -5,6 +5,8 @@ import { jwtDecode } from 'jwt-decode';
 
 
 const AdminProfile = ({onSave, onChangePassword }) => {
+  const role = localStorage.getItem('role');
+
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -113,7 +115,7 @@ const AdminProfile = ({onSave, onChangePassword }) => {
 
   return (
       <>
-        <Header role="ADMIN" />
+        <Header role={role} />
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <div>
             <label>
