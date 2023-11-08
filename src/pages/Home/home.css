@@ -1,0 +1,42 @@
+.landingPage {
+  text-align: center;
+  padding: 40px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.main-heading {
+  font-size: 3em;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-family: 'Pacifico', cursive;
+}
+
+.sub-heading {
+  font-size: 1.8em;
+  color: #2c3e30;
+  margin-bottom: 20px;
+  font-family: 'Pacifico', cursive;
+}
+
+p {
+  font-size: 1.5em;
+  color: #666;
+  margin-bottom: 40px;
+  font-family: 'Pacifico',
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
