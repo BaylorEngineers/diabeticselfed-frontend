@@ -49,13 +49,13 @@ export const useSidebarData = (role) => {
             icon: <AiIcons.AiOutlineUnorderedList />, 
             cName: "nav-sub-item"
           },
-          {
-            title: "Goals & Weight Tracker",
-            path: "/weighttracker",
-            icon: <GiIcons.GiWeightLiftingUp/>,
-            cName: "nav-sub-item"
-          }
         ];
+        baseData.push({
+          title: "Goals & Weight Tracker",
+          path: "/weighttracker",
+          icon: <GiIcons.GiWeightLiftingUp/>,
+          cName: "nav-sub-item"
+        })
       }
   
       baseData.push(forumData);
