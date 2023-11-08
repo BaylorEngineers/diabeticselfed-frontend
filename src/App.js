@@ -1,7 +1,7 @@
 import "./App.css";
 import ProtectedRoute from './ProtectedRoute'; 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Home from "./home";
+import Home from "./pages/Home/home";
 import Login from "./components/login";
 import SignUp from "./components/signup";
 import Forget from "./components/forget";
