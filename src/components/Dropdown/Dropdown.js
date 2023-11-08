@@ -23,8 +23,36 @@ function Dropdown(props) {
     };
   }, []);
 
+  const [userData, setUserData] = useState({ firstName: '', lastName: '', role: '' });
   const accessToken = localStorage.getItem('accessToken');
+
+  const userId = localStorage.getItem('userId');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (accessToken) {
+        try {
+          const response = await fetch(`http://localhost:8080/api/v1/users/get-user-data?id=${userId}`, {
+            headers: { 'Authorization': `Bearer ${accessToken}` },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setUserData(data);
+          } else {
+            console.error('Failed to fetch user data, HTTP status:', response.status);
+          }
+        } catch (error) {
+          console.error('Failed to fetch user data:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [accessToken, userId]);
+
   const role = localStorage.getItem('role');
+
+  
 
   const profileLink = role === 'PATIENT'
     ? '/patientprofile'
@@ -35,10 +63,11 @@ function Dropdown(props) {
   return (
     <div className="menu-container" ref={DropdownRef}>
       <div className="menu-trigger" onClick={() => setOpen(!open)} title="Account Settings">
+        <span className="user-greeting">Hi, {userData.firstName}!</span>
+        <span className="user-role">{userData.role}</span> {/* Add this line */}
         <mdIcon.MdAccountCircle className="account-icon" />
         <mdIcon.MdArrowDropDown className="dropdown-icon"/>
       </div>
-
 
       {accessToken ? (
         <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>

@@ -47,6 +47,12 @@
   background: var(--secondary-bg);
   transform: rotate(45deg)
 }
+.user-role {
+  color: #E0E0E0; /* Light color for contrast */
+  font-size: 0.85em; /* Smaller font size for the role */
+  margin-left: 5px; /* Space from the greeting */
+  font-weight: 400; /* Regular font weight for the role */
+}
 
 .dropdown-menu.active{
   opacity: 1;
@@ -102,6 +108,7 @@ h3 span{
   max-width: 100px;
   margin-left: 10px;
   transition: var(--speed);
+  white-space: nowrap;
 }
 
 .menu-container {
@@ -151,7 +158,11 @@ h3 span{
   /* border: 1px solid rgba(0,0,0,0.1);
   box-shadow: -1px -1px 2px rgba(0,0,0,0.1); */
 }
-
+.user-greeting {
+  color: #FFF;
+  margin-right: 8px; /* Space before the icon */
+  font-weight: 500; /* Semi-bold font for greeting */
+}
 .dropdownItem {
   display: flex;
   align-items: center;
@@ -171,6 +182,7 @@ h3 span{
 
 /* Additional styles for icons */
 .dropdownItem svg {
-  min-width: 24px; /* Ensures icons align nicely */
+  min-width: 24px;
+  fill: #314355;
 }
 
