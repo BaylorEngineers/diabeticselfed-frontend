@@ -62,7 +62,7 @@ const MessageList = () => {
             }
         };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [jwtToken]);
     const handleSendMessageToClinician = () => {
         fetchMessages(); // Refresh the message list
         setClinicianListVisible(false); // Close the modal

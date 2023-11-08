@@ -135,24 +135,24 @@ function Header({ role }) {
   const userId = localStorage.getItem('userId');
   const jwtToken = localStorage.getItem('accessToken');
 
-  useEffect(() => {
-    let subscription;
-    const socket = new SockJS('http://localhost:8080/ws');
-    const stompClient = Stomp.over(socket);
+  // useEffect(() => {
+  //   let subscription;
+  //   const socket = new SockJS('http://localhost:8080/ws');
+  //   const stompClient = Stomp.over(socket);
 
-    stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
-      subscription = stompClient.subscribe(`/topic/messages/${userId}`, (message) => {
-        setNewMessage(true);
-      });
-    });
+  //   stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
+  //     subscription = stompClient.subscribe(`/topic/messages/${userId}`, (message) => {
+  //       setNewMessage(true);
+  //     });
+  //   });
 
-    return () => {
-      if (subscription) {
-        subscription.unsubscribe();
-      }
-      stompClient.disconnect();
-    };
-  }, [userId, jwtToken]);
+  //   return () => {
+  //     if (subscription) {
+  //       subscription.unsubscribe();
+  //     }
+  //     stompClient.disconnect();
+  //   };
+  // }, [userId, jwtToken]);
 
   // Function to render links and submenus
   const renderLinks = (data) => {

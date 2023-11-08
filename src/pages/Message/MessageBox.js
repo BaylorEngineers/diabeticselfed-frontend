@@ -29,7 +29,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
         };
         
         fetchConversation();
-    }, [receiverId, token]);
+    }, [receiverId, token, newMessage]);
 
     useEffect(() => {
         // Setting up WebSocket connection
@@ -45,7 +45,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
                 console.log(newMsg);
                 console.log(userId);
                 console.log(newMsg.receiverId);
-                if(newMsg.receiverId === userId){
+                if (parseInt(newMsg.receiverId, 10) === parseInt(userId, 10)) {
                     console.log("Set");
                     setConversation(prevMessages => [...prevMessages, newMsg]);
                 }
@@ -63,7 +63,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
                 stomp.disconnect();
             }
         };
-    }, [userId, token]); 
+    }, [userId, token, conversation]); 
 
     const handleSendMessage = async () => {
         try {
