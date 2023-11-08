@@ -1,16 +1,16 @@
-// ClinicianListModal.js
 import React, { useState, useEffect } from 'react';
 
-const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
+const PatientListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
   const [clinicians, setClinicians] = useState([]);
   const [selectedClinician, setSelectedClinician] = useState(null);
   const [messageContent, setMessageContent] = useState('');
   const [errorMessage, setErrorMessage] = useState(''); // State to hold error messages
 
   useEffect(() => {
+    console.log("addd");
     const fetchClinicians = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/clinicians/getAll', {
+        const response = await fetch('http://localhost:8080/api/v1/clinicians/getAllPatient', {
           headers: { 'Authorization': `Bearer ${jwtToken}` },
         });
         if (!response.ok) {
@@ -58,13 +58,13 @@ const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
     <div className="modal">
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>Select a clinician to message</h2>
+        <h2>Select a patient to message</h2>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <ul className="clinician-list">
           {clinicians.map(clinician => (
             <li key={clinician.userId} className="clinician-item">
               <span className="clinician-name">{clinician.name}</span>
-              <button className="send-message-button" onClick={() => setSelectedClinician(clinician.clinicianId)}>Send Message</button>
+              <button className="send-message-button" onClick={() => setSelectedClinician(clinician.userId)}>Send Message</button>
             </li>
           ))}
         </ul>
@@ -83,4 +83,4 @@ const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
   );
 };
 
-export default ClinicianListModal;
+export default PatientListModal;
