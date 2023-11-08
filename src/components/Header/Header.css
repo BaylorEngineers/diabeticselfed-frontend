@@ -1,9 +1,8 @@
-/* Resets for good measure */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use your preferred font */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 /* Header styling */
@@ -12,15 +11,30 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(0, 66, 75, 0.596); 
-  box-shadow: 0 2px 10px rgba(2, 110, 69, 0.1)
+  background: linear-gradient(135deg, rgba(0, 66, 75, 0.596) 0%, rgba(0, 56, 65, 0.596) 100%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%; 
+  position: relative;
+  z-index: 10;
 }
 
 .header-content {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+
+.header-logo h1 {
+  font-size: 2em; 
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.header-logo h1:hover {
+  transform: scale(1.05);
 }
 
 /* Navigation Menu */
@@ -32,24 +46,27 @@
 }
 
 .nav-item {
-  position: relative; /* For absolute positioning of sub-menus */
+  position: relative; 
+  border-radius: 4px;
+  margin: 0 10px;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
-  padding: 0 1rem; /* Adjust the spacing around the links */
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  color: transparent; /* Make the text transparent initially */
+  color: #ffffff; 
+  background: rgba(255, 255, 255, 0.1); 
+  border-radius: 20px; 
   text-decoration: none;
-  transition: color 0.5s ease; /* Smooth transition for color change */
-  position: relative;
+  transition: all 0.3s ease;
 }
 
-.nav-link:hover .nav-text,
+/* .nav-link:hover .nav-text,
 .nav-link:focus .nav-text {
-  color: #333; /* Text color on hover or focus */
-}
+  color: #ffffff;
+} */
 
 /* Submenu */
 .nav-sub-menu {
@@ -57,15 +74,22 @@
   position: absolute;
   left: 0;
   top: 100%;
-  min-width: 200px; /* Set a minimum width for submenu */
+  min-width: 200px; 
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease-out;
 }
 
 .nav-item-with-submenu:hover .nav-sub-menu {
-  display: block; /* Show the submenu */
+  display: block; 
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
 }
 
 .nav-sub-item {
@@ -73,12 +97,36 @@
   padding: 10px 20px;
   color: #333;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  transform-origin: top;
 }
 
 .nav-sub-item:hover {
-  background-color: #f8f8f8; /* Light grey background on hover */
+  background-color: #e3e3e3;
+  transform: scale(1.0);
+  border-radius: 4px;
 }
+
+/* Add gradient and animation to sub-menu items */
+.nav-sub-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  margin: -2px; 
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-sub-item:hover::before {
+  opacity: 1;
+}
+
 
 /* Right-aligned items (e.g., login or user profile) */
 .header-right {
@@ -89,66 +137,68 @@
 /* Dropdown/User Menu styling */
 .user-dropdown {
   cursor: pointer;
-  padding: 0 1rem;
-  color: #333;
-  transition: color 0.5s ease;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1); 
+  border-radius: 20px; 
+  transition: all 0.3s ease;
 }
 
 .user-dropdown:hover {
-  color: #666; /* Darken the color slightly on hover */
+  color: #ffffff; 
+  background: rgba(255, 255, 255, 0.2); 
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 1rem 1rem; 
   }
-
+  
   .header-content {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .header-links {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+  .header-logo h1 {
+    font-size: 1.5em;
   }
 
+  /* Adjust the navigation menu for smaller screens */
+  .header-links,
   .nav-link {
-    padding: 0.5rem 0; /* Adjust padding for vertical layout */
+    width: 100%;
+    justify-content: center;
   }
 
   .nav-item {
-    width: 100%; /* Full width nav items */
+    width: 100%; 
   }
 
   .nav-sub-menu {
-    width: 100%; /* Submenu takes full width */
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: flex-end;
-    padding-top: 1rem;
+    position: static; 
+    width: 100%; 
   }
 }
 
-/* Hover effect for the main nav items */
 .nav-item:hover {
-  transform: translateY(-2px); /* Slight move up for tactile feedback */
+  transform: translateY(-2px); 
   transition: transform 0.3s ease;
 }
 
 /* Logo and User dropdown might need specific adjustments */
-.header-logo h1,
-.user-dropdown {
+.header-logo h1:hover,
+.user-dropdown:hover {
+  transform: scale(1.05); 
+}
+
+.nav-item:hover {
+  transform: translateY(-2px); 
   transition: transform 0.3s ease;
 }
 
+/* Logo and User dropdown might need specific adjustments */
 .header-logo h1:hover,
 .user-dropdown:hover {
-  transform: scale(1.05); /* Slight increase for interactivity */
+  transform: scale(1.05); 
 }
-

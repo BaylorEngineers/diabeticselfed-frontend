@@ -73,7 +73,7 @@ export const useSidebarData = (role) => {
       if (role === 'CLINICIAN') {
         baseData.push({
           title: 'Patient List',
-          path: '/patient-list',
+          path: '/patientlist',
           icon: <AiIcons.AiOutlineUser />,
           cName: 'nav-text',
         });

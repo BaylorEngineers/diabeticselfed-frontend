@@ -121,13 +121,14 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import * as AiIcons from "react-icons/ai";
 import { useSidebarData } from '../Sidebar/useSidebarData'; // Adjust the path as needed
 import './Header.css'; // Make sure this path is correct
 import Dropdown from '../Dropdown/Dropdown'; // Adjust the path as needed
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import { NavLink, Link } from 'react-router-dom'; // Import Link from react-router-dom
+
 
 function Header({ role }) {
   const { sidebarData, updateMessageIcon } = useSidebarData(role);
@@ -188,7 +189,9 @@ function Header({ role }) {
     <div className="header">
       <div className="header-content">
         <div className="header-logo">
-          <h1>DiabeticselfEd</h1>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h1>DiabeticselfEd</h1>
+          </Link>
         </div>
         <div className="header-links">
           {renderLinks(sidebarData)}
