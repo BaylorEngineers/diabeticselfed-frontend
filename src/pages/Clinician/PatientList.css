@@ -1,3 +1,43 @@
+/*.patient-list {*/
+/*    padding: 15px;*/
+/*}*/
+
+/*.patient {*/
+/*    border: 1px solid #ccc;*/
+/*    padding: 10px;*/
+/*    margin-bottom: 20px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.patient-name {*/
+/*    font-size: 18px;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.profile {*/
+/*    border: 1px solid #ccc;*/
+/*    padding: 20px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.visiting-time,*/
+/*.survey-answers,*/
+/*.patient-weight-bmi {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.survey-answers ul {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.survey-answers li {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+
 .patient-list {
     padding: 15px;
 }
@@ -24,15 +64,99 @@
 
 .visiting-time,
 .survey-answers,
-.patient-weight-bmi {
+.patient-weight-bmi,
+.bmi-weight-table {
     margin-bottom: 20px;
 }
 
-.survey-answers ul {
+.survey-answers ul,
+.bmi-weight-table table {
     list-style: none;
     padding: 0;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .survey-answers li {
     margin-bottom: 10px;
 }
+
+.bmi-weight-table th,
+.bmi-weight-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.bmi-weight-table th {
+    background-color: #f2f2f2;
+}
+
+.bmi-weight-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.bmi-weight-table tr:hover {
+    background-color: #eaeaea;
+}
+
+
+.modules-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.modules-table th,
+.modules-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.modules-table th {
+    background-color: #f2f2f2;
+}
+
+.modules-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.modules-table tr:hover {
+    background-color: #eaeaea;
+}
+
+.module-info {
+    margin-bottom: 20px;
+}
+
+.profile-spacing {
+    margin-bottom: 20px; /* Adjust the space as needed */
+}
+
+.clinician-notes-section {
+    margin-top: 20px;
+}
+
+.clinician-notes-section h4 {
+    margin-bottom: 10px;
+}
+
+.clinician-notes-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.clinician-notes-section li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.clinician-notes-section li span:first-child {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+

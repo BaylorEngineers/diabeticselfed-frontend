@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // make sure you have react-router-dom installed
 import Header from "../../components/Header/Header";
-import Post from "./Post"; // This is a component we will create to display each post
 import "./ForumPost.css";
 
 const ForumPost = () => {
@@ -73,7 +72,10 @@ const ForumPost = () => {
               </Link>
             ))}
           </div>
-          <Link to="/create-post" className="create-post-link">Create New Post</Link>
+          {role === "PATIENT" && (
+            <Link to="/create-post" className="create-post-link">Create New Post</Link>
+          )}
+
         </div>
       </div>
     </div>

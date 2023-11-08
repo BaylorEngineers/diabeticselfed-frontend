@@ -1,13 +1,11 @@
 // PatientPosts.js
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import "./ForumPost.css";
 
 const PatientPosts = () => {
   const [posts, setPosts] = useState([]);
-  const navigate = useNavigate();
   const [error, setError] = useState('');
   const role = localStorage.getItem('role');
   const patientId = 5;
@@ -50,7 +48,7 @@ useEffect(() => {
         },
       });
   
-      if (response.status!=204) {
+      if (response.status!==204) {
         throw new Error(`Error: ${response.status}`);
       }
   
