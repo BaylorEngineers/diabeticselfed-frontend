@@ -66,7 +66,7 @@ function Dropdown(props) {
     ? '/patientprofile'
     : role === 'ADMIN'
     ? '/adminprofile'
-    : '/clinicianprofile';
+    : '/adminprofile';
 
   return (
     <div className="menu-container" ref={DropdownRef}>
