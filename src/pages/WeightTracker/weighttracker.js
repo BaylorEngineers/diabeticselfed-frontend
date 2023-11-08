@@ -302,6 +302,7 @@ const updatedData = reports.map((report) => ({
                     type="number"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
+                    required
                   />
                 </label>
             <label>
