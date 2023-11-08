@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import * as AiIcons from "react-icons/ai";
+import * as GiIcons from "react-icons/gi";
 import { useContentAreas } from './useContentAreas'; 
 
 export const useSidebarData = (role) => {
@@ -48,6 +49,12 @@ export const useSidebarData = (role) => {
             icon: <AiIcons.AiOutlineUnorderedList />, 
             cName: "nav-sub-item"
           },
+          {
+            title: "Goals & Weight Tracker",
+            path: "/weighttracker",
+            icon: <GiIcons.GiWeightLiftingUp/>,
+            cName: "nav-sub-item"
+          }
         ];
       }
   
