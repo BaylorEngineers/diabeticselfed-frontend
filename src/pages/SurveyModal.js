@@ -18,6 +18,7 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
   const [viewMotivationalMessage, setViewMotivationalMessage] = useState(false);
   const [message_content, setMessage_content] = useState('');
   const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState('');
 
 
   const patientId = localStorage.getItem('patientId');
@@ -51,6 +52,8 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
       });
 
       if (response.ok) {
+        setSuccessMessage("Successfully submitted!");
+        setTimeout(() => setSuccessMessage(''), 5000);
         console.log(response);
       } else {
         setErrorMessage('Survey not saved.');
@@ -78,20 +81,31 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
             console.log("Set motivational message true: " + message_content);
             navigate("/survey");
             setViewMotivationalMessage(true);
+          } else {
+            // onRequestClose();
           }
 
     setSubmitted(true) ;
+
     // onRequestClose();
   }
 
 
   return (
-    <Modal
+    <div>
+      {successMessage && (
+          <div className="success-message">
+            {successMessage}
+          </div>
+        )}
+      <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Survey Modal"
       className="new-modal-container"
     >
+      
+      
       <h4 className="new-title">{ modalTitle }</h4>
 
       {
@@ -125,12 +139,27 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
         </label>
       </div>
       <div className="new-button-container">
-      <button className="new-submit-button" onClick={handleSubmit}>Submit</button>
+      <button className="new-submit-button disabled={disable}" 
+              disabled={disable} 
+              onClick={handleSubmit}
+              style={disable ? 
+              styles.disabledButton : styles.enabledButton}
+              >Submit</button>
       <button className="new-close-button" onClick={onRequestClose}>Close</button>
       </div>
       
     </Modal>
+    </div>
+    
   );
 }
 
 export default CustomModal;
+
+const styles = { 
+  disabledButton: { 
+      backgroundColor: 'gray', 
+      color: 'white', 
+      cursor: 'not-allowed'
+  }
+};
