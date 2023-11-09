@@ -4,10 +4,11 @@ import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import { Link, useLocation } from 'react-router-dom';
 
 function SignUp() {
+  
     const [formData, setFormData] = useState({
       email: '',
       password: '',
-      // repassword: '',
+      repassword: '',
       firstname: '',
       lastname: '',
       dob: '',
@@ -26,7 +27,17 @@ function SignUp() {
       event.preventDefault();
       console.log(formData);
       console.log(token);
+      const passwordConstraints = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordConstraints.test(formData.password)) {
+        setErrorMessage("Password must be at least 8 characters long and include \n at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        return; // Stop the form submission
+      }
+      else if (formData.password !== formData.repassword) {
+        setErrorMessage("Passwords do not match.");
+        return; // Stop the form submission
+      }else{
       try {
+        setErrorMessage("");
         const response = await fetch('http://localhost:8080/api/v1/auth/register', {
           method: 'POST',
           body: JSON.stringify({ ...formData, token }),
@@ -44,7 +55,7 @@ function SignUp() {
         }
       } catch (error) {
         setErrorMessage("Network error: Could not contact server");
-      }
+      }}
     };
 
     return (
@@ -91,7 +102,7 @@ function SignUp() {
                   />
                 </div>
 
-                {/* <div className="input-container">
+                <div className="input-container">
                   <label htmlFor="repassword">Re-enter Password </label>
                   <input
                     type="password"
@@ -100,7 +111,7 @@ function SignUp() {
                     required
                     onChange={handleInputChange}
                   />
-                </div> */}
+                </div>
 
                 <div className="input-container">
                   <label htmlFor="firstname">First Name </label>
@@ -123,17 +134,6 @@ function SignUp() {
                     onChange={handleInputChange}
                   />
                 </div>
-
-                {/* <div className="input-container">
-                  <label htmlFor="lastname">Token </label>
-                  <input
-                    type="text"
-                    id="token"
-                    name="token"
-                    required
-                    onChange={handleInputChange}
-                  />
-                </div> */}
 
                 <div className="input-container">
                   <label htmlFor="dob">Date of Birth</label>
