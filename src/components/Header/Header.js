@@ -190,7 +190,7 @@ function Header({ role }) {
       <div className="header-content">
         <div className="header-logo">
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <h1>DiabeticselfEd</h1>
+            <h1>DiabeticSelfEd</h1>
           </Link>
         </div>
         <div className="header-links">

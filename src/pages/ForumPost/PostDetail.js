@@ -45,8 +45,9 @@ const CommentForm = ({ postId, onCommentAdded }) => {
   };
 
   const Comment = ({ comment, onCommentDeleted, onCommentAdded  }) => {
+    console.log(comment);
     const token =  localStorage.getItem('accessToken');
-    const userId = 4; //JSON.parse(localStorage.getItem('user')).id; // Get the user ID from local storage
+    const userId = localStorage.getItem('userId');//4; //JSON.parse(localStorage.getItem('user')).id; // Get the user ID from local storage
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [replyContent, setReplyContent] = useState('');
     const handleDelete = async () => {
@@ -115,7 +116,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
                 <button onClick={toggleReplyForm} className="reply-button">
                     Reply
                 </button>
-                {userId === comment.userId && (
+                {parseInt(userId, 10) === comment.userId && (
                     <button onClick={handleDelete} className="delete-comment">
                         Delete
                     </button>
