@@ -30,7 +30,7 @@ function SignUp() {
       const passwordConstraints = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordConstraints.test(formData.password)) {
         setErrorMessage("Password must be at least 8 characters long and include \n at least one uppercase letter, one lowercase letter, one number, and one special character.");
-        return; // Stop the form submission
+              return; // Stop the form submission
       }
       else if (formData.password !== formData.repassword) {
         setErrorMessage("Passwords do not match.");
@@ -162,8 +162,16 @@ function SignUp() {
                   </select>
                 </div>
 
-                {errorMessage && <div className="error">{errorMessage}</div>}
-
+                {errorMessage && (
+                  <div className="error">
+                    {errorMessage.split("\n").map((line, index) => (
+                      <React.Fragment key={index}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
                 <div className="button-container">
                   <input type="submit" value="Sign Up" />
                 </div>
