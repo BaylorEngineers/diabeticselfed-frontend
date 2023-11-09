@@ -17,6 +17,17 @@ function SignUp() {
     const [errorMessage, setErrorMessage] = useState('');
     const location = useLocation();
 
+    const calculateAge = (dob) => {
+      const birthday = new Date(dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthday.getFullYear();
+      const m = today.getMonth() - birthday.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+          age--;
+      }
+      return age;
+  };
+
     const handleInputChange = (event) => {
       setFormData({ ...formData, [event.target.name]: event.target.value });
     };
@@ -28,13 +39,18 @@ function SignUp() {
       console.log(formData);
       console.log(token);
       const passwordConstraints = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-      if (!passwordConstraints.test(formData.password)) {
+      const age = calculateAge(formData.dob);
+      if (age < 18) {
+          setErrorMessage("You must be at least 18 years old to register.");
+          return;
+      }
+      else if (!passwordConstraints.test(formData.password)) {
         setErrorMessage("Password must be at least 8 characters long and include \n at least one uppercase letter, one lowercase letter, one number, and one special character.");
-              return; // Stop the form submission
+              return; 
       }
       else if (formData.password !== formData.repassword) {
         setErrorMessage("Passwords do not match.");
-        return; // Stop the form submission
+        return; 
       }else{
       try {
         setErrorMessage("");
