@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "../../components/Header/Header";
-import familyImage1 from '../../images/1.webp';
+import familyImage1 from '../../images/Asian_Couple_1.png';
 import bg from '../../images/bg.jpeg';
 import careImage from '../../images/care.jpeg';
 import './home.css';
@@ -18,12 +18,12 @@ const home = () => {
           <p>Your journey to a healthier lifestyle begins here!</p>
           <div className="image-container">
                     <img
-                      src={familyImage1} // Update with the correct path
+                      src={familyImage1}
                       alt="Healthy Lifestyle 1"
                     />
                     <p>Explore our features and start taking care of yourself today.</p>
                     <img
-                      src={careImage} // Update with the correct path
+                      src={careImage}
                       alt="Healthy Lifestyle 2"
                     />
                   </div>
