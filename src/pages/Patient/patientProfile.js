@@ -22,6 +22,7 @@ const PatientProfile = () => {
   const [age, setAge] = useState('');
   const [levelOfEd, setLevelOfEd] = useState('');
   const [formChanged, setFormChanged] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const accessToken = String(localStorage.getItem('accessToken'));
   console.log(accessToken);
@@ -153,6 +154,8 @@ const PatientProfile = () => {
       }
 
       console.log('Data sent to the backend successfully.');
+      setSuccessMessage('Your changes have been updated successfully.');
+
     } catch (error) {
       setError(error.message);
     } finally {
@@ -179,6 +182,13 @@ const PatientProfile = () => {
 
         <h1>My Profile</h1>
         {error && <p className="error-message">{error}</p>}
+        {successMessage && <div style={{backgroundColor: '#4CAF50',
+                                        color: 'white',
+                                        padding: '10px',
+                                        textAlign: 'center',
+                                        borderRadius: '5px',
+                                        margin: '10px 0',
+                                        }}>{successMessage}</div>}
         <form className="patient-profile-form" onSubmit={handleSubmit}>
           {/* Form fields */}
           <div>
