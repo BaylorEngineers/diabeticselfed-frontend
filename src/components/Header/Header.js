@@ -128,6 +128,7 @@ import Dropdown from '../Dropdown/Dropdown'; // Adjust the path as needed
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import { NavLink, Link } from 'react-router-dom'; // Import Link from react-router-dom
+import logo from '../../images/Final Logo_English_landscape.png';
 
 
 function Header({ role }) {
@@ -228,8 +229,12 @@ function Header({ role }) {
     <div className="header">
       <div className="header-content">
         <div className="header-logo">
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <h1>DiabeticSelfEd</h1>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <img
+              src={logo}
+              alt="logo"
+              style={{marginTop:'20px', width: '220px', height: '70px' }}
+            />
           </Link>
         </div>
         <div className="header-links">
