@@ -131,29 +131,68 @@ import { NavLink, Link } from 'react-router-dom'; // Import Link from react-rout
 
 
 function Header({ role }) {
+  const [newMessageReceived , setNewMessageReceived] = useState(false);
   const { sidebarData, updateMessageIcon } = useSidebarData(role);
   const [newMessage, setNewMessage] = useState(false);
   const userId = localStorage.getItem('userId');
   const jwtToken = localStorage.getItem('accessToken');
+  const [showNotification, setShowNotification] = useState(false);
+  
+  useEffect(() => {
+    const socket = new SockJS('http://localhost:8080/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
+      stompClient.subscribe(`/topic/messages/${userId}`, (message) => {
+        if(parseInt( JSON.parse(message.body).receiverId, 10) === parseInt(userId, 10))
+        setNewMessageReceived(true); // Set to true when a new message is received
+      });
+    });
+
+    return () => {
+      if (stompClient && stompClient.connected) {
+        stompClient.disconnect();
+      }
+    };
+  }, [userId, jwtToken]);
+
+  useEffect(() => {
+    let timer;
+    if (newMessageReceived) {
+      setShowNotification(true);
+      updateMessageIcon(<AiIcons.AiOutlineMail style={{ color: 'red' }} />);
+
+      timer = setTimeout(() => {
+        setShowNotification(false);
+        setNewMessageReceived(false); // Reset after showing the notification
+      }, 5000); // Notification disappears after 5 seconds
+    }
+
+    return () => clearTimeout(timer);
+  }, [newMessageReceived]);
 
   // useEffect(() => {
-  //   let subscription;
-  //   const socket = new SockJS('http://localhost:8080/ws');
-  //   const stompClient = Stomp.over(socket);
+  //   let timer;
+  //   if (newMessage) {
+  //     setShowNotification(true);
 
-  //   stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
-  //     subscription = stompClient.subscribe(`/topic/messages/${userId}`, (message) => {
-  //       setNewMessage(true);
-  //     });
-  //   });
+  //     // Reset newMessage state after showing the notification
+  //     setNewMessage(false);
 
-  //   return () => {
-  //     if (subscription) {
-  //       subscription.unsubscribe();
-  //     }
-  //     stompClient.disconnect();
-  //   };
-  // }, [userId, jwtToken]);
+  //     timer = setTimeout(() => {
+  //       setShowNotification(false);
+  //     }, 5000); // Notification disappears after 5 seconds
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [newMessage]);
+
+  useEffect(() => {
+    if (newMessage) {
+      updateMessageIcon(<AiIcons.AiOutlineMail style={{ color: 'red' }} />);
+      setNewMessage(false); // Reset new message state immediately after updating the icon
+    }
+  }, [newMessage, updateMessageIcon]);
 
   // Function to render links and submenus
   const renderLinks = (data) => {
@@ -189,7 +228,7 @@ function Header({ role }) {
     <div className="header">
       <div className="header-content">
         <div className="header-logo">
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <h1>DiabeticSelfEd</h1>
           </Link>
         </div>
@@ -198,6 +237,12 @@ function Header({ role }) {
         </div>
         <Dropdown className="user-dropdown" text="User" />
       </div>
+
+      {showNotification && (
+        <div className="notification-popup">
+          You received a new message!
+        </div>
+      )}
     </div>
   );
 }

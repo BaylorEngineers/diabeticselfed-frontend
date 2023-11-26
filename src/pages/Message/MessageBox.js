@@ -1,5 +1,6 @@
 // MessageBox.js
 import React, { useState, useEffect } from 'react';
+import useWebSocket from './useWebSocket'; 
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
@@ -9,6 +10,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     const userId =  localStorage.getItem('userId');
     const token = localStorage.getItem('accessToken');
     const [stompClient, setStompClient] = useState(null);
+    const messages = useWebSocket(userId, token);
 
     useEffect(() => {
         const fetchConversation = async () => {
@@ -32,38 +34,13 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     }, [receiverId, token, newMessage]);
 
     useEffect(() => {
-        // Setting up WebSocket connection
-        let stompSubscription;
-        const socket = new SockJS('http://localhost:8080/ws');
-        const stomp = Stomp.over(socket);
-
-        stomp.connect({ Authorization: `Bearer ${token}` }, () => {
-            console.log("Setting up subscription");
-            stompSubscription = stomp.subscribe(`/topic/messages/${userId}`, (message) => {
-                console.log("Received a message via subscription");
-                const newMsg = JSON.parse(message.body);
-                console.log(newMsg);
-                console.log(userId);
-                console.log(newMsg.receiverId);
-                if (parseInt(newMsg.receiverId, 10) === parseInt(userId, 10)) {
-                    console.log("Set");
-                    setConversation(prevMessages => [...prevMessages, newMsg]);
-                }
-            });
-        });
-
-        setStompClient(stomp);
-
-        // Cleanup function
-        return () => {
-            if (stompSubscription) {
-                stompSubscription.unsubscribe();
-            }
-            if (stomp && stomp.connected) {
-                stomp.disconnect();
-            }
-        };
-    }, [userId, token, conversation]); 
+        setConversation(currentConversation => [
+            ...currentConversation,
+            ...messages.filter(msg => 
+                parseInt(msg.senderId, 10) === parseInt(receiverId, 10) ||
+                parseInt(msg.receiverId, 10) === parseInt(receiverId, 10))
+        ]);
+    }, [messages, receiverId]);
 
     const handleSendMessage = async () => {
         try {
