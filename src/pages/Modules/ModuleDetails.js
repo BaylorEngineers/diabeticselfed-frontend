@@ -62,8 +62,8 @@ const ModuleDetails = ({ moduleId }) => {
             </div>
           </div>
         )}
-        <button className="nav-button prev-button">Prev</button>
-        <button className="nav-button next-button">Next</button>
+        {/* <button className="nav-button prev-button">Prev</button>
+        <button className="nav-button next-button">Next</button> */}
       </div>
     </>
   );
