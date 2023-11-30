@@ -58,6 +58,8 @@ function App() {
         <Route path="/view-pdf/:pdfId" element={<PDFViewer />} />
         <Route path="/content-area/:contentAreaId" element={<ModuleListWrapper />} />
         <Route path="/logout" element={<Home />}></Route>
+        <Route path="/signUp/weight-height" element={<SignupWeightAndHeight />} />
+        <Route path="/signUp/goal" element={<SignupProgramGoal />} />
 
         <Route path="/accountmanager" element={<ProtectedRoute component={AccountManager} />} />
         <Route path="/adminprofile" element={<ProtectedRoute component={AdminProfile} />} />
@@ -72,8 +74,7 @@ function App() {
         <Route path="/message" element={<ProtectedRoute component={Message} />} />
         <Route path="/weighttracker" element={<ProtectedRoute component={WeightTracker} />} />
         <Route path="/survey" element={<ProtectedRoute component={Survey} />} />
-        <Route path="/signUp/weight-height" element={<ProtectedRoute component={SignupWeightAndHeight} />} />
-        <Route path="/signUp/goal" element={<ProtectedRoute component={SignupProgramGoal} />} />
+        
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
       </Routes>
