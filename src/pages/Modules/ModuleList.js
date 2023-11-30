@@ -1,4 +1,3 @@
-// ModuleList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -9,6 +8,7 @@ const ModuleList = () => {
   const { contentAreaId } = useParams();
   const [contentArea, setContentArea] = useState('');
   const [modules, setModules] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchContentArea = async () => {
@@ -26,7 +26,14 @@ const ModuleList = () => {
     }
   }, [contentAreaId]);
 
-  // Dummy function to format the progress for display, replace with actual logic
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value.toLowerCase());
+  };
+
+  const filteredModules = modules.filter(module => 
+    module.keywords.toLowerCase().includes(searchTerm)
+  );
+
   const getProgress = (module) => {
     return module.progress || 0; // Replace with actual progress property if available
   };
@@ -37,6 +44,12 @@ const ModuleList = () => {
       <div className="module-list-container">
         <header className="module-list-header">
           <h1>{contentArea}</h1>
+          <input
+            type="text"
+            placeholder="Search by keywords..."
+            onChange={handleSearchChange}
+            className="module-search-input"
+          />
         </header>
         <table className="module-list">
           <thead>
@@ -49,12 +62,11 @@ const ModuleList = () => {
             </tr>
           </thead>
           <tbody>
-            {modules.length > 0 ? (
-              modules.map((module) => (
+            {filteredModules.length > 0 ? (
+              filteredModules.map((module, index) => (
                 <tr key={module.id} className="module-item">
-                  <td className="module-id">#{module.id}</td>
+                  <td className="module-id">#{index + 1}</td>
                   <td className="module-name">{module.name}</td>
-                  {/*<td className="module-description">{module.description}</td>*/}
                   <td className="module-format">{module.filePath.split('.').pop().toUpperCase()}</td>
                   <td className="module-progress">
                     <div className="module-progress-bar-container">
@@ -62,13 +74,13 @@ const ModuleList = () => {
                     </div>
                   </td>
                   <td>
-                    <a href={`/module/${module.id}`} className="module-link"> View Module </a>
+                    <a href={`/module/${module.id}`} className="module-link">View Module</a>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="module-list-empty">No modules found</td>
+                <td colSpan="5" className="module-list-empty">No modules found</td>
               </tr>
             )}
           </tbody>

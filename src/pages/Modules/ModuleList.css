@@ -98,3 +98,19 @@
     transition: width 0.4s ease;
   }
   
+
+  .module-search-input {
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px; /* Adjust based on your layout */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .module-search-input:focus {
+    outline: none;
+    border-color: #5CDB95; /* Color to highlight the input when focused */
+  }
+  
