@@ -17,12 +17,12 @@ const home = () => {
             <h2 className="sub-heading">Your Guide to Preventing Type 2 Diabetes and Embracing Self Care</h2>
           <p>Your journey to a healthier lifestyle begins here!</p>
           <div className="image-container">
-                    <img
+                    <img class="pic"
                       src={familyImage1}
                       alt="Healthy Lifestyle 1"
                     />
                     <p>Explore our features and start taking care of yourself today.</p>
-                    <img
+                    <img class="pic"
                       src={careImage}
                       alt="Healthy Lifestyle 2"
                     />

@@ -43,7 +43,6 @@ const ModuleList = () => {
             <tr>
               <th>Module #</th>
               <th>Title</th>
-              <th>Description</th>
               <th>Format</th>
               <th>Progress</th>
               <th>Resources</th>
@@ -55,7 +54,7 @@ const ModuleList = () => {
                 <tr key={module.id} className="module-item">
                   <td className="module-id">#{module.id}</td>
                   <td className="module-name">{module.name}</td>
-                  <td className="module-description">{module.description}</td>
+                  {/*<td className="module-description">{module.description}</td>*/}
                   <td className="module-format">{module.filePath.split('.').pop().toUpperCase()}</td>
                   <td className="module-progress">
                     <div className="module-progress-bar-container">
