@@ -35,7 +35,7 @@ const ModuleList = () => {
   );
 
   const getProgress = (module) => {
-    return module.progress || 0; // Replace with actual progress property if available
+    return module.progress || 50; // Replace with actual progress property if available
   };
 
   return (
@@ -56,6 +56,7 @@ const ModuleList = () => {
             <tr>
               <th>Module #</th>
               <th>Title</th>
+              <th>Description</th>
               <th>Format</th>
               <th>Progress</th>
               <th>Resources</th>
@@ -67,6 +68,7 @@ const ModuleList = () => {
                 <tr key={module.id} className="module-item">
                   <td className="module-id">#{index + 1}</td>
                   <td className="module-name">{module.name}</td>
+                  <td className="module-name">{module.description}</td>
                   <td className="module-format">{module.filePath.split('.').pop().toUpperCase()}</td>
                   <td className="module-progress">
                     <div className="module-progress-bar-container">
