@@ -202,3 +202,32 @@
 .user-dropdown:hover {
   transform: scale(1.05); 
 }
+
+.notification-popup {
+  position: fixed;
+  top: 20%; /* This will place it right below the header */
+  left: 50%; /* Centers the notification horizontally */
+  transform: translateX(-50%) translateY(-100%);
+  padding: 15px 30px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  animation: fade-in-out 5s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  text-align: center;
+}
+@keyframes fade-in-out {
+  0%, 80% { opacity: 1; transform: translateX(-50%) translateY(-100%); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-120px); }
+}
+
+/* Optional: Add an icon to the notification for visual appeal */
+.notification-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
