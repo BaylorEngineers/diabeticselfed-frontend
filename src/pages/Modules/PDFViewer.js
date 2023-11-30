@@ -5,7 +5,6 @@ import './PDFViewer.css';
 import Header from '../../components/Header/Header';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
-
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PDFViewer = () => {
@@ -16,6 +15,9 @@ const PDFViewer = () => {
   const { pdfId } = useParams();
   const navigate = useNavigate();
 
+  const [initialLoad, setInitialLoad] = useState(false);
+  const [maxPagePercentage, setMaxPagePercentage] = useState(0);
+
   const fetchPdfFile = async (id) => {
     try {
       const response = await fetch(`http://localhost:8080/api/modules/pdf/${id}`);
@@ -24,8 +26,80 @@ const PDFViewer = () => {
       }
       const blob = await response.blob();
       setFile(URL.createObjectURL(blob));
+      sendGetRequest();
     } catch (error) {
       console.error("Could not fetch the PDF: ", error);
+    }
+  };
+
+  const sendGetRequest = async () => {
+    try {
+      const jwtToken = localStorage.getItem('accessToken');
+      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/get/0`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      else {
+        const data = await response.json();
+        const matchingData = data.find(entry => entry.id === pdfId);
+        console.log(response);
+        if (matchingData) {
+          const completedPercentage = matchingData.completed_percentage;
+          const calculatedPageNumber = Math.floor((completedPercentage / 100) * numPages) + 1;
+          setPageNumber(calculatedPageNumber);
+          
+        }
+      }
+      
+    } catch (error) {
+      console.error("Error sending post request: ", error);
+    }
+  };
+
+  const sendPostRequest = async () => {
+    try {
+      const jwtToken = localStorage.getItem('accessToken');
+      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/create/0/${pdfId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      setInitialLoad(true);
+    } catch (error) {
+      console.error("Error sending post request: ", error);
+    }
+  };
+
+  const sendPatchRequest = async () => {
+    try {
+      const jwtToken = localStorage.getItem('accessToken');
+      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/update/0/${pdfId}/${maxPagePercentage}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error sending patch request: ", error);
     }
   };
 
@@ -33,16 +107,37 @@ const PDFViewer = () => {
     fetchPdfFile(pdfId);
   }, [pdfId]);
 
+  useEffect(() => {
+    if (!initialLoad) {
+      sendPostRequest();
+    }
+  }, [initialLoad]);
+
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  const handleNextPage = () => {
+    if (pageNumber < numPages) {
+      setPageNumber(pageNumber + 1);
+      const percentage = Math.round((pageNumber / numPages) * 100);
+      setMaxPagePercentage(Math.max(maxPagePercentage, percentage));
+      console.log(maxPagePercentage)
+    }
+  };
+
+  const handleLeavePage = () => {
+    sendPatchRequest();
+  };
 
   return (
     <>
       <Header role="ADMIN" />
       <div className="pdf-viewer">
         <div className="navigation">
-          <button className="back-button" onClick={() => navigate(-1)}>Back to Modules</button>
+          <button className="back-button" onClick={() => { handleLeavePage(); navigate(-1); }}>
+            Back to Modules
+          </button>
         </div>
         <div className="frame">
           <div className="document-container">
@@ -51,7 +146,7 @@ const PDFViewer = () => {
               onLoadSuccess={onDocumentLoadSuccess}
               className="document"
             >
-              <Page pageNumber={pageNumber} scale={scale}  renderAnnotationLayer={false} renderTextLayer={false} />
+              <Page pageNumber={pageNumber} scale={scale} renderAnnotationLayer={false} renderTextLayer={false} />
             </Document>
           </div>
           <div className="controls">
@@ -68,7 +163,7 @@ const PDFViewer = () => {
             <button
               className="control-button"
               disabled={pageNumber >= numPages}
-              onClick={() => setPageNumber(pageNumber + 1)}
+              onClick={handleNextPage}
             >
               Next
             </button>
