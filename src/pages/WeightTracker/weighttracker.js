@@ -15,6 +15,9 @@ const WeightTrackerPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [reports, setReports] = useState([]);
   const [updatedReports, setUpdatedReports] = useState([]);
+  const [feet, setFeet] = useState('');
+  const [inches, setInches] = useState('');
+
   
   // variables for program goals
   const [weightLossPercent, setWeightLossPercent] = useState('');
@@ -121,6 +124,15 @@ useEffect(() => {
 }, []);
 
 const handleAddReport = async () => {
+  const heightInInches = parseInt(feet, 10) * 12 + parseInt(inches, 10);
+
+  const data = {
+    height: heightInInches,
+    weight: goalWeight,
+    dateT: dateString,
+  };
+
+
 console.log(dateT);
     try {
       const response = await fetch('http://localhost:8080/api/v1/weight/addReport', {
@@ -131,7 +143,7 @@ console.log(dateT);
         },
         body: JSON.stringify({
           patientId: patientID, // Replace with the actual patientId
-          height: height,
+          height: heightInInches,
           weight: goalWeight,
           dateT: dateString,
         }),
@@ -253,10 +265,10 @@ const updatedData = reports.map((report) => ({
       {/* <h2>Your current Weight Loss Goal is: {earliestReport != null ? (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2) : {newWeightLossPercent}} </h2> */}
       {earliestReport != null ? (
           <h2 >
-          Your current Weight Loss Goal is: {(earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2)} lbs 
+          Your current Weight Loss Target Weight is: {(earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2)} lbs for losing {newWeightLossPercent}% of your initial weight
           </h2>
           ) : <h2>
-            Your current Weight Loss Goal is: {newWeightLossPercent} % weight loss
+            Your current Weight Loss Percentage Goal is: {newWeightLossPercent} % weight loss
             </h2>}
       <label>Select a Weight Loss Percentage:
           <select
@@ -296,15 +308,24 @@ const updatedData = reports.map((report) => ({
     </div>
     <h2>Add Weight Loss Report</h2>
     <div className="weight-goal-section">
-                <label>
-                  Height (in inches):
-                  <input
-                    type="number"
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                    required
-                  />
-                </label>
+    <label>
+            Height (Feet):
+            <input
+              type="number"
+              value={feet}
+              onChange={(e) => setFeet(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Height (Inches):
+            <input
+              type="number"
+              value={inches}
+              onChange={(e) => setInches(e.target.value)}
+              required
+            />
+          </label>
             <label>
               Goal Weight (in lbs):
               <input
