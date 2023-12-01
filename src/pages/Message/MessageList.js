@@ -67,7 +67,11 @@ const MessageList = () => {
     return (
         <div className="message-list">
             {messages.map((message) => (
-                <div key={message.receiverId} className="message-preview" onClick={() => setSelectedConversation(message.receiverId)}>
+                <div 
+                  key={message.receiverId} 
+                  className={`message-preview ${!message.read ? 'unread' : ''}`}
+                  onClick={() => setSelectedConversation(message.receiverId)}
+                >
                     <div className="message-sender">{message.receiverFirstName} {message.receiverLastName}</div>
                     <div className="message-content">{message.content}</div>
                     <div className="message-timestamp">{new Date(message.timestamp).toLocaleString()}</div>
