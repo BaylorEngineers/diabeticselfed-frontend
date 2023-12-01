@@ -1,4 +1,3 @@
-// ClinicianListModal.js
 import React, { useState, useEffect } from 'react';
 
 const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {

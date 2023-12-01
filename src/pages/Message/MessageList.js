@@ -1,4 +1,3 @@
-// MessageList.js
 import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import SockJS from 'sockjs-client';
@@ -18,7 +17,6 @@ const MessageList = () => {
     const userId =localStorage.getItem('userId');
     const jwtToken = localStorage.getItem('accessToken');
    
-    // Function to fetch messages
     const fetchMessages = async () => {
         console.log(jwtToken);
         try {
@@ -61,7 +59,6 @@ const MessageList = () => {
                 stompClient.disconnect();
             }
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [jwtToken]);
     const handleSendMessageToClinician = () => {
         fetchMessages(); // Refresh the message list

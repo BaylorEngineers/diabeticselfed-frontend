@@ -1,4 +1,3 @@
-// MessageBox.js
 import React, { useState, useEffect } from 'react';
 import useWebSocket from './useWebSocket'; 
 import SockJS from 'sockjs-client';
@@ -11,6 +10,8 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     const token = localStorage.getItem('accessToken');
     const [stompClient, setStompClient] = useState(null);
     const messages = useWebSocket(userId, token);
+    const [lastMessageId, setLastMessageId] = useState(null);
+
 
     useEffect(() => {
         const fetchConversation = async () => {
@@ -34,12 +35,17 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     }, [receiverId, token, newMessage]);
 
     useEffect(() => {
-        setConversation(currentConversation => [
-            ...currentConversation,
-            ...messages.filter(msg => 
-                parseInt(msg.senderId, 10) === parseInt(receiverId, 10) ||
-                parseInt(msg.receiverId, 10) === parseInt(receiverId, 10))
-        ]);
+        const latestMessageTime = conversation.length > 0 ? new Date(conversation[conversation.length - 1].time) : null;
+
+        const newMessages = messages.filter(msg => {
+            return (parseInt(msg.senderId, 10) === parseInt(receiverId, 10) ||
+                    parseInt(msg.receiverId, 10) === parseInt(receiverId, 10)) &&
+                   (!latestMessageTime || new Date(msg.time) > latestMessageTime);
+        });
+
+        if (newMessages.length > 0) {
+            setConversation(currentConversation => [...currentConversation, ...newMessages]);
+        }
     }, [messages, receiverId]);
 
     const handleSendMessage = async () => {
