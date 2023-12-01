@@ -16,7 +16,13 @@ const MessageList = () => {
 
     const userId =localStorage.getItem('userId');
     const jwtToken = localStorage.getItem('accessToken');
-   
+    const handleSelectConversation = (receiverId) => {
+        setSelectedConversation(receiverId);
+    
+        setMessages(prevMessages => prevMessages.map(message => 
+            message.receiverId === receiverId ? { ...message, read: true } : message
+        ));
+    };
     const fetchMessages = async () => {
         console.log(jwtToken);
         try {
@@ -70,7 +76,7 @@ const MessageList = () => {
                 <div 
                   key={message.receiverId} 
                   className={`message-preview ${!message.read ? 'unread' : ''}`}
-                  onClick={() => setSelectedConversation(message.receiverId)}
+                  onClick={() => handleSelectConversation(message.receiverId)}
                 >
                     <div className="message-sender">{message.receiverFirstName} {message.receiverLastName}</div>
                     <div className="message-content">{message.content}</div>
