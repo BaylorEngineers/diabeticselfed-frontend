@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
+import "../Patient/css/patientProfile.css";
 
 
 const ChangePassword = ({onSave, onChangePassword }) => {
@@ -87,7 +88,7 @@ const ChangePassword = ({onSave, onChangePassword }) => {
   return (
       <>
         <Header role={role} />
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+        <div class = "patient-profile-container">
           {successMessage && (
             <div
               style={{
@@ -102,18 +103,7 @@ const ChangePassword = ({onSave, onChangePassword }) => {
               {successMessage}
             </div>
           )}
-          <form
-            onSubmit={(e) => handleSubmitPasswordChange(e)}
-            style={{
-              marginTop: '20px',
-              textAlign: 'center',
-              maxWidth: '400px',
-              padding: '20px',
-              border: '1px solid #ccc',
-              borderRadius: '8px',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            }}
-          >
+          <form className="patient-profile-form" onSubmit={(e) => handleSubmitPasswordChange(e)}>
             <label>
               Current Password:
               <input
@@ -143,8 +133,8 @@ const ChangePassword = ({onSave, onChangePassword }) => {
               />
             </label>
             <br />
-            <Button type="submit" label="Save" size="small" />
-            <Button label="Cancel" onClick={(e) => handleCancel(e)} size="small" />
+            <button className="submit-button" type="submit">Save</button>
+            <button className="submit-button" onClick={(e) => handleCancel(e)}>Cancel</button>
           </form>
         </div>
       </>
