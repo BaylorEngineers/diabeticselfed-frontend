@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import * as mdIcon from "react-icons/md";
 import * as BiIcon from "react-icons/bi";
 import * as AiIcon from "react-icons/ai";
+import * as CgIcon from "react-icons/cg";
 
 function Dropdown(props) {
   const [open, setOpen] = useState(false);
@@ -65,8 +66,10 @@ function Dropdown(props) {
   const profileLink = role === 'PATIENT'
     ? '/patientprofile'
     : role === 'ADMIN'
-    ? '/adminprofile'
-    : '/adminprofile';
+    ? '/profile'
+    : '/profile';
+
+  const changePasswordLink = '/changePassword';
 
   return (
     <div className="menu-container" ref={DropdownRef}>
@@ -84,6 +87,7 @@ function Dropdown(props) {
         <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
           <ul>
             <DropdownItem img={AiIcon.AiOutlineUser} text={"My Profile"} link={profileLink} />
+            <DropdownItem img={CgIcon.CgPassword} text={"Change Password"} link={changePasswordLink} />
             <DropdownItem img={BiIcon.BiLogOut} text={"Log Out"} onClick={(e) => handleLogout(e)} />
           </ul>
         </div>

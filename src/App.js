@@ -6,10 +6,9 @@ import Login from "./components/login";
 import SignUp from "./components/signup";
 import Forget from "./components/forget";
 import Modules from "./pages/Clinician/modules"
-import AdminProfile from "./pages/Admin/adminprofile"
+import Profile from "./pages/Admin/profile"
 import AdminAccessRecords from './pages/Admin/accessrecords'
 import AccountManager from './pages/Admin/accountmanager'
-import ClinicianProfile from "./pages/Clinician/clinicianProfile"
 import PatientList from "./pages/Clinician/patientList";
 import ForumPost from "./pages/ForumPost/ForumPost";
 import CreatePost from "./pages/ForumPost/CreatePost";
@@ -24,6 +23,7 @@ import PDFViewer from "./pages/Modules/PDFViewer";
 import Survey from "./pages/MotivationalMessage/survey.js"
 import SignupWeightAndHeight from "./pages/signUpContinued/signUpWeightAndHeight";
 import SignupProgramGoal from "./pages/signUpContinued/signUpSetProgramGoal";
+import ChangePassword from "./pages/Home/changepassword";
 
 import { useParams } from 'react-router-dom';
 
@@ -62,9 +62,8 @@ function App() {
         <Route path="/signUp/goal" element={<SignupProgramGoal />} />
 
         <Route path="/accountmanager" element={<ProtectedRoute component={AccountManager} />} />
-        <Route path="/adminprofile" element={<ProtectedRoute component={AdminProfile} />} />
+        <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
         <Route path="/adminaccessrecords" element={<ProtectedRoute component={AdminAccessRecords} />} />
-        <Route path="/clinicianprofile" element={<ProtectedRoute component={ClinicianProfile} />} />
         <Route path="/patientlist" element={<ProtectedRoute component={PatientList} />} />
         <Route path="/posts" element={<ProtectedRoute component={ForumPost} />} />
         <Route path="/create-post" element={<ProtectedRoute component={CreatePost} />} />
@@ -74,6 +73,7 @@ function App() {
         <Route path="/message" element={<ProtectedRoute component={Message} />} />
         <Route path="/weighttracker" element={<ProtectedRoute component={WeightTracker} />} />
         <Route path="/survey" element={<ProtectedRoute component={Survey} />} />
+        <Route path="/changePassword" element={<ProtectedRoute component={ChangePassword} />} />
         
         {/* <Route path="/1" element={<1 />}></Route>
         <Route path="/2" element={<2 />}></Route> */}
