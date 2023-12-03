@@ -4,7 +4,7 @@ const PatientListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
   const [clinicians, setClinicians] = useState([]);
   const [selectedClinician, setSelectedClinician] = useState(null);
   const [messageContent, setMessageContent] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // State to hold error messages
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   useEffect(() => {
     console.log("addd");

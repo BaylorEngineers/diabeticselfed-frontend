@@ -1,4 +1,3 @@
-// MessageList.js
 import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import SockJS from 'sockjs-client';
@@ -17,8 +16,13 @@ const MessageList = () => {
 
     const userId =localStorage.getItem('userId');
     const jwtToken = localStorage.getItem('accessToken');
-   
-    // Function to fetch messages
+    const handleSelectConversation = (receiverId) => {
+        setSelectedConversation(receiverId);
+    
+        setMessages(prevMessages => prevMessages.map(message => 
+            message.receiverId === receiverId ? { ...message, read: true } : message
+        ));
+    };
     const fetchMessages = async () => {
         console.log(jwtToken);
         try {
@@ -61,7 +65,6 @@ const MessageList = () => {
                 stompClient.disconnect();
             }
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [jwtToken]);
     const handleSendMessageToClinician = () => {
         fetchMessages(); // Refresh the message list
@@ -70,7 +73,11 @@ const MessageList = () => {
     return (
         <div className="message-list">
             {messages.map((message) => (
-                <div key={message.receiverId} className="message-preview" onClick={() => setSelectedConversation(message.receiverId)}>
+                <div 
+                  key={message.receiverId} 
+                  className={`message-preview ${!message.read ? 'unread' : ''}`}
+                  onClick={() => handleSelectConversation(message.receiverId)}
+                >
                     <div className="message-sender">{message.receiverFirstName} {message.receiverLastName}</div>
                     <div className="message-content">{message.content}</div>
                     <div className="message-timestamp">{new Date(message.timestamp).toLocaleString()}</div>

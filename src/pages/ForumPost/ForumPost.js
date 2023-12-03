@@ -1,58 +1,69 @@
-// ForumPost.js
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // make sure you have react-router-dom installed
+import { Link } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import "./ForumPost.css";
 
+
 const ForumPost = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
-  const [error, setError] = useState(''); // Add an error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const role = localStorage.getItem('role');
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true); // Start loading
-      setError(''); // Clear previous errors
-
-      // Your JWT token
-      const jwtToken = localStorage.getItem('accessToken');
-      
-
-        const response = await fetch('http://localhost:8080/api/v1/forum-posts/allposts', {
-          method: 'GET',
-          headers: {
-            // Include the Authorization header with the token
-            'Authorization': `Bearer ${jwtToken}`,
-            'Content-Type': 'application/json'
-          },
-        });
-        
-        if (!response.ok) {
-          // If the response is not ok, set an error message
-          setError("Unable to fetch posts. Please try again later.");
-          
-          // Clear the error after 5 seconds
-          const timer = setTimeout(() => {
-            setError("");
-          }, 5000);
-          setLoading(false);
-          // Clear timeout if the component unmounts
-          return () => clearTimeout(timer);
-        }
-        const data = await response.json();
-        setLoading(false);
-        setPosts(data);
-
-    };
-
     fetchPosts();
   }, []);
 
+  const fetchPosts = async (search = '') => {
+    setLoading(true);
+    setError('');
+
+    const jwtToken = localStorage.getItem('accessToken');
+    let url = 'http://localhost:8080/api/v1/forum-posts/allposts';
+    if (search) {
+      url = `http://localhost:8080/api/v1/forum-posts/search?searchValue=${search}`;
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to fetch posts. Please try again later.");
+      }
+
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = () => {
+    fetchPosts(searchValue);
+  };
   return (
     <div className="forum-page">
       <Header role={role} />
       <div className="forum-content">
+      <div className="search-bar-container">
+          <input
+            type="text"
+            placeholder="Search posts..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="search-input"
+          />
+          <button onClick={handleSearch} className="search-button">Search</button>
+        </div>
         <div className="forum-post-container">
           {loading && <div>Loading posts...</div>}
           {error && <div className="error-message">{error}</div>}

@@ -213,3 +213,36 @@
     font-size: .875rem; /* smaller font size on smaller screens */
   }
 }
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.search-bar-container .search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  height: 40px; /* Set a fixed height */
+  font-size: 16px;
+  box-sizing: border-box; /* Include padding and border in height calculation */
+}
+
+.search-bar-container .search-button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #5C6BC0;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  height: 40px; /* Match the height of the input field */
+  font-size: 16px;
+  box-sizing: border-box; /* Include padding and border in height calculation */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-bar-container .search-button:hover {
+  background-color: #1E88E5;
+}

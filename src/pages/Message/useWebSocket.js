@@ -1,29 +1,20 @@
-// useWebSocket.js
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 
 const useWebSocket = (userId, token) => {
-    const [stompClient, setStompClient] = useState(null);
     const [messages, setMessages] = useState([]);
-
-    const connectWebSocket = useCallback(() => {
-        const socket = new SockJS('http://localhost:8080/ws');
-        const stomp = Stomp.over(socket);
-
-        stomp.connect({ Authorization: `Bearer ${token}` }, () => {
-            stomp.subscribe(`/topic/messages/${userId}`, (message) => {
-                const newMsg = JSON.parse(message.body);
-                setMessages(prevMessages => [...prevMessages, newMsg]);
-            });
-        });
-
-        setStompClient(stomp);
-    }, [userId, token]);
+    const socket = new SockJS('http://localhost:8080/ws');
+    const stompClient = Stomp.over(socket);
 
     useEffect(() => {
         if (userId && token) {
-            connectWebSocket();
+            stompClient.connect({ Authorization: `Bearer ${token}` }, () => {
+                stompClient.subscribe(`/topic/messages/${userId}`, (message) => {
+                    const newMsg = JSON.parse(message.body);
+                    setMessages(prevMessages => [...prevMessages, newMsg]);
+                });
+            });
         }
 
         return () => {
@@ -31,7 +22,7 @@ const useWebSocket = (userId, token) => {
                 stompClient.disconnect();
             }
         };
-    }, [userId, token, connectWebSocket]);
+    }, [userId, token]);
 
     return messages;
 };
