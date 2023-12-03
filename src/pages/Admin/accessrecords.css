@@ -8,23 +8,80 @@
 }
 
 .clinician-preview {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 15px;
   display: flex;
   justify-content: space-between;
   width: 500px;
+  transition: background-color 0.3s ease;
+}
+
+.clinician-preview:hover {
+  background-color: #f7f7f7;
 }
 
 .clinician-name {
   font-weight: bold;
+  color: #333;
 }
 
 .clinician-email {
   color: #555;
 }
 
-h2 {
-  margin-bottom: 10px;
+.details-container {
+  margin-top: 10px;
+}
+
+.view-details-button,
+.view-patients-button,
+.view-details-patient-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-button:hover,
+.view-patients-button:hover,
+.view-details-patient-button:hover {
+  background-color: #45a049;
+}
+
+.heading2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.heading3 {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.patientlist {
+  list-style: none;
+  padding: 0;
+}
+
+.patient-item {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.view-details-patient-button {
+  background-color: #2196f3;
+}
+
+.view-details-patient-button:hover {
+  background-color: #0b7dda;
 }

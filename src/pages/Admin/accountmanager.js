@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
+import "../Patient/css/patientProfile.css";
 import "./accountmanager.css"
 
 const AccountManager = () => {
@@ -64,8 +65,9 @@ const AccountManager = () => {
             {successMessage}
           </div>
         )}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <form style={{ marginTop: '20px', textAlign: 'center' }}>
+      <div className="patient-profile-container">
+      <h1>Manage User Registration</h1>
+        <form className="patient-profile-form">
           <label>
             Select Role:
             <select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
@@ -82,7 +84,7 @@ const AccountManager = () => {
           <br /><br />
           {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
   
-          <Button label="Invite User" size="small" onClick={(e) => { e.preventDefault(); handleInviteUser(); }}/>
+          <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); handleInviteUser(); }}>Invite User </button>
         </form>
       </div>
     </>
