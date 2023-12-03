@@ -86,6 +86,13 @@ const AccessRecords = () => {
 
       const patientsData = await response.json();
       setPatients(patientsData);
+      console.log(patientsData.length);
+
+      if (patientsData === null || patientsData.length === 0) {
+            setNoPatientsAvailable(true);
+          }else {
+                 setNoPatientsAvailable(false);
+               }
     } catch (error) {
       console.error('Error fetching patients:', error.message);
     } finally {
