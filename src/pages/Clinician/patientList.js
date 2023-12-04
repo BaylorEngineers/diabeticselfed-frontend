@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./PatientList.css";
@@ -8,8 +8,11 @@ const PatientList = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [note, setNote] = useState("");
 
-    const accessToken = localStorage.getItem("accessToken")
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const [patientsPerPage] = useState(10);
 
+    const accessToken = localStorage.getItem("accessToken");
     useEffect(() => {
         const fetchData = async () => {
             const requestOptions = {
@@ -34,7 +37,6 @@ const PatientList = () => {
 
         fetchData();
     }, []);
-
 
     const handleNoteChange = (event) => {
         setNote(event.target.value);
@@ -131,15 +133,21 @@ const PatientList = () => {
         );
     };
 
+    // Pagination logic
+    const indexOfLastPatient = currentPage * patientsPerPage;
+    const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
+    const currentPatients = patients.slice(indexOfFirstPatient, indexOfLastPatient);
+    const totalPages = Math.ceil(patients.length / patientsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <>
-            <Header  role="CLINICIAN"/>
-            {/* <Sidebar sidebarType="sidebarClinician" /> */}
+            <Header role="CLINICIAN"/>
             <div className="patient-list">
                 <h2>Patients List</h2>
                 <div>
-                    {patients.map((patient, index) => (
+                    {currentPatients.map((patient, index) => (
                         <div key={index} className="patient">
                             <span className="patient-name">{patient.patientName}</span>
                             <Button label="View Profile" onClick={() => handleViewProfile(patient)} size="small"/>
@@ -157,14 +165,19 @@ const PatientList = () => {
                         </div>
                     ))}
                 </div>
-
+                <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+                        <button key={number} onClick={() => paginate(number)} className="page-button">
+                            {number}
+                        </button>
+                    ))}
+                </div>
                 {selectedPatient && (
                     <div className="profile">
                         <h3>{selectedPatient.patientName}'s Profile:</h3>
                         <p>Date of Birth: {new Date(selectedPatient.patientDOB).toLocaleDateString()}</p>
                         <p>Height(inches): {selectedPatient.height ? `${selectedPatient.height} ` : 'N/A'}</p>
                         <div className="profile-spacing"></div>
-                        {/* This adds the space */}
                         {renderSurveyAnswers(selectedPatient)}
                         <div className="bmi-weight-table">
                             <h4>Weight and BMI Track:</h4>
