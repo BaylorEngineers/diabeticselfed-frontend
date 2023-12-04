@@ -17,6 +17,12 @@ const WeightTrackerPage = () => {
   const [updatedReports, setUpdatedReports] = useState([]);
   const [feet, setFeet] = useState('');
   const [inches, setInches] = useState('');
+  const [isBmiPlot, setIsBmiPlot] = useState(false);
+
+  const togglePlot = () => {
+    setIsBmiPlot(!isBmiPlot);
+  };
+
 
   
   // variables for program goals
@@ -85,9 +91,6 @@ useEffect(() => {
     }, null);
     setEarliestReport(earliest);
     setEarliestHeight(earliest.height);
-    console.log(earliest);
-
-
     })
     .catch(error => {
       console.error('Error fetching reports:', error.message);
@@ -381,15 +384,48 @@ const updatedData = reports.map((report) => ({
       </table>
       </div>
 
+      <Button label="Toggle Plot" size="small" onClick={togglePlot} />
       <div style={{ marginTop: '20px' }}>
-        <Plot
-                data={[plotData]}
-                layout={{
-                  title: 'Weight Tracking Report',
-                  xaxis: { title: 'Date' },
-                  yaxis: { title: 'BMI' },
-                }}
-              />
+        {isBmiPlot ? (
+          <Plot
+            data={[plotData]}
+            layout={{
+              title: 'Weight Tracking (BMI)',
+              xaxis: { title: 'Date' },
+              yaxis: { title: 'BMI' },
+            }}
+          />
+        ) : (
+          <Plot
+            data={[
+              {
+                x: updatedData.map((report) => report.dateT),
+                y: updatedData.map((report) => report.weight),
+                type: 'scatter',
+                mode: 'lines+markers',
+                marker: { color: 'green' },
+              },
+            ]}
+            layout={{
+              title: 'Weight Tracking (lbs)',
+              xaxis: { title: 'Date' },
+              yaxis: { title: 'Weight (lbs)' },
+              shapes: [
+                {
+                  type: 'line',
+                  x0: updatedData[0].dateT, // Adjust as needed
+                  x1: updatedData[updatedData.length - 1].dateT, // Adjust as needed
+                  y0: (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2),
+                  y1: (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2),
+                  line: {
+                    color: 'red', // Adjust the line color as needed
+                    width: 2, // Adjust the line width as needed
+                  },
+                },
+              ],
+            }}
+          />
+        )}
       </div>
     </div>
     </>

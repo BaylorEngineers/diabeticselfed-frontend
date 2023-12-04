@@ -23,6 +23,12 @@ function SignupWeightAndHeight() {
       return;
     }
 
+    if (inches < 0 || inches > 11) {
+      setErrorMessage('Please enter a valid value for inches (between 0 and 11).');
+      setSuccessMessage('');
+      return;
+    }
+
     // Convert feet and inches to total inches
     const heightInInches = parseInt(feet, 10) * 12 + parseInt(inches, 10);
 
@@ -62,14 +68,14 @@ function SignupWeightAndHeight() {
 
   return (
     <div className="center-container">
-      <h2>Please Enter Your Height (in feet and inches) and Goal Weight (in lbs) as of Today</h2>
+      <h2>Please Enter Your Height (in feet and inches) and Weight (in lbs) as of Today</h2>
       <div className="height-section">
         <label>
           Feet:
           <input
             type="number"
             value={feet}
-            onChange={(e) => setFeet(e.target.value)}
+            onChange={(e) => setFeet(Math.round(e.target.value))}
           />
         </label>
         <label>
@@ -77,17 +83,17 @@ function SignupWeightAndHeight() {
           <input
             type="number"
             value={inches}
-            onChange={(e) => setInches(e.target.value)}
+            onChange={(e) => setInches(Math.min(Math.max(Math.round(e.target.value), 0), 11))}
           />
         </label>
       </div>
       <div className="weight-section">
         <label>
-          Goal Weight (in lbs):
+          Weight (in lbs):
           <input
             type="number"
             value={goalWeight}
-            onChange={(e) => setGoalWeight(e.target.value)}
+            onChange={(e) => setGoalWeight(Math.round(e.target.value))}
             required
           />
         </label>
