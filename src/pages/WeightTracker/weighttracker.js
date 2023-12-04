@@ -29,7 +29,7 @@ const WeightTrackerPage = () => {
   const [weightLossPercent, setWeightLossPercent] = useState('');
   const [newWeightLossPercent, setNewWeightLossPercent] = useState('');
   const [teapotMessage, setTeapotMessage] = useState('');
-  const [earliestReport, setEarliestReport] = useState('');
+  const [earliestReport, setEarliestReport] = useState({});
   const [earliestHeight, setEarliestHeight] = useState('');
 
   // List of numbers to choose from
@@ -410,19 +410,19 @@ const updatedData = reports.map((report) => ({
               title: 'Weight Tracking (lbs)',
               xaxis: { title: 'Date' },
               yaxis: { title: 'Weight (lbs)' },
-              shapes: [
-                {
-                  type: 'line',
-                  x0: updatedData[0].dateT, // Adjust as needed
-                  x1: updatedData[updatedData.length - 1].dateT, // Adjust as needed
-                  y0: (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2),
-                  y1: (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2),
-                  line: {
-                    color: 'red', // Adjust the line color as needed
-                    width: 2, // Adjust the line width as needed
-                  },
-                },
-              ],
+              // shapes: [
+              //   {
+              //     type: 'line',
+              //     x0: updatedData[0].dateT, // Adjust as needed
+              //     x1: updatedData[updatedData.length - 1].dateT, // Adjust as needed
+              //     y0: (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2),
+              //     y1: (earliestReport.weight - earliestReport.weight * weightLossPercent * 0.01).toFixed(2),
+              //     line: {
+              //       color: 'red', // Adjust the line color as needed
+              //       width: 2, // Adjust the line width as needed
+              //     },
+              //   },
+              // ],
             }}
           />
         )}
