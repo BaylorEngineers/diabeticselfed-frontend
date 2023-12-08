@@ -13,7 +13,7 @@ const ModuleList = () => {
   useEffect(() => {
     const fetchContentArea = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/content-areas/${contentAreaId}`);
+        const response = await axios.get(`https://seal-app-by4vt.ondigitalocean.app/api/content-areas/${contentAreaId}`);
         setContentArea(response.data.name);
         setModules(response.data.modules);
       } catch (error) {

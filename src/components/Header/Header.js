@@ -15,7 +15,7 @@
 
 //   useEffect(() => {
 //     let subscription;
-//     const socket = new SockJS('http://localhost:8080/ws');
+//     const socket = new SockJS('https://seal-app-by4vt.ondigitalocean.app/ws');
 //     const stompClient = Stomp.over(socket);
 
 //     stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
@@ -140,7 +140,7 @@ function Header({ role }) {
   const [showNotification, setShowNotification] = useState(false);
   
   useEffect(() => {
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS('https://seal-app-by4vt.ondigitalocean.app/ws');
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {

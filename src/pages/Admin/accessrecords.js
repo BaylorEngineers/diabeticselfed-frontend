@@ -16,7 +16,7 @@ const AccessRecords = () => {
   useEffect(() => {
     const getAllClinicians = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/clinicians/getAll', {
+        const response = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/clinicians/getAll', {
           mode: 'cors',
           method: 'GET',
           headers: {
@@ -71,7 +71,7 @@ const AccessRecords = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/clinicians/${userId}/patients`, {
+      const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/clinicians/${userId}/patients`, {
         mode: 'cors',
         method: 'GET',
         headers: {

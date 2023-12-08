@@ -10,7 +10,7 @@ const PatientListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
     console.log("addd");
     const fetchClinicians = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/clinicians/getAllPatient', {
+        const response = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/clinicians/getAllPatient', {
           headers: { 'Authorization': `Bearer ${jwtToken}` },
         });
         if (!response.ok) {
@@ -28,7 +28,7 @@ const PatientListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
 
   const sendMessage = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/messages/send', {
+      const response = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/messages/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

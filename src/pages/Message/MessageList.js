@@ -26,7 +26,7 @@ const MessageList = () => {
     const fetchMessages = async () => {
         console.log(jwtToken);
         try {
-            const response = await fetch(`http://localhost:8080/api/v1/messages/last-messages/${userId}`, {
+            const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/messages/last-messages/${userId}`, {
                 headers: { 'Authorization': `Bearer ${jwtToken}` },
             });
             const data = await response.json();
@@ -41,7 +41,7 @@ const MessageList = () => {
         fetchMessages();
 
         // Setup WebSocket connection
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS('https://seal-app-by4vt.ondigitalocean.app/ws');
         const stomp = Stomp.over(socket);
 
         stomp.connect({ Authorization: `Bearer ${jwtToken}` }, () => {

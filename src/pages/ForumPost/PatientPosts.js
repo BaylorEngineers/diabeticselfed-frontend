@@ -15,7 +15,7 @@ const PatientPosts = () => {
 useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/forum-posts/posts/${patientId}`, {
+        const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/posts/${patientId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${jwtToken}`,
@@ -41,7 +41,7 @@ useEffect(() => {
 
   const deletePost = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/forum-posts/${postId}/patient/${patientId}`, {
+      const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/${postId}/patient/${patientId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${jwtToken}`,

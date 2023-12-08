@@ -14,7 +14,7 @@ const Profile = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/users/get-user-data?id=${userId}`, {
+        const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/users/get-user-data?id=${userId}`, {
           mode: 'cors',
           method: 'GET',
           headers: {

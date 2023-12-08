@@ -13,7 +13,7 @@ function Test() {
     const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY5OTA1MTg0NCwiZXhwIjoxNjk5MTM4MjQ0fQ.x_6pjym3sSfOvHrf85hjavt6JtKXwb1XcjFFy8SERP0"
     useEffect(() => {
         let subscription; // declare the variable here
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS('https://seal-app-by4vt.ondigitalocean.app/ws');
         const stomp = Stomp.over(socket);
     
         stomp.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
@@ -46,7 +46,7 @@ function Test() {
           content: messageInput
         };
     
-        fetch('http://localhost:8080/api/v1/messages/send', {
+        fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/messages/send', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

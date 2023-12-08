@@ -25,7 +25,7 @@ const CreatePost = () => {
     const post = { title, content, patientId };
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/forum-posts/post', {
+      const response = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

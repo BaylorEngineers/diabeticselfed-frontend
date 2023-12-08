@@ -11,7 +11,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
       if (!content.trim()) return;
   
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/forum-posts/comments`, {
+        const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/comments`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
     const [replyContent, setReplyContent] = useState('');
     const handleDelete = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/forum-posts/comments/${comment.id}/user/${userId}`, {
+        const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/comments/${comment.id}/user/${userId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -77,7 +77,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
         if (!replyContent.trim()) return;
     
         try {
-            const response = await fetch(`http://localhost:8080/api/v1/forum-posts/comments/${comment.id}`, {
+            const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/comments/${comment.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
   
     const fetchPost = async () => {
         try {
-          const response = await fetch(`http://localhost:8080/api/v1/forum-posts/${postId}`, {
+          const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/${postId}`, {
             headers: {
               'Authorization': `Bearer ${token}` // Add the Authorization header with the token
             }

@@ -43,7 +43,7 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
 
     console.log(JSON.stringify(survey));
     try {
-      const response = await fetch('http://localhost:8080/api/v1/survey/submit', {
+      const response = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/survey/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -62,9 +62,9 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
       setErrorMessage('An error occurred while submitting the survey.');
     }
 
-    console.log('http://localhost:8080/api/v1/motivationalmessage/get/'+ String(localStorage.getItem('patientId')));
+    console.log('https://seal-app-by4vt.ondigitalocean.app/api/v1/motivationalmessage/get/'+ String(localStorage.getItem('patientId')));
     
-    const fetchMessage = await fetch('http://localhost:8080/api/v1/motivationalmessage/get/'+ String(localStorage.getItem('patientId')), {
+    const fetchMessage = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/motivationalmessage/get/'+ String(localStorage.getItem('patientId')), {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

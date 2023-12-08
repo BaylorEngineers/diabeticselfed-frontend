@@ -14,7 +14,7 @@
 //   useEffect(() => {
 //     const contentAreaMenuItems = contentAreas.map(area => ({
 //       title: area.name,
-//       // path: `http://localhost:8080/api/content-areas/${area.id}`,
+//       // path: `https://seal-app-by4vt.ondigitalocean.app/api/content-areas/${area.id}`,
 //       path: `/content-area/${area.id}`,
 //       icons: <AiIcons.AiFillBook />,
 //       cName: "nav-sub-text"

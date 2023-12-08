@@ -20,9 +20,9 @@ const ForumPost = () => {
     setError('');
 
     const jwtToken = localStorage.getItem('accessToken');
-    let url = 'http://localhost:8080/api/v1/forum-posts/allposts';
+    let url = 'https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/allposts';
     if (search) {
-      url = `http://localhost:8080/api/v1/forum-posts/search?searchValue=${search}`;
+      url = `https://seal-app-by4vt.ondigitalocean.app/api/v1/forum-posts/search?searchValue=${search}`;
     }
 
     try {

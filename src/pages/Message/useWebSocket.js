@@ -4,7 +4,7 @@ import Stomp from 'stompjs';
 
 const useWebSocket = (userId, token) => {
     const [messages, setMessages] = useState([]);
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS('https://seal-app-by4vt.ondigitalocean.app/ws');
     const stompClient = Stomp.over(socket);
 
     useEffect(() => {

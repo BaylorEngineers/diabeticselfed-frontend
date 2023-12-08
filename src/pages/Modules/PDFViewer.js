@@ -20,7 +20,7 @@ const PDFViewer = () => {
 
   const fetchPdfFile = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/modules/pdf/${id}`);
+      const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/modules/pdf/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -35,7 +35,7 @@ const PDFViewer = () => {
   const sendGetRequest = async () => {
     try {
       const jwtToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/get/0`, {
+      const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/modules/progress/get/0`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const PDFViewer = () => {
   const sendPostRequest = async () => {
     try {
       const jwtToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/create/0/${pdfId}`, {
+      const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/modules/progress/create/0/${pdfId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const PDFViewer = () => {
   const sendPatchRequest = async () => {
     try {
       const jwtToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/update/0/${pdfId}/${maxPagePercentage}`, {
+      const response = await fetch(`https://seal-app-by4vt.ondigitalocean.app/api/v1/modules/progress/update/0/${pdfId}/${maxPagePercentage}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

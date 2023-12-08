@@ -24,7 +24,7 @@ const AccountManager = () => {
 
     setErrorMessage("");
 
-    fetch('http://localhost:8080/api/v1/auth/invite', {
+    fetch('https://seal-app-by4vt.ondigitalocean.app/api/v1/auth/invite', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

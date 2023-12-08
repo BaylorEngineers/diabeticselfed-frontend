@@ -24,7 +24,7 @@ const PatientList = () => {
             };
 
             try {
-                const response = await fetch("http://localhost:8080/api/v1/users/viewpatientsummary", requestOptions);
+                const response = await fetch("https://seal-app-by4vt.ondigitalocean.app/api/v1/users/viewpatientsummary", requestOptions);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -48,7 +48,7 @@ const PatientList = () => {
             note: note,
         };
 
-        fetch("http://localhost:8080/api/v1/users/notes", {
+        fetch("https://seal-app-by4vt.ondigitalocean.app/api/v1/users/notes", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

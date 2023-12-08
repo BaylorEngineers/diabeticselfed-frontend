@@ -5,7 +5,7 @@ export const useContentAreas = () => {
 
   const fetchContentAreas = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/content-areas');
+      const response = await fetch('https://seal-app-by4vt.ondigitalocean.app/api/content-areas');
       if (!response.ok) {
         throw new Error(`Network response was not ok, status: ${response.status}`);
       }
