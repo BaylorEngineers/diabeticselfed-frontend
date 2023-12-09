@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from "../../components/Header/Header";
 import "../Patient/css/patientProfile.css";
+import environment from '../../environment';
 
 const Profile = () => {
   const role = localStorage.getItem('role');
@@ -14,7 +15,7 @@ const Profile = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/users/get-user-data?id=${userId}`, {
+        const response = await fetch(`${environment.baseUrl}/api/v1/users/get-user-data?id=${userId}`, {
           mode: 'cors',
           method: 'GET',
           headers: {

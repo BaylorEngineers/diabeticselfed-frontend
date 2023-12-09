@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import environment from '../../environment';
 
 const useWebSocket = (userId, token) => {
     const [messages, setMessages] = useState([]);
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS(`${environment.baseUrl}/ws`);
     const stompClient = Stomp.over(socket);
 
     useEffect(() => {

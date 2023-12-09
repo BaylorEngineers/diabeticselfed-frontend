@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "../Patient/css/patientProfile.css";
+import environment from '../../environment';
 
 
 const ChangePassword = ({onSave, onChangePassword }) => {
@@ -51,7 +52,7 @@ const ChangePassword = ({onSave, onChangePassword }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/users/change-password', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/users/change-password`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

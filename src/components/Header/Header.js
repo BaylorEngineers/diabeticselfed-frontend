@@ -15,7 +15,7 @@
 
 //   useEffect(() => {
 //     let subscription;
-//     const socket = new SockJS('http://localhost:8080/ws');
+//     const socket = new SockJS('${environment.baseUrl}/ws');
 //     const stompClient = Stomp.over(socket);
 
 //     stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {
@@ -129,7 +129,7 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import { NavLink, Link } from 'react-router-dom'; // Import Link from react-router-dom
 import logo from '../../images/Final Logo_English_landscape.png';
-
+import environment from '../../environment';
 
 function Header({ role }) {
   const [newMessageReceived , setNewMessageReceived] = useState(false);
@@ -140,7 +140,7 @@ function Header({ role }) {
   const [showNotification, setShowNotification] = useState(false);
   
   useEffect(() => {
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS(`${environment.baseUrl}/ws`);
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({ Authorization: `Bearer ${jwtToken}` }, () => {

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './PDFViewer.css';
 import Header from '../../components/Header/Header';
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import environment from '../../environment';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -20,7 +21,7 @@ const PDFViewer = () => {
 
   const fetchPdfFile = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/modules/pdf/${id}`);
+      const response = await fetch(`${environment.baseUrl}/api/modules/pdf/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -35,7 +36,7 @@ const PDFViewer = () => {
   const sendGetRequest = async () => {
     try {
       const jwtToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/get/0`, {
+      const response = await fetch(`${environment.baseUrl}/api/v1/modules/progress/get/0`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ const PDFViewer = () => {
   const sendPostRequest = async () => {
     try {
       const jwtToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/create/0/${pdfId}`, {
+      const response = await fetch(`${environment.baseUrl}/api/v1/modules/progress/create/0/${pdfId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ const PDFViewer = () => {
   const sendPatchRequest = async () => {
     try {
       const jwtToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8080/api/v1/modules/progress/update/0/${pdfId}/${maxPagePercentage}`, {
+      const response = await fetch(`${environment.baseUrl}/api/v1/modules/progress/update/0/${pdfId}/${maxPagePercentage}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

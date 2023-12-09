@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import "./PatientList.css";
+import environment from '../../environment';
 
 const PatientList = () => {
     const [patients, setPatients] = useState([]);
@@ -24,7 +25,7 @@ const PatientList = () => {
             };
 
             try {
-                const response = await fetch("http://localhost:8080/api/v1/users/viewpatientsummary", requestOptions);
+                const response = await fetch(`${environment.baseUrl}/api/v1/users/viewpatientsummar`, requestOptions);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -48,7 +49,7 @@ const PatientList = () => {
             note: note,
         };
 
-        fetch("http://localhost:8080/api/v1/users/notes", {
+        fetch(`${environment.baseUrl}/api/v1/users/notes`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

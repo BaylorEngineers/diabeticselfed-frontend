@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import './accessrecords.css';
+import environment from '../../environment';
 
 const accessToken = String(localStorage.getItem('accessToken'));
 
@@ -16,7 +17,7 @@ const AccessRecords = () => {
   useEffect(() => {
     const getAllClinicians = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/clinicians/getAll', {
+        const response = await fetch(`${environment.baseUrl}/api/v1/clinicians/getAll`, {
           mode: 'cors',
           method: 'GET',
           headers: {
@@ -71,7 +72,7 @@ const AccessRecords = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/clinicians/${userId}/patients`, {
+      const response = await fetch(`${environment.baseUrl}/api/v1/clinicians/${userId}/patients`, {
         mode: 'cors',
         method: 'GET',
         headers: {

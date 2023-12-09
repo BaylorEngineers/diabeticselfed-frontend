@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
 import "../Patient/css/patientProfile.css";
 import "./accountmanager.css"
+import environment from '../../environment';
 
 const AccountManager = () => {
   const [selectedOption, setSelectedOption] = useState('');
@@ -24,7 +25,7 @@ const AccountManager = () => {
 
     setErrorMessage("");
 
-    fetch('http://localhost:8080/api/v1/auth/invite', {
+    fetch(`${environment.baseUrl}/api/v1/auth/invite`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

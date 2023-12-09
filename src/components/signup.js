@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import { Link, useLocation } from 'react-router-dom';
+import environment from '../environment';
 
 function SignUp() {
   
@@ -54,7 +55,7 @@ function SignUp() {
       }else{
       try {
         setErrorMessage("");
-        const response = await fetch('http://localhost:8080/api/v1/auth/register', {
+        const response = await fetch(`${environment.baseUrl}/api/v1/auth/register`, {
           method: 'POST',
           body: JSON.stringify({ ...formData, token }),
           headers: {

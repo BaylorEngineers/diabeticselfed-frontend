@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './ModuleList.css';
 import Header from '../../components/Header/Header';
+import environment from '../../environment';
 
 const ModuleList = () => {
   const { contentAreaId } = useParams();
@@ -13,7 +14,7 @@ const ModuleList = () => {
   useEffect(() => {
     const fetchContentArea = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/content-areas/${contentAreaId}`);
+        const response = await axios.get(`${environment.baseUrl}/api/content-areas/${contentAreaId}`);
         setContentArea(response.data.name);
         setModules(response.data.modules);
       } catch (error) {

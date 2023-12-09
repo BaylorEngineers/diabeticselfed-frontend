@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { useNavigate, useLocation } from 'react-router-dom';
+import environment from '../environment';
 
 import '../pages/css/modal.css'
 import Survey from './MotivationalMessage/survey';
@@ -43,7 +44,7 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
 
     console.log(JSON.stringify(survey));
     try {
-      const response = await fetch('http://localhost:8080/api/v1/survey/submit', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/survey/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -62,9 +63,9 @@ function CustomModal({ isOpen, onRequestClose, onSubmit, question } ) {
       setErrorMessage('An error occurred while submitting the survey.');
     }
 
-    console.log('http://localhost:8080/api/v1/motivationalmessage/get/'+ String(localStorage.getItem('patientId')));
+    console.log(`${environment.baseUrl}/api/v1/motivationalmessage/get/`+ String(localStorage.getItem('patientId')));
     
-    const fetchMessage = await fetch('http://localhost:8080/api/v1/motivationalmessage/get/'+ String(localStorage.getItem('patientId')), {
+    const fetchMessage = await fetch(`${environment.baseUrl}/api/v1/motivationalmessage/get/`+ String(localStorage.getItem('patientId')), {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

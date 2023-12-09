@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import environment from '../../environment';
 
 const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
   const [clinicians, setClinicians] = useState([]);
@@ -9,7 +10,7 @@ const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
   useEffect(() => {
     const fetchClinicians = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/clinicians/getAll', {
+        const response = await fetch(`${environment.baseUrl}/api/v1/clinicians/getAll`, {
           headers: { 'Authorization': `Bearer ${jwtToken}` },
         });
         if (!response.ok) {
@@ -27,7 +28,7 @@ const ClinicianListModal = ({ onClose, jwtToken, userId, onMessageSent }) => {
 
   const sendMessage = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/messages/send', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/messages/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import CustomModal from '../SurveyModal';
 import "./stylesurvey.css";
+import environment from '../../environment';
 
 const Survey = () => {
     const [isModalOpen, setIsModalOpen] = useState(true);
@@ -18,7 +19,7 @@ const Survey = () => {
 
           const patientId = localStorage.getItem('patientId');
     
-            const response = await fetch('http://localhost:8080/api/v1/question/get/'+1, {
+            const response = await fetch(`${environment.baseUrl}/api/v1/question/get/`+1, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json'

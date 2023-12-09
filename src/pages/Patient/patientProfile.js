@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Header from "../../components/Header/Header";
 import CustomModal from '../SurveyModal';
 import "./css/patientProfile.css";
+import environment from '../../environment';
 
 const PatientProfile = () => {
   const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ const PatientProfile = () => {
     const fetchPatientData = async () => {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:8080/api/v1/patient-profile/detail/' + patientId, {
+        const response = await fetch(`${environment.baseUrl}/api/v1/patient-profile/detail/` + patientId, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
@@ -140,7 +141,7 @@ const PatientProfile = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/api/v1/patient-profile/submit', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/patient-profile/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

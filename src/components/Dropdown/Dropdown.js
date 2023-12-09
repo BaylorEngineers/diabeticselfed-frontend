@@ -7,6 +7,8 @@ import * as mdIcon from "react-icons/md";
 import * as BiIcon from "react-icons/bi";
 import * as AiIcon from "react-icons/ai";
 import * as CgIcon from "react-icons/cg";
+import environment from '../../environment';
+
 
 function Dropdown(props) {
   const [open, setOpen] = useState(false);
@@ -41,7 +43,7 @@ function Dropdown(props) {
     const fetchUserData = async () => {
       if (accessToken) {
         try {
-          const response = await fetch(`http://localhost:8080/api/v1/users/get-user-data?id=${userId}`, {
+          const response = await fetch(`${environment.baseUrl}/api/v1/users/get-user-data?id=${userId}`, {
             headers: { 'Authorization': `Bearer ${accessToken}` },
           });
           if (response.ok) {

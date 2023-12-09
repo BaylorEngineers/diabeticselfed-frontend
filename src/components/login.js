@@ -3,6 +3,7 @@ import backgroundImage from '../images/Background.jpg';
 import logo from '../images/Bear_Mark_1_Color_01.jpg';
 import {Link} from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
+import environment from '../environment';
 
 function Login() {
     const [errorMessages, error_login] = useState('');
@@ -31,7 +32,7 @@ function Login() {
           event.preventDefault();
 
           try {
-            const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
+            const response = await fetch(`${environment.baseUrl}/api/v1/auth/authenticate`, {
               mode: 'cors',
               method: 'POST',
               body: JSON.stringify({

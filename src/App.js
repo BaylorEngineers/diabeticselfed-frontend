@@ -24,6 +24,7 @@ import Survey from "./pages/MotivationalMessage/survey.js"
 import SignupWeightAndHeight from "./pages/signUpContinued/signUpWeightAndHeight";
 import SignupProgramGoal from "./pages/signUpContinued/signUpSetProgramGoal";
 import ChangePassword from "./pages/Home/changepassword";
+import environment from './environment';
 
 import { useParams } from 'react-router-dom';
 

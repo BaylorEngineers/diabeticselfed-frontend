@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import Button from '../../components/Button/Button';
 import './signUpWeightAndHeight.css';
+import environment from '../../environment';
+
 
 function SignupWeightAndHeight() {
   const [feet, setFeet] = useState('');
@@ -40,7 +42,7 @@ function SignupWeightAndHeight() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/weight/first/weightReport', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/weight/first/weightReport`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

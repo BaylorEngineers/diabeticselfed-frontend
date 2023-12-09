@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket from './useWebSocket'; 
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
+import environment from '../../environment';
+
 const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     console.log(receiverId);
     const [conversation, setConversation] = useState([]);
@@ -16,7 +16,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
     useEffect(() => {
         const fetchConversation = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/v1/messages/conversation?userId1=${userId}&userId2=${receiverId}`, {
+                const response = await fetch(`${environment.baseUrl}/api/v1/messages/conversation?userId1=${userId}&userId2=${receiverId}`, {
                     headers: { 'Authorization': `Bearer ${token}` },
                 });
                 if (response.ok) {
@@ -50,7 +50,7 @@ const MessageBox = ({ receiverId, receiverName, senderName, onClose }) => {
 
     const handleSendMessage = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/v1/messages/send', {
+            const response = await fetch(`${environment.baseUrl}/api/v1/messages/send`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

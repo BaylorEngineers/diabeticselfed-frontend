@@ -4,6 +4,7 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import ClinicianListModal from './ClinicianListModal';
 import PatientListModal from './PatientListModal';
+import environment from '../../environment';
 
 
 const MessageList = () => {
@@ -26,7 +27,7 @@ const MessageList = () => {
     const fetchMessages = async () => {
         console.log(jwtToken);
         try {
-            const response = await fetch(`http://localhost:8080/api/v1/messages/last-messages/${userId}`, {
+            const response = await fetch(`${environment.baseUrl}/api/v1/messages/last-messages/${userId}`, {
                 headers: { 'Authorization': `Bearer ${jwtToken}` },
             });
             const data = await response.json();
@@ -41,7 +42,7 @@ const MessageList = () => {
         fetchMessages();
 
         // Setup WebSocket connection
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS(`${environment.baseUrl}/ws`);
         const stomp = Stomp.over(socket);
 
         stomp.connect({ Authorization: `Bearer ${jwtToken}` }, () => {

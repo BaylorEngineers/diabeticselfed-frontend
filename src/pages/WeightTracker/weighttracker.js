@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button';
 import { format } from 'date-fns';
 import './weighttracker.css';
 import Plot from 'react-plotly.js';
+import environment from '../../environment';
 
 const WeightTrackerPage = () => {
   // variables for weight report
@@ -65,7 +66,7 @@ const WeightTrackerPage = () => {
 
 useEffect(() => {
   // Fetch report by patientId
-  fetch(`http://localhost:8080/api/v1/weight/fetchReport/${patientID}`, {
+  fetch(`${environment.baseUrl}/api/v1/weight/fetchReport/${patientID}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ useEffect(() => {
 
     // Fetching weightloss goal
     // Fetch weight loss percentage from the backend
-    fetch(`http://localhost:8080/api/v1/goals/getGoal`, {
+    fetch(`${environment.baseUrl}/api/v1/goals/getGoal`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -138,7 +139,7 @@ const handleAddReport = async () => {
 
 console.log(dateT);
     try {
-      const response = await fetch('http://localhost:8080/api/v1/weight/addReport', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/weight/addReport`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +161,7 @@ console.log(dateT);
       setSuccessMessage('Report added successfully!');
       setErrorMessage('');
 
-      const updatedReportsResponse = await fetch(`http://localhost:8080/api/v1/weight/fetchReport/${patientID}`, {
+      const updatedReportsResponse = await fetch(`${environment.baseUrl}/api/v1/weight/fetchReport/${patientID}`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`,
             },
@@ -223,7 +224,7 @@ const updatedData = reports.map((report) => ({
   const handleUpdateGoal = async () => {
     
     try {
-      const response = await fetch('http://localhost:8080/api/v1/goals/setGoal', {
+      const response = await fetch(`${environment.baseUrl}/api/v1/goals/setGoal`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

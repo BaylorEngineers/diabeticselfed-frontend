@@ -3,6 +3,7 @@ import './ModuleDetails.css';
 import Header from '../../components/Header/Header';
 import moduleImage from '../../images/Family-Why-I-Prevent-T2.png'; 
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import environment from '../../environment';
 
 
 
@@ -19,7 +20,7 @@ const ModuleDetails = ({ moduleId }) => {
   const progress = 75;
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/modules/${moduleId}`)
+    fetch(`${environment.baseUrl}/api/modules/${moduleId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
