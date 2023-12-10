@@ -13,13 +13,13 @@ function Login() {
     const [userId, setUserID] = useState();
     const [patientID, setPatientID] = useState();
     const [accessToken, setAccessToken] = useState();
-    const[isFirstLogInToday, setIsFirstLogInToday] = useState();
+    const[isFirstLogInToday, setIsFirstLogInToday] = useState(false);
     const navigate = useNavigate();
     const { state } = useLocation();
     
   
     const errors = {
-      username: "This user Id does not exit or invalid password",
+      username: "This user Id does not exist or invalid password",
      
     };
 
@@ -45,21 +45,18 @@ function Login() {
 
             if (!response.ok) {
               const errorMessage = await response.text();
+              console.log("Response not ok");
               throw new Error(` ${response.status}`);
-            } else {
-              if(true){
-                setIsFirstLogInToday(true);
-              }
               
-              if(isFirstLogInToday) {
-                navigate("/survey");
-              }
+            } else {
+              console.log("Logged in today.");
+              //TODO: from response, get if showSurvey true then set true
               
             }
 
             const responseData = await response.json();
             setRole(responseData.role);
-
+            console.log(responseData);
             const userID = responseData.userID;
             setUserID(userID);
             localStorage.setItem('userId', userID);
@@ -79,6 +76,9 @@ function Login() {
             const role = responseData.role;
             setRole('role', role);
             localStorage.setItem('role', role);
+
+            setIsFirstLogInToday(responseData.showSurvey);
+            console.log(responseData.showSurvey);
 
             login_set_true(true);
           } catch (error) {
@@ -159,7 +159,12 @@ function Login() {
             </Link>
           {(() => {
                         if (islogin) {
+                          if(isFirstLogInToday) {
+                            window.location.href = "/survey";
+                          } else {
                             window.location.href = "/";
+                          }
+                            
                         } else {
           return (
             renderForm
