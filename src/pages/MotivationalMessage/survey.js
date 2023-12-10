@@ -51,6 +51,7 @@ const Survey = () => {
 
       const closeModal = () => {
         setIsModalOpen(false);
+        window.location.href = "/";
       };
 
       const handleModalSubmit = (modalInput) => {
